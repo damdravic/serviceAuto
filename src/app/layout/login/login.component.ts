@@ -59,7 +59,9 @@ export class LoginComponent implements OnInit {
             console.log('response --> ' + response);
             localStorage.setItem(Key.TOKEN, response.data.accessToken);
             localStorage.setItem(Key.REFRESH_TOKEN, response.data.refreshToken);
-            this.router.navigate(['/']);
+            console.log("111")
+            this.router.navigate(['/dashboard']);
+            console.log("222")
             return { dataState: DataState.LOADED, loginSuccess: true };
           }
         }),
