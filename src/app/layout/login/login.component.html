@@ -1,0 +1,121 @@
+
+
+<section *ngIf="(loginState$ | async) as state" [ngSwitch]="state.dataState">
+	<div *ngIf="!state.loginSucces && !state.isUsingMfa"
+	class="box" id="box" [ngClass]="signUpMode == true ? 'sign-up-mode': '' ">
+		<div class="inner-box">
+			<div class="login-box">
+				
+				<form class="sign-in-form"  #loginForm="ngForm" (ngSubmit)="login(loginForm)" autocomplete="off">
+					<div class="logo">
+						<img src="../../../assets/images/anaxim.png" alt="easyclass" >
+						<h3>Admin section</h3>
+					</div>
+
+
+					<div class="heading">
+						<h2>Welcome Back</h2>
+						<h6>Not registred yet ?   
+						<a (click)="toggle()" class="toggle"> Sing Up</a></h6>
+					</div>
+
+
+					<div class="actual-form">
+						<div class="input-wrap">
+							
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" 
+							[disabled]="state.dataState === DataState.LOADING" ngModel type="text" name="email" minlength="4" class="input-field" autocomplete="off" id="email" required />
+							<label for="email">Email</label>
+						</div>
+						<div class="input-wrap">
+							
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" 
+							[disabled]="state.dataState === DataState.LOADING" ngModel type="password" name="password" minlength="4" class="input-field" autocomplete="off" id="pass" required />
+							<label for="pass">Password</label>
+						</div>
+
+						<button [disabled]="state.dataState === DataState.LOADING "  type="submit" class="sign-in">
+							<span *ngIf="state.dataState === DataState.LOADING" class="spinner-border spinner-border-sm" ></span>
+							<span *ngIf="state.dataState === DataState.LOADING" >Loading</span>
+							<span *ngIf="!(state.dataState === DataState.LOADING)" >Log In</span>
+						
+						</button>
+						
+						<p class="text">
+							Forgotten your password or your login details ?
+							<a href="#">Click Here</a> to reset your password.
+						</p>
+
+					</div>
+
+				
+
+					
+
+				</form>
+
+				<form class="sign-up-form" action="index.html" autocomplete="off" >
+					<div class="logo">
+						<img src="../../../assets/images/anaxim.png" alt="easyclass" >
+						<h3>Admin section</h3>
+					</div>
+
+
+					<div class="heading">
+						<h2>Get Started</h2>
+						<h6>Already have an account ?   
+						<a  class="toggle" (click)="toggle()"> Sing In</a></h6>
+					</div>
+
+
+					<div class="actual-form">
+
+						<div class="input-wrap">
+							
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" type="input" minlength="4" class="input-field" autocomplete="off" id="firstName" required />
+							<label for="firstName">First Name</label>
+						</div>
+						<div class="input-wrap">
+							
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" type="input" minlength="4" class="input-field" autocomplete="off" id="lastName" required />
+							<label for="firstName">Last Name</label>
+						</div>
+						<div class="input-wrap">
+							
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" type="input" minlength="4" class="input-field" autocomplete="off" id="email" required />
+							<label for="email">Email</label>
+						</div>
+						<div class="input-wrap">
+							
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" type="password" minlength="4" class="input-field" autocomplete="off" id="pass" required />
+							<label for="pass">Password</label>
+						</div>
+						
+						<input type="submit" class="sign-up" value="Sing Up ">
+						<p class="text">
+							By signing up, I agree to the <a href="#" >Terms of Services</a> and <a href="#" >Privacy Policy</a>
+						</p>
+					</div>
+
+				
+
+					
+
+				</form>
+
+<script> </script>
+
+			</div>
+			<div class="image-box">
+				<div class="image-wrapper" >
+				<img class="image-car" src="../../../assets/images/ms.png" alt="" >
+			</div>
+			</div>
+
+		</div>
+
+	</div>
+</section>
+
+
+
