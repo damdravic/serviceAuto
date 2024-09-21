@@ -1,0 +1,214 @@
+<div class="wrapper">
+    <div class="modal-top">
+        <div class="modal-image"></div>
+        <div class="modal-details">
+            <h1>Repair Order </h1>
+
+            <!-- -------------------------------Order information ---------------------------- -->
+            <div class="order-info">
+                <div class="order-details">
+                    <div class="order">
+                        <h3>Order ID</h3>
+                        <h4>{{order.orderId}}</h4>
+                    </div>
+                    <div class="order">
+                        <h3>Order Date</h3>
+                        <h4>{{order.dateReceived | formatDate}}</h4>
+                    </div>
+                    <div class="order">
+                        <h3>Order Status</h3>
+                        <h4>{{order.status}}</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- -------------------------------Price information ---------------------------- -->
+            <div class="price-info">
+                <div class="price-details">
+                    <div class="price">
+                        <h3>Parts Price</h3>
+                        <h4>{{getTotalPartsPrice()}} <span style="font-size:10px;">RON</span></h4>
+                    </div>
+                    <div class="price">
+                        <h3>Labor Price</h3>
+                        <h4>{{getTotalLaborPrice()}}</h4>
+                    </div>
+                    <div class="price">
+                        <h3>Average discount</h3>
+                        <h4>5%</h4>
+                    </div>
+                </div>
+                <div class="total">
+                    <h3>Total Price</h3>
+                    <h4>{{getTotalOrderPrice()}}<span style="font-size:10px;">RON</span></h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!------------------Tabs   -------------------------------->
+    <div class="modal-tabs">
+        <div class="tab">
+            <button class="tablinks" (click)="setActiveTab('parts')">Piese</button>
+            <button class="tablinks" (click)="setActiveTab('labor')">Manopera</button>
+
+        </div>
+        <!------------------Tabs Parts Content  -------------------------------->
+        <div class="tabcontent" [ngClass]="{'active' : activeTab === 'parts'}">
+            <div class="options">
+                <button class="btn btn-primary opt" (click)="addParts()">Adauga piese</button>
+                <button class="btn btn-primary opt" (click)="deletePart()">Sterge piese</button>
+
+            </div>
+
+
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Cantitate</th>
+                            <th>P.Unitar</th>
+                            <th>Discount</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of repairOrderItems; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{item.part.code}}</td>
+                            <td>{{item.part.name}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.part.price}}</td>
+                            <td>{{discount}}</td>
+                            <td>{{item.part.price * item.quantity}}</td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="add-part" [ngClass]="{'active' : addPart }">
+                <div class="fcontrol">
+                    <label for="">Search Parts</label>
+                    <input type="text" class="part-search" #searchInput name="search" [(ngModel)]="searchTerm"
+                        placeholder="Search Parts ..." (input)="filterParts()">
+                </div>
+                <div class="result">
+                    <div class="table-container" (focus)="focusFirstRow(0)">
+                        <table #partsTable>
+                            <thead>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th></th>
+                            </thead>
+                            <tbody class="body">
+                                <tr *ngFor="let part of filteredParts; let i =index" (click)="selectPart(part, $event)"
+                                    tabindex="0" [attr.id]="'row-' + i" (keydown)="handleKeyDown($event,i)"
+                                    (keydown.enter)="selectPart(part, $event)">
+                                    <td>{{part.code}}</td>
+                                    <td>{{part.name}}</td>
+                                    <td>{{part.price}}</td>
+                                    <td>{{part.stock}}</td>
+                                    <td><input type="checkbox" #checkPart tabindex="-1"></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="fcontrol" *ngIf="selectedPart">
+                    <label for="">Quantity</label>
+                    <div class="input-group">
+                        <button class="input-change" (click)="quantityIncrement()">+</button>
+                        <input type="text" class="part-quantity" name="quantity" [(ngModel)]="quantity">
+                        <button class="input-change" (click)="quantityDecrement()">-</button>
+                    </div>
+                </div>
+
+                <div class="submit">
+                    <button class="btn btn-primary opt" (click)="addSelectedPart()">Add Part</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tabcontent" [ngClass]="{'active' : activeTab === 'labor'}">
+            <div class="options">
+                <button class="btn btn-primary opt" (click)="addLabors()">Adauga Manopera</button>
+                <button class="btn btn-primary opt" (click)="deleteLabors()">Sterge piese</button>
+
+            </div>
+
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Cantitate</th>
+                            <th>P.Unitar</th>
+                            <th>Discount</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of repairOrderLaborItem; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{item.labor.code}}</td>
+                            <td>{{item.labor.name}}</td>
+                            <td>{{item.labor.time}}</td>
+                            <td>{{item.labor.price}}</td>
+                            <td>{{discount}}</td>
+                            <td>{{item.labor.price * item.quantity}}</td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="add-labor" [ngClass]="{'active' : addLabor} ">
+                <div class="fcontrol">
+                    <label for="">Search Labors</label>
+                    <input type="text" class="part-search" #searchInput2 name="searchl" [(ngModel)]="searchTerm"
+                        placeholder="Search Labors ..." (input)="filterLabors()">
+                </div>
+                <div class="result">
+                    <div class="table-container" (focus)="focusFirstRow(0)">
+                        <table #laborsTable>
+                            <thead>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th></th>
+                            </thead>
+                            <tbody class="body">
+                                <tr *ngFor="let labor of filteredLabors; let i =index"
+                                    (click)="selectLabor(labor, $event)" tabindex="0" [attr.id]="'row-' + i"
+                                    (keydown)="handleKeyDown($event,i)" (keydown.enter)="selectLabor(labor, $event)">
+                                    <td>{{labor.code}}</td>
+                                    <td>{{labor.name}}</td>
+                                    <td>{{labor.price}}</td>
+                                    <td><input type="checkbox" #checkLabor tabindex="-1"></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="fcontrol" *ngIf="selectedLabor">
+                    <label for="">Quantity</label>
+                    <input type="number" class="part-quantity" name="quantity" [(ngModel)]="quantity">
+                </div>
+
+                <div class="submit">
+                    <button class="btn btn-primary opt" (click)="addSelectedLabor()">Add Labor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

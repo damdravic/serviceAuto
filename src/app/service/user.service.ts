@@ -6,19 +6,20 @@ import { Profile } from '../interface/profile';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Key } from '../enum/key';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+ 
 
 
 
-  private readonly server: string = 'http://localhost:8081';
+  private readonly server: string = 'http://192.168.0.175:8081';
   private jwtHelper = new JwtHelperService();
-  isAuthenticated: boolean = this.getAuth();
-
-  constructor(private http: HttpClient) {}
+ 
+  constructor(private http: HttpClient,private router:Router) {}
 
   login$ = (email: string, password: string) =>
     <Observable<CustomHttpResponse<Profile>>>(
@@ -39,6 +40,17 @@ export class UserService {
         .pipe(tap(console.log), catchError(this.handleError))
     );
 
+
+
+    refreshToken$ = () => <Observable<CustomHttpResponse<Profile>>> 
+    this.http.get<CustomHttpResponse<Profile>>(`${this.server}/user/refresh/token`,{headers: {Authorization: `Bearer ${localStorage.getItem(Key.REFRESH_TOKEN)}`}})
+    .pipe(tap(response => {
+      localStorage.removeItem(Key.TOKEN);
+      localStorage.removeItem(Key.REFRESH_TOKEN);
+      localStorage.setItem(Key.TOKEN, response.data.accessToken);
+      localStorage.setItem(Key.REFRESH_TOKEN, response.data.refreshToken);
+    }))
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string;
     if (error.error instanceof ErrorEvent) {
@@ -53,7 +65,8 @@ export class UserService {
     return throwError(() => errorMessage);
   }
 
-  private getAuth(): boolean {
+  public getAuth(): boolean {
+    console.log('getAuth()');
     let token = localStorage.getItem(Key.TOKEN);
     if (token) {
       return this.jwtHelper.decodeToken(token) &&
@@ -61,12 +74,23 @@ export class UserService {
         ? true
         : false;
     } else {
+      console.log('getAuth() false');
       return false;
     }
+    
+  }
+
+
+  logout() {
+    localStorage.removeItem(Key.TOKEN);
+    localStorage.removeItem(Key.REFRESH_TOKEN);
+    this.router.navigate(['/login']);
+     
   }
 
 
  
  
-  public isAuthenticate = ():boolean => (this.jwtHelper.decodeToken<string>(localStorage.getItem(Key.TOKEN)) && !this.jwtHelper.isTokenExpired(localStorage.getItem(Key.TOKEN)));
+  public isAuthenticated = ():boolean => (this.jwtHelper.decodeToken<string>(localStorage.getItem(Key.TOKEN)) && 
+  !this.jwtHelper.isTokenExpired(localStorage.getItem(Key.TOKEN)));
 }

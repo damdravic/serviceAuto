@@ -1,0 +1,138 @@
+.info_area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  border-bottom: 1px solid #eeeeee;
+}
+.card_info {
+  position: relative;
+  margin: 1rem;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  text-align: right;
+  border: 1px solid #eeeeee;
+  height: 5rem;
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
+    rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px,
+    rgba(240, 46, 170, 0.05) 25px 25px;
+}
+
+.infox {
+  position: absolute;
+  top: calc(50% - 1.5rem);
+  left: -0.3rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.2rem;
+  border: 1px solid gray;
+  background-color: rgb(191, 136, 243);
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: #00000059 0px 5px 15px;
+}
+
+.infox h3 {
+  text-shadow: 1px 1px 1px black;
+}
+
+.info p {
+  margin-right: 1rem;
+}
+
+.main_area {
+  display: block;
+  position: relative;
+  margin: 1rem;
+  min-height: 100%;
+}
+
+.main_top_area {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.ax_card {
+  position: relative;
+  border-radius: 0.5rem;
+  border: 1px solid #eeeeee;
+  min-height: 20rem;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
+}
+
+.bottom{
+width: 100%;
+  margin-top: 20px;
+  padding: 0 1rem;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  background-color: rgb(238, 238, 238);
+}
+.card_btn {
+  border-radius: 0.5rem;
+  border: 1px solid gray;
+  background-color: rgb(191, 136, 243);
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  padding: 0.2rem 0.5rem;
+
+  margin: 0 0.3rem;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
+}
+.top_info{
+    padding: 0.3rem 0.4rem 0.6rem 0.4rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(238, 238, 238);
+    border-bottom: 1px solid #ccc;
+}
+
+.top_info .title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 2rem;
+}
+.content{
+    width: 100%;
+    padding: 0.2;
+}
+
+.recent_orders{
+    width: 100%;
+    padding: 0.5rem;
+
+}
+
+ td,  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+ tr:nth-child(even){background-color: #f2f2f2;}
+  
+tr:hover {background-color: #ddd;}
+  
+ th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(191, 136, 243);
+    color: white;
+  }
+
+  .middle_area{
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }

@@ -1,0 +1,58 @@
+<section *ngIf="(orderState$ | async) as dashState">
+
+
+    <div class="top">
+        <div class="left">
+            <div class="title">Orders</div>
+        </div>
+        <div class="right">
+            <button>Add New Order</button>
+            <div class="search">
+               <input type="text" name="" id="">
+               <button>Search</button>
+            </div>
+        </div>
+    </div>
+     <div class="table_area">
+        <table class="orders_table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Order Date</th>
+                    <th>Estimated Completion Date</th>
+                    <th>Total Cost</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td>{{order.orderId}}</td>
+                    <td>{{order.orderDate}}</td>
+                    <td>{{order.description}}</td>
+                    <td>{{order.totalCost}}</td>
+                    <td>{{order.status}}</td>
+                    <td class="min">
+                        <button>View</button>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+     </div>
+     <div class="bottom">
+        <app-pagination></app-pagination>
+     </div>
+
+
+
+
+
+
+
+
+
+
+</section>

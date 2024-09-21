@@ -1,0 +1,48 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 0 1rem;
+
+}
+
+.pagination li{
+    list-style: none;
+    cursor: pointer;
+  
+     border-radius: 25px;
+
+    border: 1px solid #2e0fe0;
+    transition: 1s;
+}
+.pagination li a{
+    display: block;
+    padding: 0.2rem 0.6rem;
+    text-decoration: none;
+    color: #2e0fe0;
+}   
+
+.pagination li:first-child{
+    border-radius: 10px 0 0 -10px;
+}
+.pagination li:last-child{
+    border-radius:0 10px -10px 0;
+}
+.pagination li.active{
+    background-color: #2e0fe0;
+    padding : 0 0.5rem;
+    color: white;
+    transition: 1s;
+}
+.pagination li.active a{
+    color: white;
+}
+
+.disabled{
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: #f1f1f1;
+    color: #ccc;
+
+}
+

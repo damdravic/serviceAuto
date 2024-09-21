@@ -1,0 +1,72 @@
+<div class="wrapper">
+  <div class="top">
+        <div class="title">Adding new Repair Order</div>
+
+  </div>
+  <div class="content">
+        <div class="content_wrapper">
+          <form #newOrderForm="ngForm" >
+                
+                <div class="flex">
+
+
+                  <div class="ax_select">
+                  <label for="">Workshop</label>
+                  <select class="form-select" ngModel name="workshopId" aria-label="Default select example">
+                    <option selected>Select Workshop</option>
+                    <option value="1">One</option>
+                  </select>
+                </div>
+                <div class="ax_select">
+                  <label for="">Car</label>
+                  <select class="form-select" ngModel name="vehicleId" aria-label="Default select example">
+                    <option selected>Select Car</option>
+                    <option value="1">One</option>
+                  
+                  </select>
+                </div>
+
+
+                </div>
+
+
+
+               <div class="form-group">
+                <label for="">Repair order Description</label>
+                <textarea class="form-control" name="description" ngModel id="exampleFormControlTextarea1" rows="3"></textarea>
+               </div>
+
+               <div class="flex">
+
+
+                <div class="ax_select">
+                <label for="">Technician</label>
+                <select class="form-select" ngModel name="technicianId" aria-label="Default select example">
+                  <option selected>Select Technician</option>
+                  <option value="1">One</option>
+                  
+                </select>
+              </div>
+              <div class="ax_select">
+                <label for="">Estimated Date to Complete</label>
+                <input type="date" ngModel name="estimatedCompletionDate" class="date form-control" style="width: 100%" />
+              </div>
+
+
+              </div>
+
+
+          </form>
+        </div>
+  </div>
+  <footer>
+    <button class="modal_btn" (click)="save(newOrderForm)">Save</button>
+    <button class="modal_btn" (click)="close()">Cancel</button>
+
+  </footer>
+   <script type="text/javascript">
+      $(".date").datepicker({
+        format: "dd-mm-yyyy",
+      });
+    </script>
+</div>

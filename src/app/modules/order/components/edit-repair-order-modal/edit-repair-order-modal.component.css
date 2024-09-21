@@ -1,0 +1,247 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper{
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+
+}
+.modal-top{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+   
+}
+.modal-details{
+    padding: 10px;
+    text-align: right;
+}
+
+.modal-image {
+    width: auto;
+    height: auto;
+    background-image: url("/assets/images/repair.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+.tab{
+    width: 100%;
+}
+.modal-tabs{
+    padding: 10px;
+}
+.tablinks{
+    width: 6rem;
+    height: 2rem;
+    background-color: transparent;
+    border-radius: 10px 10px 0 0;
+    border-bottom: none;
+
+}
+.part-search{
+    text-indent:10px;
+}
+
+.opt{
+    margin: 0 10px;
+    padding: 5px;
+}
+.tabcontent{
+    display: none;
+    padding: 10px;
+    border-top: none;
+    border: 1px solid #ccc;
+    border-radius: 0 0 10px 10px;
+}
+
+
+.add-part, .add-labor {
+    background-color: rgb(223, 210, 247);
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    width: 100%;
+    table-layout: fixed;
+    align-items: center;
+    border: #ccc 1px solid;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 5px 5px 5px #ccc;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s, visibility 0.5s, max-height 0.5s;
+}
+.opt{
+    margin: 0 10px;
+}
+
+.fcontrol{
+    display:flex;
+    flex-direction: column;
+    margin: 0 10px;
+    align-items: baseline;
+}
+.add-part :nth-child(2){
+    flex: 1 1 auto;
+}
+
+.add-labor :nth-child(2){
+    flex: 1 1 auto;
+}
+.result{
+   margin:0 10px;
+
+}
+
+.add-part.active, .add-labor.active{
+    display: flex;
+     /* Active state */
+    opacity: 1;
+    visibility: visible;
+    max-height: 1000px;
+}
+
+.active{
+    display: block;
+}
+ table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1px;
+
+    
+ }
+ thead{
+  
+    border-bottom: 1px solid #ccc;
+    border-radius: 8px 8px 0 0;
+ }
+ .table-container {
+    min-height: 60px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 2px 2px 2px #ccc;
+    background-color: white;
+}
+
+/* price info */
+.price-info {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 5px;
+}
+.order-info{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 5px;
+}
+.price-details{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: rgb(223, 210, 247);
+    box-shadow: 5px 5px 5px #ccc;
+   
+}
+.order-details{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: rgb(223, 210, 247);
+    box-shadow: 5px 5px 5px #ccc;
+}
+
+.order{
+    border:#ccc 1px solid;
+    border-radius: 8px;
+    background-color: white;
+ padding: 5px;
+ 
+}
+.price{
+    border:#ccc 1px solid;
+    border-radius: 8px;
+    background-color: white;
+ padding: 5px;
+ 
+}
+
+.part-search{
+    border-radius: 8px;
+    margin-left: 5px;
+}
+ h3{
+    font-size: 1rem;
+ }
+
+ .total{
+    display:flex;
+    justify-content: space-around;
+    padding: 5px;
+  
+}
+.total h3{
+    font-size: 1.5rem;
+
+}
+
+
+
+
+.fcontrol label {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+  width:20px;
+}
+.input-group input{
+    width: 100%;
+    height: 20px;
+    text-align: center;
+}
+.input-change{
+    width: 100%;    
+    background-color: red;
+    text-align: center;
+  height:20px;
+  text-indent: none;
+  line-height:0;
+
+}
+.btn-add, .btn-rem {
+    height: 20px;
+    padding: 5px 10px;
+    margin-bottom: 2px; /* Space between buttons */
+    background-color: #f0f0f0; /* Example background color */
+    border: 1px solid #ccc; /* Example border */
+    cursor: pointer;
+}
+
+.btn-add {
+    margin-bottom: 2px; /* Space between buttons */
+}
+
+.btn-rem {
+    margin-top: 2px; /* Space between buttons */
+}

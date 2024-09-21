@@ -1,0 +1,139 @@
+
+
+
+
+.order-card {
+    color: #fff;
+}
+
+.bg-c-blue {
+    background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
+
+.bg-c-green {
+    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+}
+
+.bg-c-yellow {
+    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
+
+.bg-c-pink {
+    background: linear-gradient(45deg,#FF5370,#ff869a);
+}
+
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.card .card-block {
+    padding: 25px;
+}
+
+.order-card i {
+    font-size: 26px;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}
+
+
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.right{
+    display: flex;
+    justify-content: space-between;
+}
+.right button{
+    margin-right: 10px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 0.5rem 1rem;
+}
+
+input{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5rem;
+    border-radius: 15px 0 0 15px;
+}
+
+.search button{
+
+    border-radius: 0 15px 15px 0;
+    padding: 0.5rem 1rem;
+   
+  
+    
+}
+.title
+{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 2rem;
+}
+
+.table_area{
+margin-top: 0.5rem;
+padding: 0.5rem;}
+
+.orders_table{
+    width: 100%;
+    border-collapse: collapse;  
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+
+  tr:nth-child(even){background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+
+td button{
+    margin-right: 10px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 0.5rem 1rem;
+}
+
+td.min {
+    width: 1%;
+    white-space: nowrap;
+}
+.last{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    border-top: 1px solid #ccc;
+    width: wrap;
+}

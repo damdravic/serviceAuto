@@ -1,0 +1,92 @@
+
+    <div class="sidebar" [ngClass]="collapsed ? 'collapsed' : ''">
+        <div class="sidebar-content">
+
+            <div class="sidebar_top">
+
+                <div class="sidebar-logo">
+                    {{collapsed}}
+                </div>
+
+                <div class="sidebar-user">
+                    <div class="sidebar-user-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="sidebar-user-info">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="sidebar_menu">
+
+               <ul>
+                <li>
+                    <button type="button" #but
+                      (click)="clicked($event.target)"
+                    routerLink="">
+                        <i class="ai-home-alt1"></i>
+                        <p>Home</p>
+
+                    </button>
+
+                </li>
+                <li>
+                    <button type="button" #but
+                      routerLink="/repairOrder"
+                     
+                      (click)="clicked($event.target)" >
+                      
+                      <i class='bx bx-task'></i>
+                        <p>Repair Oredrs</p>
+
+                    </button>
+
+                </li>
+                <li>
+                    <button type="button" #but (click)="clicked($event.target)" >
+                        <i class="ai-gear"></i>
+                        <p>Settings</p>
+                        <i class="ai-chevron-down-small"></i>      
+                    </button>
+                    <div class="submenu" #subMenu>
+                        <ul>
+                            <li>
+                                <button type="button">Display</button>
+                            </li>
+                            <li>
+                                <button type="button">Preferance</button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" #but (click)="clicked($event.target)" >
+                        <i class="ai-gear"></i>
+                        <p>Settings</p>
+                        <i class="ai-chevron-down-small"></i>      
+                    </button>
+                    <div class="submenu" #subMenu>
+                        <ul>
+                            <li>
+                                <button type="button">Display</button>
+                            </li>
+                            <li>
+                                <button type="button">Preferance</button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+               </ul>
+           
+
+       
+
+            </div>
+
+        </div>
+
+    </div>
+
+

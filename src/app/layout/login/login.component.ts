@@ -1,7 +1,8 @@
-import { TmplAstDeferredBlockLoading } from '@angular/compiler';
+
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import {
   BehaviorSubject,
   Observable,
@@ -10,10 +11,11 @@ import {
   of,
   startWith,
 } from 'rxjs';
-import { DataState } from 'src/app/states/data-state';
+
 import { Key } from 'src/app/enum/key';
-import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
-import { LoginState } from 'src/app/states/login-state';
+import { DataState } from 'src/app/interface/data-state';
+import { LoginState } from 'src/app/interface/login-state';
+
 
 import { UserService } from 'src/app/service/user.service';
 
@@ -32,10 +34,12 @@ export class LoginComponent implements OnInit {
   signUpMode: boolean = false;
 
   constructor(private router: Router, private userService: UserService) {}
+  
   ngOnInit(): void {
     this.userService.isAuthenticated
       ? this.router.navigate(['/'])
-      : this.router.navigate(['/login']);
+      :   this.router.navigate(['/login'])
+     
   }
 
   login(loginForm: NgForm): void {
@@ -56,13 +60,9 @@ export class LoginComponent implements OnInit {
               ),
             };
           } else {
-            console.log('response --> ' + response);
-            localStorage.setItem(Key.TOKEN, response.data.accessToken);
-            localStorage.setItem(Key.REFRESH_TOKEN, response.data.refreshToken);
-            console.log("111")
-            this.router.navigate(['/dashboard']);
-            console.log("222")
-            return { dataState: DataState.LOADED, loginSuccess: true };
+          return this.setTokensAndNavigate(response.data.accessToken, response.data.refreshToken);
+
+           // return { dataState: DataState.LOADED, loginSuccess: true };
           }
         }),
         startWith({ dataState: DataState.LOADING, isUsingMfa: false }),
@@ -76,6 +76,28 @@ export class LoginComponent implements OnInit {
         })
       );
   }
+  setTokensAndNavigate(accessToken: string, refreshToken: string): any {
+    return new Promise((resolve) => {
+      localStorage.setItem(Key.TOKEN, accessToken);
+      console.log(localStorage.getItem(Key.TOKEN));
+      localStorage.setItem(Key.REFRESH_TOKEN, refreshToken);
+      console.log(localStorage.getItem(Key.REFRESH_TOKEN));
+      resolve(true);
+    }).then(() => {
+      console.log('setTokensAndNavigate');
+      this.router.navigate(['/']).then(success => {
+        if (success) {
+          console.log('Navigation successful');
+        } else {
+          console.log('Navigation failed');
+        }
+      }).catch(error => {
+        console.error('Navigation error:', error);
+      });
+        return { dataState: DataState.LOADED, loginSuccess: true };
+      });
+    }
+  
 
   verifyCode(verifyForm: NgForm): void {
     console.log(verifyForm.value.code + ' <-- code');

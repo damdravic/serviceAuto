@@ -6,13 +6,14 @@
 		<div class="inner-box">
 			<div class="login-box">
 				
-				<form class="sign-in-form"  #loginForm="ngForm" (ngSubmit)="login(loginForm)" autocomplete="off">
+				<form class="sign-in-form"  #loginForm="ngForm" (ngSubmit)="login(loginForm)" >
 					<div class="logo">
 						<img src="../../../assets/images/anaxim.png" alt="easyclass" >
 						<h3>Admin section</h3>
 					</div>
-
-
+					<div class="error" *ngIf="state.dataState === DataState.ERROR">
+                      {{state.error }}
+					</div>
 					<div class="heading">
 						<h2>Welcome Back</h2>
 						<h6>Not registred yet ?   
