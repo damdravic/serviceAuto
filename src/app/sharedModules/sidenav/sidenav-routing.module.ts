@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 const routes = [
-  {path : '',component : SidenavComponent}
+  {path : '',component : SidenavComponent},
+ 
 ]
 
 @NgModule({
@@ -12,6 +13,6 @@ const routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
-  ]
+  ],exports:[RouterModule]
 })
 export class SidenavRoutingModule { }

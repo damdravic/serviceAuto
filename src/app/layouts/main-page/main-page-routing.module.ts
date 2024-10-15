@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { TechnicianComponent } from './components/technician/technician.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 
-const routes=[
-  {
-    path: '',component : TechnicianComponent }
+const routes =[
+{path: '',component : MainPageComponent}
 ]
 
 @NgModule({
@@ -15,4 +14,4 @@ const routes=[
     CommonModule
   ]
 })
-export class TechnicianRoutingModule { }
+export class MainPageRoutingModule { }

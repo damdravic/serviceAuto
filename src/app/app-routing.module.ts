@@ -24,12 +24,7 @@ const routes: Routes = [
         path: 'repairOrder',
         component: RepairOrderComponent,
         canActivate: [AuthenticationGuard],
-      },
-      {
-        path: 'technician',
-        component: TechnicianComponent,
-        canActivate: [AuthenticationGuard],
-      },
+      }
     ],
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
