@@ -9,16 +9,6 @@ export class TechnicianEffects{
 
     constructor(private actions$ : Actions){}
 
-    loadTechs$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(loadTechs),
-            
-        )
-    )
-
-
-
-
 
 
 
