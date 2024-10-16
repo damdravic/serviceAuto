@@ -27,6 +27,9 @@ import { OrderModule } from './modules/order/order.module';
 import { SidenavModule } from './sharedModules/sidenav/sidenav.module';
 import { StoreModule } from '@ngrx/store';
 import { TechnicianModule } from './modules/technician/technician.module';
+import { techReducer } from './modules/technician/store/technician.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { TechnicianEffects } from './modules/technician/store/technician.effect';
 
 @NgModule({
   declarations: [
@@ -50,8 +53,10 @@ import { TechnicianModule } from './modules/technician/technician.module';
     OrderModule,
     SidenavModule,
     NgbModule,
+    EffectsModule.forRoot([TechnicianEffects]),
     TechnicianModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({technician: techReducer})
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { addTech, LoadTechFailure, loadTechs, loadTechSucccess, removeTech } from './technician.actions';
 import { initialTecniciansState } from './technician.state';
 
-export const reducer = createReducer(
+export const techReducer = createReducer(
   initialTecniciansState,
   on(addTech, (state, { content }) => ({
     ...state,

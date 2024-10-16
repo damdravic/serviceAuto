@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { addTech, loadTechs } from '../../store/technician.actions';
 import { Technician } from '../../models/technician';
+import { selectAllTechnicians } from '../../store/technician.selectors';
 
 @Component({
   selector: 'app-technician',
   templateUrl: './technician.component.html',
   styleUrl: './technician.component.css'
 })
-export class TechnicianComponent {
+export class TechnicianComponent implements OnInit{
+
+  public technicians$ = this.store.select(selectAllTechnicians);
+
 
   constructor(private store : Store){}
 
