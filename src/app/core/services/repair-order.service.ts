@@ -1,10 +1,6 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CustomHttpResponse } from '../interface/custom-http-response';
+import { CustomHttpResponse } from '../../interface/custom-http-response';
 import {
   catchError,
   Observable,
@@ -13,12 +9,12 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { RepairOrder } from '../interface/repair-order';
-import { Key } from '../enum/key';
-import { RepairOrderComponent } from '../modules/order/components/repair-order/repair-order.component';
-import { RepairOrderState } from '../interface/repair-order-state';
-import { Part } from '../interface/part';
-import { Labor } from '../interface/labor';
+import { RepairOrder } from '../../interface/repair-order';
+import { Key } from '../../enum/key';
+import { RepairOrderComponent } from '../../modules/order/components/repair-order/repair-order.component';
+import { RepairOrderState } from '../../interface/repair-order-state';
+import { Part } from '../../interface/part';
+import { Labor } from '../../interface/labor';
 
 @Injectable({
   providedIn: 'root',

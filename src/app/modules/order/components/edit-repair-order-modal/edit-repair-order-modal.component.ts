@@ -10,7 +10,7 @@ import { Labor } from 'src/app/interface/labor';
 import { OrderItem } from 'src/app/interface/orderItem';
 import { Part } from 'src/app/interface/part';
 import { RepairOrder } from 'src/app/interface/repair-order';
-import { RepairOrderService } from 'src/app/service/repair-order.service';
+import { RepairOrderService } from 'src/app/core/services/repair-order.service';
 import { OrderLaborItem } from 'src/app/interface/order-labor-item';
 
 @Component({

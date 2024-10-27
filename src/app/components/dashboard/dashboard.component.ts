@@ -2,12 +2,14 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AddNewOrderModalComponent } from '../../modules/order/components/add-new-order-modal/add-new-order-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { XcompComponent } from '../xcomp/xcomp.component';
-import { RepairOrderService } from 'src/app/service/repair-order.service';
+import { RepairOrderService } from 'src/app/core/services/repair-order.service';
 import { catchError, map, Observable, of, startWith } from 'rxjs';
 import { RepairOrderState } from 'src/app/interface/repair-order-state';
 import { DataState } from 'src/app/interface/data-state';
 import { RepairOrder } from 'src/app/interface/repair-order';
 import { EditRepairOrderModalComponent } from '../../modules/order/components/edit-repair-order-modal/edit-repair-order-modal.component';
+import { Store } from '@ngrx/store';
+import { selectAllTechnicians } from '../../modules/technician/store/technician.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,11 +25,13 @@ export class DashboardComponent implements OnInit {
   });
 
   readonly DataState = DataState;
+  public technicians$ = this.store.select(selectAllTechnicians);
 
   constructor(
     private ngbModal: NgbModal,
     private orderService: RepairOrderService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private store : Store
   ) {}
 
   ngOnInit(): void {

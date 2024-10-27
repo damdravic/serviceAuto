@@ -1,7 +1,7 @@
 <div class="top">
     <div class="top-title">
         <h1>Technicians</h1>
-        <button class="btn add">
+        <button class="btn add" (click)="addNewTech()">
             <i class="fas fa-plus"></i>
             Add Technician
         </button>
@@ -31,9 +31,9 @@
                     </thead>
                     
                         <tr *ngFor="let tech of technicians$ |async" >
-                            <td>tech.id</td>
-                            <td>tech.workshop</td>
-                            <td>tech.techicianSpecialization</td>
+                            <td>{{tech.id}}</td>
+                            <td>{{tech.workshop}}</td>
+                            <td>{{tech.specialization}}</td>
                             <td>
                     
                         </tr>

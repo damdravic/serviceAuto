@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RepairOrder } from 'src/app/interface/repair-order';
-import { RepairOrderService } from 'src/app/service/repair-order.service';
+import { RepairOrderService } from 'src/app/core/services/repair-order.service';
 
 @Component({
   selector: 'app-add-new-order-modal',

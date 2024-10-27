@@ -12,7 +12,7 @@ export class SidenavComponent {
   @Input() collapsed:boolean; 
   constructor(private el: ElementRef){};
 
-  ngOnChanges(){
+  ngOnChanges(){                      
     this.collapsed =!this.collapsed;
   }
 

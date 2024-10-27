@@ -1,0 +1,41 @@
+<div class="header">
+    Add New Technician
+    <hr>
+</div>
+<div class="content">
+    <div class="searchUser">
+        <div class="info"> For create a new technician , need to chose a existent user !!!</div>
+        <div class="search">
+            <form (ngSubmit)="searchUser(searchInput.value)">
+                <input #searchInput type="text" placeholder="Search User ...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="searchResult">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>User Name</th>
+                        <th>User Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users$ |async">
+                        <td>{{user.userId}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.email}}</td>
+                        <td></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+<div class="footer">
+
+</div>

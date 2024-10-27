@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, Observable, switchMap, throwError } from 'rxjs';
-import { Key } from '../enum/key';
-import { UserService } from '../service/user.service';
-import { CustomHttpResponse } from '../interface/custom-http-response';
-import { Profile } from '../interface/profile';
+import { Key } from '../../enum/key';
+import { UserService } from '../services/user.service';
+import { CustomHttpResponse } from '../../interface/custom-http-response';
+import { Profile } from '../../interface/profile';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -28,12 +22,12 @@ export class TokenInterceptor implements HttpInterceptor {
    console.log('TokenInterceptor');
      return next.handle(this.addAuthorizationHeader(request, localStorage.getItem(Key.TOKEN))).pipe(
       catchError((error : HttpErrorResponse) => {
-        console.log('error occured --> '+ error.error.reason);
+      
         if(error instanceof HttpErrorResponse && error.status === 401 && error.error.reason.includes('expired')){
-          console.log("in if statement");
+          
          return this.handleRefreshToken(request,next);
         }else{
-          console.log('error'+ error.error.reason);
+         
           return throwError(() => error);
           
         }
@@ -45,7 +39,7 @@ export class TokenInterceptor implements HttpInterceptor {
 }
  private  handleRefreshToken(request: HttpRequest<unknown>, next: HttpHandler) : Observable<HttpEvent<unknown>> {
     if(!this.isTokenRefreshing){
-      console.log('refreshing token');
+ 
       this.isTokenRefreshing = true;
       this.refreshTokenSubject.next(null);
       return this.userService.refreshToken$().pipe(

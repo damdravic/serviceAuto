@@ -21,8 +21,9 @@ loadTechs$ = createEffect( () =>
             this.actions$.pipe(
                 ofType(loadTechs),
                 switchMap(() =>
-                  from(this.technicianService.getTechnicians()).pipe(
-                    map((technicians) => loadTechSucccess({ technicians : technicians }) ),
+                 from( this.technicianService.getTechnicians$()).pipe(
+                    map((response) =>  { 
+                     return loadTechSucccess({ technicians : response.data?.technicians})} ),
                     catchError((error) => of(LoadTechFailure({error : error})))
 
             ))

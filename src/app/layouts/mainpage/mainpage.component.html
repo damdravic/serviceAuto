@@ -1,0 +1,11 @@
+<app-header (isCollapsed) ="switch()"></app-header> 
+
+<div class="main-container">
+    <div class="main-side">
+        <app-sidenav [collapsed]="collapsed"></app-sidenav>
+    </div> 
+    <div class ="main-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<app-footer></app-footer>

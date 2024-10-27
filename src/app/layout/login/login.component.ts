@@ -17,7 +17,7 @@ import { DataState } from 'src/app/interface/data-state';
 import { LoginState } from 'src/app/interface/login-state';
 
 
-import { UserService } from 'src/app/service/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   styleUrls: ['./login.component.css'],

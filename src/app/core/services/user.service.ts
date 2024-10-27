@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
-import { CustomHttpResponse } from '../interface/custom-http-response';
-import { Profile } from '../interface/profile';
+import { CustomHttpResponse } from '../../interface/custom-http-response';
+import { Profile } from '../../interface/profile';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Key } from '../enum/key';
+import { Key } from '../../enum/key';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -68,6 +68,7 @@ export class UserService {
   public getAuth(): boolean {
     console.log('getAuth()');
     let token = localStorage.getItem(Key.TOKEN);
+    console.log(token);
     if (token) {
       return this.jwtHelper.decodeToken(token) &&
         !this.jwtHelper.isTokenExpired(token)

@@ -1,29 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Technician } from './models/technician';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TechnicianService {
 
-  constructor() { }
+ 
+  private readonly server: string = 'http://192.168.0.175:8081';
+
+  constructor(private http : HttpClient) { }
+
+    getTechnicians$(): Observable<CustomHttpResponse<{ technicians: Technician[] }>> {
+      return this.http.get<CustomHttpResponse<{ technicians: Technician[] }>>(`${this.server}/all`).pipe(
+        tap(response => console.log('API Response:', response)),
+        catchError(this.handleError)
+      );
+    }
 
 
-  getTechnicians() : Observable<Technician[]> {
-    return new Observable<Technician[]>(
-      (observer) => {
-        observer.next([
-          {
-            id: 1,
-            isActive: true,
-            workshop: 'workshop',
-            technicianExperience: 1,
-            techicianSpecialization: 'specialization'
-          }
-        ])
+    private handleError(error: HttpErrorResponse) {
+      let errorMessage: string;
+
+      if(error.error){
+      if (error.error instanceof ErrorEvent) {
+        errorMessage = error.error.message;
+      } else {
+        if (error.error.reason) {
+          errorMessage = error.error.reason;
+        } else {
+          errorMessage = `en error occured - error status ${error.status} - error message ${error.message}`;
+        }
+      }}else{
+        errorMessage = `en error occured - error status ${error.status} - error message ${error.message}`;
       }
-
-    )}
-  
+      return throwError(() => errorMessage);
+    }
   }

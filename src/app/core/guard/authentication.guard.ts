@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { UserService } from '../service/user.service';
-import { JwtInterceptor } from '@auth0/angular-jwt';
-import { TokenInterceptor } from '../interceptors/token.interceptor';
+import { UserService } from '../services/user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationGuard {
@@ -12,20 +10,16 @@ export class AuthenticationGuard {
     routeSnapShot: AuthenticationGuard,
     state: RouterStateSnapshot
   ): boolean {
-   
     return this.isAuthenticated();
-    
-
   }
 
   private isAuthenticated(): boolean {
-  
-   
-    if (this.authService.getAuth()) {
-
+    console.log("in guard is utthenticated")
+    if (this.authService.isAuthenticated()) {
+      console.log(this.authService.isAuthenticated())
       return true;
     } else {
-
+      console.log("Else" + this.authService.isAuthenticated())
       this.router.navigate(['/login']);
       return false;
     }

@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
-const routes = [
-  {path : '',component : SidenavComponent},
+//const routes = [
+ // {path : '',component : SidenavComponent},
  
-]
+//]
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule
   ],exports:[RouterModule]
 })
 export class SidenavRoutingModule { }
