@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { UserService } from 'src/app/modules/user/user.service';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationGuard {

@@ -1,32 +1,47 @@
-<div class="header">
-    Add New Technician
+<div class="top">
+    <div class="modal_title">Add New Technician</div>
+
     <hr>
 </div>
 <div class="content">
     <div class="searchUser">
-        <div class="info"> For create a new technician , need to chose a existent user !!!</div>
-        <div class="search">
-            <form (ngSubmit)="searchUser(searchInput.value)">
-                <input #searchInput type="text" placeholder="Search User ...">
-                <button type="submit">Search</button>
-            </form>
+        <div class="search" *ngIf="selectedUser == null ; else isSelected">
+            <div class="info"> For create a new technician , need to chose a existent user !!!</div>
+            <div class="">
+                <div>
+                    <input #searchInput type="text" (keyup)="searchUser(searchInput.value)" [(ngModel)]="searchInputv"
+                        name="searchInputv" placeholder="Search User ..."  autocomplete="off">
+
+                </div>
+            </div>
         </div>
-        <div class="searchResult">
-            <table>
+
+        <ng-template #isSelected>
+            <div class="info">User selected : {{selectedUser.firstName}} {{selectedUser.lastName}}</div>
+            <div class="info">User email : {{selectedUser.email}}</div>
+            <hr>
+            <button class="modal_btn" (click)="resetSelectedUser()">Reset</button>
+            <button class="modal_btn" *ngIf="!userIsConfirmed" class="modal_btn" (click)="confirmUser()">Continue with this user ... </button>
+        </ng-template>
+
+        <div class="searchResult" *ngIf="searchInputv && (usersFound$ | async) as usersFound   ">
+            <table *ngIf="usersFound.length && !selectedUser  ; else noUsers">
                 <thead>
                     <tr>
-                        <th>User ID</th>
-                        <th>User Name</th>
-                        <th>User Email</th>
-                        <th>Actions</th>
+                        <th> ID</th>
+                        <th> First Name</th>
+                        <th> Last Name</th>
+                        <th> Email</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of users$ |async">
+                    <tr class="user_row" *ngFor="let user of usersFound" (click)="selectUser(user)">
                         <td>{{user.userId}}</td>
                         <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
                         <td>{{user.email}}</td>
-                        <td></td>
+                       
                     </tr>
 
                 </tbody>
@@ -34,6 +49,45 @@
             </table>
 
         </div>
+
+        <div class="newTech" *ngIf="userIsConfirmed == true">
+            <form #addNewTech="ngForm" (ngSubmit)="addTech(addNewTech)">
+                <div class="form-group">
+                    <label for="techName">Technician Name</label>
+                    <input type="text" id="techName" [(ngModel)]="techName" name="techName"
+                        placeholder="Technician Name">
+                </div>
+                <div class="form-group">
+                    <label for="workshop">Workshop</label>
+                    <input type="text" [(ngModel)]="workshop" name="workshop" name="workshop">
+                </div>
+                <div class="form-group">
+                    <label for="specialization">Specialization</label>
+                    <input type="text" [(ngModel)]="specialization" name="specialization" placeholder="Specialization">
+                </div>
+                <div class="form-group">
+                    <select name="experience" [(ngModel)]="experience" id="experience">
+                        <option value="1" selected >1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <hr>
+                <button class="modal_btn" type="submit">Add Technician</button>
+            </form>
+        </div>
+
+        <ng-template #noUsers>
+            <div *ngIf="!selectedUser ">
+                <div class="info">No user found with this search criteria</div>
+                <div>Ask person to register or register new user using below button</div>
+                <button class="modal_btn" (click)="gotoregister()"> aici</button>
+                <button class="modal_btn" [routerLink]="['/register']"> aici</button>
+                <a [routerLink]="['/register']"> aici</a>
+            </div>
+        </ng-template>
     </div>
 </div>
 <div class="footer">

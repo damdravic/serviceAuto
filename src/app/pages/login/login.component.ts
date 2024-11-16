@@ -13,11 +13,14 @@ import {
 } from 'rxjs';
 
 import { Key } from 'src/app/enum/key';
+import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { DataState } from 'src/app/interface/data-state';
 import { LoginState } from 'src/app/interface/login-state';
+import { User } from 'src/app/interface/user';
+import { UserService } from 'src/app/modules/user/user.service';
 
 
-import { UserService } from 'src/app/core/services/user.service';
+
 
 @Component({
   styleUrls: ['./login.component.css'],
@@ -143,4 +146,23 @@ export class LoginComponent implements OnInit {
     this.signUpMode = !this.signUpMode;
     return this.signUpMode ? ' sign-up-mode' : '';
   }
+
+
+
+register(registerForm: NgForm): void {
+  this.userService.register(  registerForm.value).subscribe(
+    (response : CustomHttpResponse<User>) =>{
+      console.log('User registered', response);
+      this.router.navigate(['/login']).then(() => {
+        this.toggle();
+        registerForm.reset();
+    }) ;
+    }
+  ),(error : string) => {
+    console.error('User not registered', error);
+  }
+  
+}
+
+
 }

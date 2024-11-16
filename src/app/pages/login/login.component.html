@@ -55,7 +55,7 @@
 
 				</form>
 
-				<form class="sign-up-form" action="index.html" autocomplete="off" >
+				<form class="sign-up-form" #registerForm="ngForm" (ngSubmit)="register(registerForm)" autocomplete="off" >
 					<div class="logo">
 						<img src="../../../assets/images/anaxim.png" alt="easyclass" >
 						<h3>Admin section</h3>
@@ -73,26 +73,35 @@
 
 						<div class="input-wrap">
 							
-							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" type="input" minlength="4" class="input-field" autocomplete="off" id="firstName" required />
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" name="firstName" ngModel type="input" minlength="4" class="input-field" autocomplete="off" id="firstName" required />
 							<label for="firstName">First Name</label>
 						</div>
 						<div class="input-wrap">
 							
-							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" type="input" minlength="4" class="input-field" autocomplete="off" id="lastName" required />
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" name="lastName" ngModel type="input" minlength="4" class="input-field" autocomplete="off" id="lastName" required />
 							<label for="firstName">Last Name</label>
 						</div>
 						<div class="input-wrap">
 							
-							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" type="input" minlength="4" class="input-field" autocomplete="off" id="email" required />
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event) "
+							 #email="ngModel" ngModel name="email"
+							   type="email" minlength="4" class="input-field"
+							    autocomplete="off" id="email" required />
 							<label for="email">Email</label>
+							<div *ngIf="email.invalid && (email.dirty || email.touched)">
+								<div *ngIf="email.errors?.['required']">Email is required.</div>
+								<div *ngIf="email.errors?.['email']">Invalid email address.</div> 
+							  </div>
+					         
+
 						</div>
 						<div class="input-wrap">
 							
-							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" type="password" minlength="4" class="input-field" autocomplete="off" id="pass" required />
+							<input (focus)="onFocus($event)" (blur) ="onBlur($event)" ngModel name="password" type="password" minlength="4" class="input-field" autocomplete="off" id="pass" required />
 							<label for="pass">Password</label>
 						</div>
 						
-						<input type="submit" class="sign-up" value="Sing Up ">
+						<input type="submit" class="sign-up" value="Sing Up " [disabled]="registerForm.invalid">
 						<p class="text">
 							By signing up, I agree to the <a href="#" >Terms of Services</a> and <a href="#" >Privacy Policy</a>
 						</p>

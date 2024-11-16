@@ -3,6 +3,8 @@ import { Technician } from './models/technician';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddTechnicianComponent } from './components/add-technician/add-technician.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class TechnicianService {
  
   private readonly server: string = 'http://192.168.0.175:8081';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,  private modal : NgbModal) { }
 
     getTechnicians$(): Observable<CustomHttpResponse<{ technicians: Technician[] }>> {
       return this.http.get<CustomHttpResponse<{ technicians: Technician[] }>>(`${this.server}/all`).pipe(
@@ -20,6 +22,14 @@ export class TechnicianService {
         catchError(this.handleError)
       );
     }
+
+
+  addTechnician$(technician: Technician): Observable<CustomHttpResponse<Technician>> {
+    return this.http.post<CustomHttpResponse<Technician>>(`${this.server}/newTechnician`, technician).pipe(
+      tap(response => console.log('API Response:', response)),
+      catchError(this.handleError)
+    )
+  }
 
 
     private handleError(error: HttpErrorResponse) {
@@ -39,4 +49,13 @@ export class TechnicianService {
       }
       return throwError(() => errorMessage);
     }
+
+
+    addNewTechModal(){
+      this.modal.open(AddTechnicianComponent, {size : 'lg'});
+
+    }
+
+
+
   }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './layout/login/login.component';
+
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
@@ -17,7 +17,6 @@ import { TopWidgetComponent } from './widgets/top-widget/top-widget.component';
 import { MainComponent } from './shared/main/main.component';
 import { CommonModule } from '@angular/common';
 
-import { LandingPageComponent } from './layout/landing-page/landing-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { XcompComponent } from './components/xcomp/xcomp.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
@@ -34,6 +33,11 @@ import { MainpageComponent } from './layouts/mainpage/mainpage.component';
 import { User } from './interface/user';
 import { UserEffects } from './modules/user/store/user.effects';
 import { userReducer } from './modules/user/store/user.reducer';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { Customer } from './modules/customer/model/customer';
+import { CustomerEffects } from './modules/customer/store/customer.effects';
+import { customerReducer } from './modules/customer/store/customer.reducer';
 
 @NgModule({
   declarations: [
@@ -44,10 +48,10 @@ import { userReducer } from './modules/user/store/user.reducer';
     TopWidgetComponent,
     MainComponent,
     DashboardComponent,
-    LandingPageComponent,
     XcompComponent,
     PaginationComponent,
-    MainpageComponent
+    MainpageComponent,
+    RegisterComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -58,10 +62,14 @@ import { userReducer } from './modules/user/store/user.reducer';
     OrderModule,
     SidenavModule,
     NgbModule,
-    EffectsModule.forRoot([TechnicianEffects,UserEffects]),
+    EffectsModule.forRoot([TechnicianEffects, UserEffects, CustomerEffects]),
     TechnicianModule,
     ThemesModule,
-    StoreModule.forRoot({ technician: techReducer,user : userReducer }),
+    StoreModule.forRoot({
+      technician: techReducer,
+      user: userReducer,
+      customer: customerReducer,
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

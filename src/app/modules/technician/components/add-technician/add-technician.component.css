@@ -8,12 +8,22 @@
     flex-direction: column;
     align-items: center;
     margin-top: 1rem;
+    width: 100%;
+
+
+}
+.search{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 }
 
 .search input{
+    margin-top: 1rem;
     border: 1px solid #ccc;
-    border-radius : 10px 0 0 10px;
+    border-radius : 10px ;
     height: 3rem;
 }
 
@@ -28,7 +38,7 @@
 .search button{
     border: 1px solid #ccc;
     border-radius : 0 10px 10px 0;
-    background-color: #f8f9fa;
+    
     height: 3rem;
 }
 .search{
@@ -36,4 +46,78 @@
 }
 .searchResult{
     margin-top: 1rem;
+    width: 70%;
+
+}
+.my_btn{
+    margin-top: 0.5rem;
+ padding: 0.2rem 0.5rem;
+ background-color: rgb(123, 123, 236);
+ border-radius: 0.5rem;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    
+}
+.form-group
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}  
+
+.user_row{
+    border: 1px solid #ccc;
+    width: 100%;
+    
+}
+.user_row td{
+    padding:0.5rem 1rem;
+}
+table{
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+tbody tr:first-child{
+    
+    border-radius:1rem;
+
+}
+
+table tr:last-child{
+    border-radius: 0 0.5rem 0.5rem 0;}
+
+ table th{
+    padding: 0.5rem 1rem;
+   }
+
+.user_row:hover{
+    background-color: #c5cbd1;
+    cursor: pointer;
+}
+
+.form-group input,select{
+ 
+    background-color: none;
+    border: 1px solid blue;
+    line-height: 0;
+    font-size: 17px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    border-radius: 60px;
+    color: blue;
+    font-weight: 100;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 1;
+}
+
+.newTech{
+    width: 50%;
 }

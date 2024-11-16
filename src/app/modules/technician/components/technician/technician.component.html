@@ -1,72 +1,116 @@
-<div class="top">
+<div class="header">
     <div class="top-title">
         <h1>Technicians</h1>
-        <button class="btn add" (click)="addNewTech()">
+        <button class="add_btn" (click)="addNewTech()">
             <i class="fas fa-plus"></i>
             Add Technician
         </button>
     </div>
-    
+
 </div>
 <div class="content">
     <div class="left">
-          <div class="half_content">
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-                  <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                  <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
-                </div>
-              </nav>
-              <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><table>
-                    <thead>
-                        <tr>
-                            <th>Technician ID</th>
-                            <th>Technician workshop</th>
-                            <th>Technician Spec</th>
-                            
-                        </tr>
-                        <tr> <th colspan=3><hr></tr>
-                    </thead>
-                    
-                        <tr *ngFor="let tech of technicians$ |async" >
+        <div class="half_content">
+
+            <div class="tab-content">
+                <div >
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Technician ID</th>
+                                <th>Technician workshop</th>
+                                <th>Technician Spec</th>
+
+                            </tr>
+                            <tr>
+                                <th colspan=3>
+                                    <hr>
+                            </tr>
+                        </thead>
+
+                        <tr *ngFor="let tech of technicians$ |async" (click)="selectTech(tech)">
                             <td>{{tech.id}}</td>
                             <td>{{tech.workshop}}</td>
                             <td>{{tech.specialization}}</td>
                             <td>
-                    
+
                         </tr>
-                </table>
+                    </table>
+                </div>
+
             </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
-              </div>
-            
-            
+
+
         </div>
     </div>
     <div class="right">
-        <div class="half_content">
-           <div class="info">
+         <div class="half_content">
+
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                    type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                    type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                    type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+            </div>
+        </nav>
+        <div class="tab-content " id="nav-tabContent">
+            <div  class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <h1>Technician Information</h1>
                 <div class="info-content">
-                     <div class="info-content-left">
-                          <div class="info-content-left-item">
+                    <div class="info-content-left">
+                        <div class="info-content-left-item">
                             <label for="technician-id">Technician ID</label>
-                            <input type="text" id="technician-id" placeholder="1" disabled>
-                          </div>
-                          <div class="info-content-left-item">
+                            {{selectedTech?.id}}
+                        </div>
+                        <div class="info-content-left-item">
                             <label for="technician-name">Technician Name</label>
                             <input type="text" id="technician-name" placeholder="John Doe" disabled>
-                          </div>
-                          <div class="info-content-left-item">
-                            <label for="technician-email">Technician Email</label>
-                            </div>
                         </div>
-                 </div>
+                        <div class="info-content-left-item">
+                            <label for="technician-email">Technician Email</label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="info-actions">
+                    <button class="modal_btn" (click)="editTech(selectedTech)">
+                        <i class='bx bx-message-square-edit'></i>
+                        Edit
+                    </button>
+                    <button class="modal_btn" (click)="deleteTech(selectedTech)">
+                        <i class='bx bx-message-square-minus'></i>
+                        Delete
+                    </button>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div *ngIf="selectedTechUser$ | async as selectedTechUser ; else noUser ">
+                    <p><strong>First Name:</strong> {{ selectedTechUser.firstName }}</p>
+                    <p><strong>Last Name:</strong> {{ selectedTechUser.lastName }}</p>
+                    <p><strong>Email:</strong> {{ selectedTechUser.email }}</p>
+                  </div>
+                  <ng-template #noUser>
+                    <p>No user selected</p>
+                    </ng-template>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <div *ngIf="selectedTechUser$ | async as selectedTechUser ; else noUser ">
+                <p><strong>First email:</strong> {{ selectedTechUser.email }}</p>
+                <p><strong>Last phoneNumber:</strong> {{ selectedTechUser.phone }}</p>
+                <p><strong>Email:</strong> {{ selectedTechUser.email }}</p>
+              </div>
+              <ng-template #noUser>
+                <p>No user selected</p>
+                </ng-template>
+            
+            </div>
         </div>
-        </div> 
     </div>
-          
+    </div>
+
+    
+
 </div>

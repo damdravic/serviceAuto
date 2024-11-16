@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  --primary-color :#c491e6;
+  --secondary-color: #5e28b4;
+}
+
+
 
 *  {
     padding: 0;
@@ -6,3 +12,145 @@
     box-sizing: border-box;
   
 }
+.top{
+    background-color: var(--primary-color);
+    border-radius: 0.4rem 0.4rem 0 0;
+    height: 40px;
+    display: flex;
+    color: white;
+    align-items: center;
+}
+.modal_btn{
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 2px;
+    border: none;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.25rem;
+  }
+  .modal_btn:hover{
+    background-color:var(--secondary-color);
+  }
+  .add_btn
+  {
+    background-color: #c491e6;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 2px;
+    border: none;
+    border-radius: 1.25rem;
+    cursor: pointer;
+    width: 15rem;
+    font-size: 1.25rem;
+    box-shadow: 2px 2px 2px 2px #ccc;
+  }
+
+  .add_btn:hover{
+    background-color: var(--secondary-color);
+   }
+
+
+
+
+
+  .header{
+    font-size: 1.1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+  .modal_title , .page_title{
+    font-size: 1.1rem;
+    margin-left: 1rem;
+  }
+  .top-title{
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.main_content{
+    padding: 0.8rem;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1rem;
+}
+.content_section{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  
+}
+
+
+.search_section{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.5rem;
+ 
+}
+.search_section input{
+  width:40%;
+  padding:0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+.table_section{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 0 0.8rem;
+  
+}
+
+.v_form_content{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 60%;
+  padding: 0 0.8rem;
+}
+
+.content{
+  display: flex;
+  justify-content: center;;
+  padding: 0.8rem;
+}
+
+
+
+.vert_form_wrapper{
+  width: 60%;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px 2px #ccc;
+}
+
+.vert_form_wrapper .form_group{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.8rem;
+}
+
+.form_group input:focus{
+  border: 1px solid var(--primary-color);
+  outline: none;
+}
+.modal_bottom{
+  display: flex;
+  justify-content:space-around;
+  padding: 0.5rem 3rem;
+
+} 

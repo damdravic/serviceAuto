@@ -1,0 +1,52 @@
+<div class="wrapper">
+    <div class="top">
+        <div class="modal_title">Adding new Customer</div>
+
+    </div>
+    <div class="content">
+        <div class="vert_form_wrapper">
+            <form #newCustomer="ngForm">
+                
+                    <div class="form_group">
+                        <label >First Name</label>
+                        <input type="text" ngModel name="firstName" class="form-control" id="fisrtName"
+                             placeholder="Enter Customer First Name" />
+                    </div>
+                    <div class="form_group">
+                        <label >Last Name</label>
+                        <input type="text" ngModel name="lastName" class="form-control" id="lastName"
+                             placeholder="Enter Customer Last Name" />
+                    </div>
+                    <div class="form_group">
+                        <label >Email</label>
+                        <input type="text" ngModel name="email" class="form-control" id="email"
+                             placeholder="Enter Customer Email" />
+                    </div>
+                    <div class="form_group">
+                        <label >Phone</label>
+                        <input type="text" ngModel name="phone" class="form-control" id="phone"
+                             placeholder="Enter Customer Phone" />
+                    </div>
+                    <div class="form_group">
+                        <label >Note</label>
+                        <input type="text" ngModel name="notes" class="form-control" id="notes"
+                             placeholder="Enter notes" />
+                    </div>
+
+
+           <!-- todo: add more fields and need to add adress fields -->
+   
+            </form>
+        </div>
+    </div>
+    <div class="modal_bottom">
+        <button class="modal_btn" (click)="save(newCustomer)">Save</button>
+        <button class="modal_btn" (click)="closeModal()">Cancel</button>
+
+    </div>
+    <footer>
+       
+
+    </footer>
+
+</div>

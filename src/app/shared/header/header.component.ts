@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Key } from 'src/app/enum/key';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserService } from 'src/app/modules/user/user.service';
+
 
 @Component({
   selector: 'app-header',

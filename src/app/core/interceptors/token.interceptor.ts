@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, Observable, switchMap, throwError } from 'rxjs';
 import { Key } from '../../enum/key';
-import { UserService } from '../services/user.service';
+
 import { CustomHttpResponse } from '../../interface/custom-http-response';
 import { Profile } from '../../interface/profile';
+import { UserService } from 'src/app/modules/user/user.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

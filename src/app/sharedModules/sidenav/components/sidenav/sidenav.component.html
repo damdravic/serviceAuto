@@ -44,6 +44,16 @@
                 </li>
                 <li>
                     <button type="button" #but
+                      (click)="clicked($event.target)"
+                    routerLink="customer" >
+                      <i class='bx bxs-user-detail'></i>
+                        <p>Customers</p>
+
+                    </button>
+
+                </li>
+                <li>
+                    <button type="button" #but
                       routerLink="/repairOrder"
                      
                       (click)="clicked($event.target)" >

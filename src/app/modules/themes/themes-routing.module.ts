@@ -9,7 +9,11 @@ const routes: Routes = [
   {path:'dashboard' , component: DashboardComponent},
   {path : 'technician', 
     loadChildren: () => import ('../technician/technician.module').then(m => m.TechnicianModule )
-  }
+  },
+  {path : 'customer', 
+    loadChildren: () => import ('../customer/customer.module').then(m => m.CustomerModule )
+  },
+
 ];
 
 @NgModule({
