@@ -16,7 +16,7 @@ export class CustomerService {
   
 
 private server =  'http://192.168.0.175:8081';
- public customers$ = this.store.select(store => store.);
+
 
   constructor( private http: HttpClient,
      private modal: NgbModal,
