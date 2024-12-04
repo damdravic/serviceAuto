@@ -8,8 +8,9 @@
         </div>
         <div class="info">
           <p>Orders</p>
-          <p></p>
         </div>
+      
+        
         <div class="infox">
           <h3>5</h3>
         </div>
@@ -54,6 +55,7 @@
 
     <div class="main_area">
       <div class="main_top_area">
+       
 
         <div class="ax_card">
           <section *ngIf="(orderState$ | async) as orderState">
@@ -116,299 +118,29 @@
           </section>
           
         </div>
-        <div class="ax_card">
-          <div class="top_info">
-            <div class="title">
-              <h5>Orders</h5>
-            </div>
-            <div class="settings">
-              <button class="card_btn">Add New Order</button>
-              <button class="card_btn">Options</button>
-            </div>
+        <div class="ax_chart">
 
+          <app-pie-chart></app-pie-chart>
+          <div class="Label-info">
+            <h3>Orders</h3>
+            <p>Orders</p>
           </div>
-          <div class="content">
-            <table class="recent_orders">
-              <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
-              </tr>
-              <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Berglunds snabbköp</td>
-                <td>Christina Berglund</td>
-                <td>Sweden</td>
-              </tr>
-              <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-              </tr>
-              <tr>
-                <td>Ernst Handel</td>
-                <td>Roland Mendel</td>
-                <td>Austria</td>
-              </tr>
-              <tr>
-                <td>Island Trading</td>
-                <td>Helen Bennett</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Königlich Essen</td>
-                <td>Philip Cramer</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Laughing Bacchus Winecellars</td>
-                <td>Yoshi Tannamuri</td>
-                <td>Canada</td>
-              </tr>
-              <tr>
-                <td>Magazzini Alimentari Riuniti</td>
-                <td>Giovanni Rovelli</td>
-                <td>Italy</td>
-              </tr>
-              <tr>
-                <td>North/South</td>
-                <td>Simon Crowther</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-            </table>
-          </div>
-        </div>
+ 
+         </div>
+        
 
       </div>
-
-      <div class="middle_area">
-        <div class="ax_card">
-          <div class="top_info">
-            <div class="title">
-              <h5>Orders</h5>
-            </div>
-            <div class="settings">
-              <button class="card_btn">Add New Order</button>
-              <button class="card_btn">Options</button>
-            </div>
-
-          </div>
-          <div class="content">
-            <table class="recent_orders">
-              <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
-              </tr>
-              <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Berglunds snabbköp</td>
-                <td>Christina Berglund</td>
-                <td>Sweden</td>
-              </tr>
-              <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-              </tr>
-              <tr>
-                <td>Ernst Handel</td>
-                <td>Roland Mendel</td>
-                <td>Austria</td>
-              </tr>
-              <tr>
-                <td>Island Trading</td>
-                <td>Helen Bennett</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Königlich Essen</td>
-                <td>Philip Cramer</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Laughing Bacchus Winecellars</td>
-                <td>Yoshi Tannamuri</td>
-                <td>Canada</td>
-              </tr>
-              <tr>
-                <td>Magazzini Alimentari Riuniti</td>
-                <td>Giovanni Rovelli</td>
-                <td>Italy</td>
-              </tr>
-              <tr>
-                <td>North/South</td>
-                <td>Simon Crowther</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-
-
-        <div class="ax_card">
-          <div class="top_info">
-            <div class="title">
-              <h5>Orders</h5>
-            </div>
-            <div class="settings">
-              <button class="card_btn">Add New Order</button>
-              <button class="card_btn">Options</button>
-            </div>
-
-          </div>
-          <div class="content">
-            <table class="recent_orders">
-              <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
-              </tr>
-              <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Berglunds snabbköp</td>
-                <td>Christina Berglund</td>
-                <td>Sweden</td>
-              </tr>
-              <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-              </tr>
-              <tr>
-                <td>Ernst Handel</td>
-                <td>Roland Mendel</td>
-                <td>Austria</td>
-              </tr>
-              <tr>
-                <td>Island Trading</td>
-                <td>Helen Bennett</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Königlich Essen</td>
-                <td>Philip Cramer</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Laughing Bacchus Winecellars</td>
-                <td>Yoshi Tannamuri</td>
-                <td>Canada</td>
-              </tr>
-              <tr>
-                <td>Magazzini Alimentari Riuniti</td>
-                <td>Giovanni Rovelli</td>
-                <td>Italy</td>
-              </tr>
-              <tr>
-                <td>North/South</td>
-                <td>Simon Crowther</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-
-
-        <div class="ax_card">
-          <div class="top_info">
-            <div class="title">
-              <h5>Orders</h5>
-            </div>
-            <div class="settings">
-              <button class="card_btn">Add New Order</button>
-              <button class="card_btn">Options</button>
-            </div>
-
-          </div>
-          <div class="content">
-            <table class="recent_orders">
-              <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
-              </tr>
-              <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Berglunds snabbköp</td>
-                <td>Christina Berglund</td>
-                <td>Sweden</td>
-              </tr>
-              <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-              </tr>
-              <tr>
-                <td>Ernst Handel</td>
-                <td>Roland Mendel</td>
-                <td>Austria</td>
-              </tr>
-              <tr>
-                <td>Island Trading</td>
-                <td>Helen Bennett</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Königlich Essen</td>
-                <td>Philip Cramer</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Laughing Bacchus Winecellars</td>
-                <td>Yoshi Tannamuri</td>
-                <td>Canada</td>
-              </tr>
-              <tr>
-                <td>Magazzini Alimentari Riuniti</td>
-                <td>Giovanni Rovelli</td>
-                <td>Italy</td>
-              </tr>
-              <tr>
-                <td>North/South</td>
-                <td>Simon Crowther</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-            </table>
-          </div>
-        </div>
+      <div class="cars-list">
+        <h2>Cars</h2>
+        <ul>
+          <li *ngFor="let car of cars$ | async">
+            {{ car.make }} - {{ car.model }}
+          </li>
+        </ul>
       </div>
+
+      
+      
     </div>
   </div>
 </div>

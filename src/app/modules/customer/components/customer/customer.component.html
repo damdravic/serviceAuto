@@ -65,35 +65,107 @@
             </div>
             <div class="tab-content" id="nav-tabContent" *ngIf="selectedCustomer">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="info_area"> First Name : {{selectedCustomer?.firstName}} <br>
-                        Last Name : {{selectedCustomer?.lastName}} <br>
-                    </div>
+                    <table class="info_table">
+                        <tr>
+                            <td>First Name: </td>
+                            <td><input type="text" class="editing_input " [(ngModel)]="selectedCustomer.firstName "
+                                    > </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Last Name : </td>
+                            <td><input type="text" class="editing_input" [(ngModel)]="selectedCustomer.lastName "
+                                    > </td>
+                        </tr>
+                        <tr>
+                            <td>Address : </td>
+                            <td><input type="text" class="editing_input" value="WIll be added later" disabled> </td>
+                                   
+                        </tr>
+            
+                        
+                    </table>
                    
 
                 </div>
                 <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
                     <div class="info_area"><img src="" alt=" ">
-                        Notes :
-                        <input type="text" class="editing_input" [(ngModel)]="selectedCustomer.notes ">  <br>
-                        Active: {{selectedCustomer?.active}} <br>
-                        Created At : {{selectedCustomer?.createDate}} <br>
-                        Created By : {{selectedCustomer?.createBy}} <br>
-                        Updated At : {{selectedCustomer?.updateDate}} <br>
-                        Updated By : {{selectedCustomer?.updateBy}} <br>
+                        <table class="info_table">
+                            <tr>
+                                <td>Id : </td>
+                                <td><input type="text" class="editing_input " [ngModel]="selectedCustomer.customerId " disabled
+                                        > </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Notes : </td>
+                                <td><input type="text" class="editing_input" [(ngModel)]="selectedCustomer.notes " name="notes"
+                                        > </td>
+                            </tr>
+                            <tr>
+                                <td>Created By: </td>
+                                <td> <input type="text" class="editing_input "  [ngModel]="selectedCustomer.createdBy" name="" id=""  disabled>
+                        
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Created At : </td>
+                                <td> <input type="text" class="editing_input "  [ngModel]="selectedCustomer.createdDate" name="" id=""  disabled>
+                        
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Updated By: </td>
+                                <td> <input type="text" class="editing_input"  [ngModel]="selectedCustomer.updatedBy" name="" id="" disabled>
+                        
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Updated At : </td>
+                                <td> <input type="text" class="editing_input" [ngModel]="selectedCustomer.updatedDate" name="" id="" disabled>
+                        
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Active : </td>
+                                <td> <input type="checkbox" [(ngModel)]="selectedCustomer.active" name="active" id="" >
+                        
+                                </td>
+                            </tr>
+                            
+                        </table>
+                       
+    
+             
                     </div>
                 </div>
                 <div class="tab-pane fade " id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="info_area">
-                        Email : {{selectedCustomer?.email}} <br>
-                        Phone : {{selectedCustomer?.phone}} <br>
+                        <table class="info_table">
+                            <tr>
+                                <td>Email: </td>
+                                <td><input type="text" class="editing_input " [(ngModel)]="selectedCustomer.email "
+                                        > </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Phone : </td>
+                                <td><input type="text" class="editing_input" [(ngModel)]="selectedCustomer.phone "
+                                        > </td>
+                            </tr>
+                
+                            
+                        </table>
                     </div>
                 </div>
-
+               
                 <div class="bottom">
-                    <button class="bottom_button edit_btn" (click)="editCustomer(selectedCustomer)">
+                    <button class="bottom_button edit_btn" (click)="editCustomer(selectedCustomer)"
+                    [disabled]="!hasCustomerChanged()" [ngClass]="{'disabled_button' : !hasCustomerChanged() }">
                         <i class='bx bx-edit'></i></button>
-                    <button class="bottom_button delete_btn" (click)="deleteCustomer(selectedCustomer)">
+                    <button class="bottom_button delete_btn" (click)="deleteCustomer(selectedCustomer.customerId)">
                         <i class='bx bx-trash'></i></button>
 
                 </div>

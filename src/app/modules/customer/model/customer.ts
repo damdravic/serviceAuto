@@ -10,8 +10,8 @@ export class Customer {
     active: boolean;
     createDate: Date;
     updateDate: Date;
-    createBy: string;
-    updateBy: string;
+    createdBy: string;
+    updatedBy: string;
 
     constructor() {
     }

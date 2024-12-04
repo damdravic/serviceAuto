@@ -6,7 +6,10 @@
 
 .toggle{
     padding: 0.1rem 0.6rem;
-    border-radius: 2rem;
+    border-radius: 0.2rem;
+}
+.toggle_area{
+    margin-left: 2rem;
 }
 
 .wrapper{
@@ -101,3 +104,22 @@ input{
     border-radius: 0.5rem;
     margin-left: 10px;
 }
+.info{
+    position: relative;
+}
+.drpdown-menu{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    z-index: 10000;
+
+
+}
+.drpdown-menu.show {
+    display: block;
+  }

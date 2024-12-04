@@ -1,12 +1,13 @@
 <div class="wrapper">
+   <div class="logo_area">
+      <img src="assets/images/logo.png" alt="logo">
+   </div>
    <div class="toggle_area">
-    <button class="toggle" (click)="switchSidenav()" > X </button>
+    <button class="toggle" (click)="switchSidenav()" >
+      <i class='bx bx-menu'></i>
+   </button>
    </div>
-   <div class="search_area">
-    <input type="text" placeholder="Search">
-    <button>Search</button>
 
-   </div>
    <div class="right">
    <div class="nav_area">
     <ul>
@@ -19,9 +20,18 @@
       <div class="image">
        
       </div>
-      <div class="info">
-         <p>John Doe</p>
-         <p>{{role | json}}</p>  
+      <div class="info" (mouse)="toggleDropdown()" >
+         <p>{{getName()}}</p>
+         <p>{{role | json}}</p>
+
+         <div class="drpdown-menu "  [class.show]="dropdownOpen" >
+            <ul>
+               <li>Profile</li>
+               <li>Settings</li>
+             
+
+            </ul>
+         </div> 
       </div>
       <div class="logout">
          <button (click)="logout()">Logout</button>

@@ -11,20 +11,20 @@ import { selectCustomer } from '../../store/customer.selectors';
 })
 export class CustomerComponent {
 
-
-
-
-deleteCustomer(arg0: Customer) {
-throw new Error('Method not implemented.');
-}
-editCustomer(arg0: Customer) {
-throw new Error('Method not implemented.');
-}
   searchTerm: any;
   customers$: Observable<Customer[]>;
   selectedCustomer: Customer =null;
+  selectedCustomerOriginal: Customer = null;
   customerStatus :string;
 
+deleteCustomer(id){
+  this.customerService.deleteCustomer(id);
+}
+
+editCustomer(customer : Customer) {
+ this.customerService.editCustomer(customer);
+}
+ 
 constructor(private customerService : CustomerService) {}
 
 
@@ -47,6 +47,13 @@ constructor(private customerService : CustomerService) {}
   }
 
   selectCustomer(customer : Customer){
-    this.selectedCustomer = customer;
+    this.selectedCustomer = {...customer};
+    this.selectedCustomerOriginal = {...customer};
   }
+
+  hasCustomerChanged(): boolean {
+    return JSON.stringify(this.selectedCustomer) !== JSON.stringify(this.selectedCustomerOriginal);
+  }
+
+
 }

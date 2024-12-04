@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { Customer } from './model/customer';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +8,7 @@ import { AddNewCustomerModalComponent } from './components/add-new-customer-moda
 import { AppState } from 'src/app/interface/app-state';
 import { Store } from '@ngrx/store';
 import { selectAllCustomers, selectCustomerStatus } from './store/customer.selectors';
+import { deleteCustomer, updateCustomer } from './store/customer.actions';
 
 
 @Injectable({
@@ -68,7 +69,7 @@ addNewCustomer(){
 }
 
 addCustomer(customer : Customer): Observable<CustomHttpResponse<{customer : Customer}>> {
-  console.log("value");
+ 
   return this.http.post<CustomHttpResponse<{customer : Customer}>>(
     `${this.server}/customer/add`,customer 
   ).pipe(
@@ -84,18 +85,30 @@ return this.http.put<CustomHttpResponse<Customer>>(
 )
 }
 
-deleteCustomer(id : number): Observable<CustomHttpResponse<String>>{
+deleteCustomerHttp(customerId : number): Observable<CustomHttpResponse<String>>{
+  console.log("in service");
   return this.http.delete<CustomHttpResponse<String>>(
-    `${this.server}/customer/delete/${id}`).pipe(
+    `${this.server}/customer/delete/${customerId}`).pipe(
       catchError(this.handleError)
     )
 }
 
+deleteCustomer(id : number){
+  this.store.dispatch(deleteCustomer({id}) )
+}
+
+editCustomer(customer: Customer) {
+  this.store.dispatch(updateCustomer({customer}))
+}
 
 
-
-
-
+updateCustomerHttp(customer ) : Observable<CustomHttpResponse<{customer : Customer}>>{
+  return this.http.put<CustomHttpResponse<{customer : Customer}>>(
+    `$(this.server)/customer/update`,customer
+  ).pipe(
+  catchError(this.handleError)  
+  )
+}
 
 closeModal(){
   this.modal.dismissAll();

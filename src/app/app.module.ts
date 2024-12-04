@@ -30,16 +30,19 @@ import { EffectsModule } from '@ngrx/effects';
 import { TechnicianEffects } from './modules/technician/store/technician.effect';
 import { ThemesModule } from './modules/themes/themes.module';
 import { MainpageComponent } from './layouts/mainpage/mainpage.component';
-import { User } from './interface/user';
 import { UserEffects } from './modules/user/store/user.effects';
 import { userReducer } from './modules/user/store/user.reducer';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { Customer } from './modules/customer/model/customer';
 import { CustomerEffects } from './modules/customer/store/customer.effects';
 import { customerReducer } from './modules/customer/store/customer.reducer';
-import { SpinnerComponent } from './shared/spinner/spinner.component';
-import { CustomerModule } from './modules/customer/customer.module';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { ChartsModule } from './modules/charts/charts.module';
+import { CarModule } from './modules/car/car.module';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -62,8 +65,11 @@ import { CustomerModule } from './modules/customer/customer.module';
     AppRoutingModule,
     CommonModule,
     FormsModule,
+    BaseChartDirective,
     OrderModule,
     SidenavModule,
+    ChartsModule,
+    CarModule,
     NgbModule,
     EffectsModule.forRoot([TechnicianEffects, UserEffects, CustomerEffects]),
     TechnicianModule,
@@ -76,6 +82,7 @@ import { CustomerModule } from './modules/customer/customer.module';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    provideCharts(withDefaultRegisterables()),
     provideHttpClient(withInterceptorsFromDi()),
   ],
 })

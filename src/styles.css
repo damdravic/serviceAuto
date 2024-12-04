@@ -188,5 +188,41 @@
 .editing_input
 {
  border:none;
-  padding: 0.5rem;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+}
+.editing_input:focus{
+  outline: none;
+  border: 1px solid var(--primary-color);
+}
+
+.disabled_button{
+  cursor: none;
+  background-color: #fcf7f7;
+  color: white;
+  
+}
+.info_table{
+  width: 100%;
+
+}
+
+.info_table tr{
+  width: 100%;
+      padding: 0 0.8rem;
+  display:flex;
+  justify-content:stretch;
+  align-items: start;
+
+}
+.info_table td{
+ 
+  min-width: 20%;
+}
+
+.no-focus{
+  outline: none;
+  pointer-events: none;
+  background-color: #f1f1f1  ;
+  border-radius: 0.2rem;
 }

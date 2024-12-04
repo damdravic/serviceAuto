@@ -19,11 +19,11 @@
                 </div>
                 <div class="ax_select">
                   <label for="">Car</label>
-                  <select class="form-select" ngModel name="vehicleId" aria-label="Default select example">
-                    <option selected>Select Car</option>
-                    <option value="1">One</option>
-                  
-                  </select>
+                  <input  type="text" class="form-select" [(ngModel)]="searchCarTerm" (keyup)="searchCar()" name="vehicleId" aria-label="Default select example" />
+                   <div class="result" >
+
+                   </div>
+              
                 </div>
 
 

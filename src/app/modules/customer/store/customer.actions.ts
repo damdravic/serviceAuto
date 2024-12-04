@@ -39,6 +39,17 @@ export const updateCustomer = createAction(
   props<{ customer : Customer}>()
 );
 
+export const updateCustomerSuccess = createAction(
+  '[Customer] Update Customer Success ',
+  props<{customer : Customer}>()
+
+);
+
+export const updateCustomerFailure = createAction(
+'[Customer] Update Customer Failure',
+props<{error : string}>
+);
+
 export const loadCustomer = createAction(
   '[Customer] Load Customer',
   props<{ id : number}>()

@@ -64,6 +64,16 @@
     0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
     0 16px 16px rgba(0, 0, 0, 0.12);
 }
+.ax_chart {
+    position: relative;
+
+    height: 100%; /* Ensure the container takes up the full height */
+    width: 100%; /* Ensure the container takes up the full width */
+    padding: 20px; /* Add padding to the container */
+    border-radius: 10px; /* Add border radius to the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow to the container */
+  
+}
 
 .bottom{
 width: 100%;
@@ -135,4 +145,17 @@ tr:hover {background-color: #ddd;}
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+  }
+
+  .ax_chart{
+    display: flex;
+    justify-content: space-around;
+  }
+
+ 
+  .chart-container-mini {
+    width: 50%;
+    height: 100%; 
+    overflow: hidden;
+    background-color: red;
   }
