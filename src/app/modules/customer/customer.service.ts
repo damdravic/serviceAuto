@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { Customer } from './model/customer';
@@ -7,21 +7,32 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddNewCustomerModalComponent } from './components/add-new-customer-modal/add-new-customer-modal.component';
 import { AppState } from 'src/app/interface/app-state';
 import { Store } from '@ngrx/store';
+import { selectAllCustomers, selectCustomerStatus } from './store/customer.selectors';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class CustomerService implements OnInit {
+
   
 
 private server =  'http://192.168.0.175:8081';
 
+customers$ = this.store.select(selectAllCustomers);
+customerStatus$ = this.store.select(selectCustomerStatus);
 
   constructor( private http: HttpClient,
      private modal: NgbModal,
      private store : Store<AppState> 
-    ) { }
+    ) { 
+    
+
+    }
+  ngOnInit(): void {
+    this.store.dispatch({type: '[Customer] Load Customers'});
+   
+  }
 
 
 getCustomers$() : Observable<CustomHttpResponse<{customers: Customer[]}>>{
@@ -56,14 +67,35 @@ addNewCustomer(){
   this.modal.open(AddNewCustomerModalComponent, {size: 'lg', centered: true});
 }
 
-addCustomer(value: any) {
+addCustomer(customer : Customer): Observable<CustomHttpResponse<{customer : Customer}>> {
   console.log("value");
-  return this.http.post<CustomHttpResponse<Customer>>(
-    `${this.server}/customer/add`,value 
+  return this.http.post<CustomHttpResponse<{customer : Customer}>>(
+    `${this.server}/customer/add`,customer 
   ).pipe(
     catchError(this.handleError)
   )
 }
+
+updateCustomer(customer: Customer): Observable<CustomHttpResponse<Customer>> {
+return this.http.put<CustomHttpResponse<Customer>>(
+  `${this.server}/customer/update`,customer
+).pipe(
+  catchError(this.handleError)
+)
+}
+
+deleteCustomer(id : number): Observable<CustomHttpResponse<String>>{
+  return this.http.delete<CustomHttpResponse<String>>(
+    `${this.server}/customer/delete/${id}`).pipe(
+      catchError(this.handleError)
+    )
+}
+
+
+
+
+
+
 
 closeModal(){
   this.modal.dismissAll();

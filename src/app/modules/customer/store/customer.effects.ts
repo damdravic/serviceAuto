@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/interface/app-state';
 import { CustomerService } from '../customer.service';
-import { loadCustomers, loadCustomersSuccess, LoadCustomersFailure, addCustomer } from './customer.actions';
-import { catchError, from, map, of, switchMap } from 'rxjs';
+import { loadCustomers, loadCustomersSuccess, LoadCustomersFailure, addCustomer, updateCustomer, deleteCustomer, addCustomerSuccess } from './customer.actions';
+import { catchError, delay, from, map, of, switchMap } from 'rxjs';
 
 
 
@@ -34,10 +34,31 @@ addCustomer$ = createEffect(() =>
     ofType(addCustomer),
     switchMap( (action) =>
        from(this.service.addCustomer(action.customer)).pipe(
-          map((response) => loadCustomers()),
-          catchError((error) => of(LoadCustomersFailure({error : error}))
-       ))
- )))
+        delay(1000),
+        map((response) => {
+        return addCustomerSuccess({customer : response.data?.customer})}),
+       )),catchError((error) => of(LoadCustomersFailure({error : error}))
+ )));
+
+ updateCustomer$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(updateCustomer),
+  switchMap((action) =>
+  from(this.service.updateCustomer(action.customer)).pipe(
+    map((response) => loadCustomers()),
+    catchError((error) => of(LoadCustomersFailure({error : error})  
+  ))
+))));
+
+deleteCustoemr$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(deleteCustomer),
+  switchMap((action) =>
+  from(this.service.deleteCustomer(action.id)).pipe(
+    map((response) => loadCustomers()),
+    catchError((error) => of(LoadCustomersFailure({error : error}))
+  ))
+)))
 
 
 

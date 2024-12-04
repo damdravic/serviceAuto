@@ -53,7 +53,17 @@
    }
 
 
-
+  .bottom_button{
+    background-color: var(--primary-color);
+    color: white;
+    padding: 6px 20px;
+    margin: 8px 2px;
+    border: none;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.25rem;
+  }
 
 
   .header{
@@ -128,6 +138,20 @@
   padding: 0.8rem;
 }
 
+.bottom{
+
+    border-radius: 0 0 0.4rem 0.4rem;
+    height: 30px;
+    margin-top: 1rem;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+.info_area{
+  padding : 0.85rem;
+}
 
 
 .vert_form_wrapper{
@@ -154,3 +178,15 @@
   padding: 0.5rem 3rem;
 
 } 
+
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+.editing_input
+{
+ border:none;
+  padding: 0.5rem;
+}

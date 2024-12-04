@@ -15,11 +15,21 @@ export const LoadCustomersFailure = createAction(
 
 export const addCustomer = createAction(
   '[Customer] Add Customer',
-  props<{ customer : Customer}>()
+  props<{customer : Customer}>()
 );
 
-export const removeCustomer = createAction(
-  '[Customer] Remove Customer',
+ export const addCustomerSuccess = createAction(
+  '[Customer] Add Customer Success',
+  props<{customer : Customer}>()
+ )
+
+ export const addCustomerFailure = createAction(
+  '[Customer] Add Customer Failure',
+  props<{error : string}>()
+ )
+
+export const deleteCustomer = createAction(
+  '[Customer] Delete Customer',
   props<{ id : number}>()
 );
 

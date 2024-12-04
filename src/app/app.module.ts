@@ -38,6 +38,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { Customer } from './modules/customer/model/customer';
 import { CustomerEffects } from './modules/customer/store/customer.effects';
 import { customerReducer } from './modules/customer/store/customer.reducer';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { CustomerModule } from './modules/customer/customer.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { customerReducer } from './modules/customer/store/customer.reducer';
     PaginationComponent,
     MainpageComponent,
     RegisterComponent,
+ 
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -68,7 +71,7 @@ import { customerReducer } from './modules/customer/store/customer.reducer';
     StoreModule.forRoot({
       technician: techReducer,
       user: userReducer,
-      customer: customerReducer,
+      customerState: customerReducer
     }),
   ],
   providers: [

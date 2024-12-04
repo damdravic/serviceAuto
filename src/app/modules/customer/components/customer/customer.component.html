@@ -14,14 +14,19 @@
                 </div>
                 <input class="search" type="text" placeholder="Search for customer" [(ngModel)]="searchTerm"
                     (ngModelChange)="searchCustomer()">
-                
+
             </div>
-            <div class="table_section">
+        
+            <div class="loading" *ngIf="customerStatus === 'loading'">
+                <app-spinner></app-spinner>
+              
+            </div>
+            <div class="table_section" *ngIf="customerStatus !== 'loading' ">
                 <table>
                     <thead>
                         <tr>
-                            <th>Customer ID</th>
-                            <th>Customer Name</th>
+                            <th>Customer First Name</th>
+                            <th>Customer Last Name</th>
                             <th>Customer Email</th>
 
                         </tr>
@@ -29,17 +34,18 @@
                             <th colspan=4>
                                 <hr>
                         </tr>
-                        
+
                     </thead>
                     <tbody>
-                    <tr *ngFor="let customer of customers$ | async" (click)="selectCustomer(customer)">
-                        <td>{{customer.id}}</td>
-                        <td>{{customer.name}}</td>
-                        <td>{{customer.email}}</td>
+                        <tr *ngFor="let customer of customers$ | async" (click)="selectCustomer(customer)">
+                            <td>{{customer.firstName}}</td>
+                            <td>{{customer.lastName}}</td>
+                            <td>{{customer.email}}</td>
 
-                    </tr>
-                </tbody>
+                        </tr>
+                    </tbody>
                 </table>
+
             </div>
         </div>
 
@@ -54,18 +60,45 @@
                         type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
                 </div>
             </nav>
-             <div class="tab-content" id="nav-tabContent" >
+            <div class="tab_content" *ngIf="!selectedCustomer">
+                Customer not selected
+            </div>
+            <div class="tab-content" id="nav-tabContent" *ngIf="selectedCustomer">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    home
+                    <div class="info_area"> First Name : {{selectedCustomer?.firstName}} <br>
+                        Last Name : {{selectedCustomer?.lastName}} <br>
+                    </div>
+                   
+
                 </div>
                 <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    profile
+
+                    <div class="info_area"><img src="" alt=" ">
+                        Notes :
+                        <input type="text" class="editing_input" [(ngModel)]="selectedCustomer.notes ">  <br>
+                        Active: {{selectedCustomer?.active}} <br>
+                        Created At : {{selectedCustomer?.createDate}} <br>
+                        Created By : {{selectedCustomer?.createBy}} <br>
+                        Updated At : {{selectedCustomer?.updateDate}} <br>
+                        Updated By : {{selectedCustomer?.updateBy}} <br>
+                    </div>
                 </div>
                 <div class="tab-pane fade " id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    contact
+                    <div class="info_area">
+                        Email : {{selectedCustomer?.email}} <br>
+                        Phone : {{selectedCustomer?.phone}} <br>
+                    </div>
                 </div>
 
-             </div>
+                <div class="bottom">
+                    <button class="bottom_button edit_btn" (click)="editCustomer(selectedCustomer)">
+                        <i class='bx bx-edit'></i></button>
+                    <button class="bottom_button delete_btn" (click)="deleteCustomer(selectedCustomer)">
+                        <i class='bx bx-trash'></i></button>
+
+                </div>
+
+            </div>
 
         </div>
 
