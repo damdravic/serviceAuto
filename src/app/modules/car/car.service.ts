@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { Car } from './models/car';
 
@@ -26,12 +26,11 @@ public getAllCars$() : Observable<CustomHttpResponse<{cars : Car[]}>>{
     );
 }
 
-
-
-
-
-
-
+public getAllCarList$(): Observable<Car[]> {
+  return this.getAllCars$().pipe(
+    map(response => response.data.cars)
+  )
+}
 
 
   private handleError(error: any): Observable<never> {

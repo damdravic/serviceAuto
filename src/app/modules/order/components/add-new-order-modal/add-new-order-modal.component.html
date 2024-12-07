@@ -20,8 +20,11 @@
                 <div class="ax_select">
                   <label for="">Car</label>
                   <input  type="text" class="form-select" [(ngModel)]="searchCarTerm" (keyup)="searchCar()" name="vehicleId" aria-label="Default select example" />
-                   <div class="result" >
-
+                   <div class="search-result" >
+                   
+                    <div class="search-result-item" *ngFor="let car of filtredCars$ | async"  >
+                      {{car.licencePlate}}
+                    </div>
                    </div>
               
                 </div>
