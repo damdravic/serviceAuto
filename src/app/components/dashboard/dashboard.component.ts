@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { selectAllTechnicians } from '../../modules/technician/store/technician.selectors';
 import { CarService } from 'src/app/modules/car/car.service';
 import { Car } from 'src/app/modules/car/models/car';
+import { EditInfoOrderComponent } from 'src/app/modules/order/components/edit-info-order/edit-info-order.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,12 +20,14 @@ import { Car } from 'src/app/modules/car/models/car';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+
   orders: RepairOrder[] = [];
   itemsPerPage: number = 3;
   currentPage: number = 1;
   orderState$: Observable<RepairOrderState> = of({
     dataState: DataState.LOADED,
   });
+
 
   readonly DataState = DataState;
   public technicians$ = this.store.select(selectAllTechnicians);
@@ -45,10 +48,6 @@ export class DashboardComponent implements OnInit {
    
   }
   collapsed = true;
-
-  // switch() {
-  //   this.collapsed = !this.collapsed;
-  // }
 
   addNew() {
     this.ngbModal.open(AddNewOrderModalComponent, { size: 'lg' });
@@ -72,6 +71,13 @@ export class DashboardComponent implements OnInit {
   editOrder(order: RepairOrder) {
     const modalRef = this.ngbModal.open(EditRepairOrderModalComponent, {
       size: 'lg',
+    });
+    modalRef.componentInstance.order = order;
+  }
+
+  editInfoOrder(order: RepairOrder) {
+    const modalRef = this.ngbModal.open(EditInfoOrderComponent, {
+      size: 'lg'
     });
     modalRef.componentInstance.order = order;
   }

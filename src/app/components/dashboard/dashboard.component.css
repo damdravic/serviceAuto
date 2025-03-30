@@ -51,19 +51,24 @@
 
 .main_top_area {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
 .ax_card {
+  grid-column:span 2;
   position: relative;
   border-radius: 0.5rem;
   border: 1px solid #eeeeee;
   min-height: 20rem;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
-    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
-    0 16px 16px rgba(0, 0, 0, 0.12);
+    0 4px 4px rgba(0, 0, 0, 0.12);
 }
+
+.main_top_area :nth-child(3){
+ grid-column: span 3;
+}
+
 .ax_chart {
     position: relative;
 
@@ -158,4 +163,10 @@ tr:hover {background-color: #ddd;}
     height: 100%; 
     overflow: hidden;
     background-color: red;
+  }
+
+  .min{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }

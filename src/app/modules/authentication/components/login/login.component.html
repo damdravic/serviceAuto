@@ -1,0 +1,43 @@
+<div class="wrapper">
+    <div class="content">
+
+
+        <div class="main-content">
+            <div class="left">
+                <img src="" alt="">
+                <p>If you dont have already an account
+                    <a routerLink="/register">Register</a>
+                </p>
+            </div>
+            <div class="right">
+                <div class="title-area">
+                    <div class="title">
+                        Authentication
+                    </div>
+                </div>
+
+                <hr>
+                <form #loginForm="ngForm" (ngSubmit)="login(loginForm) " action="">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" ngModel name="email" placeholder="  Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" ngModel name="password" placeholder="  Your password here" id="">
+                    </div>
+                    <div class="submit-area">
+                        <button type="submit">
+                            Submit
+                        </button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

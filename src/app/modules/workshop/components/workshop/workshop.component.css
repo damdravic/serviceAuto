@@ -1,0 +1,76 @@
+.top-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-add{
+    margin-right: 2rem;
+    background-color:rgb(94, 16, 197);
+    color: white;
+
+
+}
+
+.btn-add:hover{
+    background-color: blue;
+   
+}
+
+.table-container{
+    padding: 2rem;
+}
+
+.table-head{
+    padding: 20px;
+    
+
+}
+td{
+    border-right :1px solid rgb(158, 137, 137);
+    text-align: center;
+}
+.id{
+    width: 5%;
+}
+
+.options{
+    
+    width: 15%;
+}
+.td-options{
+    width:100%;
+    display:flex;
+    justify-content: space-around;
+}
+.table-container{
+    width: 100%;
+   
+}
+.workshop-table{
+    width: 100%;
+    table-layout: fixed;
+
+}
+
+.table-head th{
+    padding: 1rem;
+    color: white;
+    border-right: 1px solid white;
+    font-size: 20px;
+   background-color: rgb(94, 16, 197);
+
+}
+
+.table-head th:first-child{
+    border-radius: 20px 0 0 0 ;
+    
+ 
+}
+.table-head th:last-child{
+    border-radius: 0 20px 0 0 ;
+}
+
+.title{
+    margin-left: 2rem;
+}

@@ -12,15 +12,27 @@
     margin-left: 2rem;
 }
 
-.wrapper{
+.header-wrapper{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-
+    height: 5.5rem;
     border-bottom: 1px solid #e9ecef;
     padding: 0.2rem 0.5rem ;
   
+}
+.logo_area{
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo_area img{
+    width: 250px;
+    height: auto;
+    border-radius: 50%;
 }
 .right{
     display: flex;
@@ -77,6 +89,7 @@ input{
 .user_area{
   
     text-align: center;
+    font-size: 1.2rem;
    
 }
 
@@ -90,8 +103,6 @@ input{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 4rem;
-   
     width: wrap;
 }
 .user_area .info{
@@ -100,26 +111,62 @@ input{
 
 .user_area button{
     background-color: rgb(238, 235, 243);
-    padding: 0.3rem 1.5rem;
     border-radius: 0.5rem;
     margin-left: 10px;
 }
-.info{
+.user-info{
     position: relative;
+    
 }
 .drpdown-menu{
-    display: none;
+    box-sizing: border-box;
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 0;
+    right: 0;
     background-color: white;
-    border: 1px solid #e9ecef;
-    border-radius: 0.5rem;
-    padding: 0.5rem;
     z-index: 10000;
+ 
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
+
+
+    max-height: 0;
+    
+    overflow: hidden;
+    transition: max-height 0.8s ease-in ;
+   
 
 }
+
+.drpdown-menu ul li{
+    list-style: none;
+  padding: 0.2rem 0.6rem;
+    border-bottom: 1px solid #e9ecef;
+    text-align: center;
+    cursor: pointer;
+    
+}
+
+.drpdown-menu ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+}
+
+
+.drpdown-menu ul li:hover{
+   background-color: bisque;
+   transform: all 0.5s;
+}
+
 .drpdown-menu.show {
-    display: block;
-  }
+    max-height: 500px;
+    opacity: 1;
+   
+    
+    
+}
+
+
+  

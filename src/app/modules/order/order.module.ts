@@ -6,6 +6,7 @@ import { RepairOrderComponent } from './components/repair-order/repair-order.com
 import { AddNewOrderModalComponent } from './components/add-new-order-modal/add-new-order-modal.component';
 import { EditRepairOrderModalComponent } from './components/edit-repair-order-modal/edit-repair-order-modal.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { EditInfoOrderComponent } from './components/edit-info-order/edit-info-order.component';
 
 
 
@@ -13,7 +14,8 @@ import { CoreModule } from 'src/app/core/core.module';
   declarations: [
     RepairOrderComponent,
     AddNewOrderModalComponent,
-    EditRepairOrderModalComponent
+    EditRepairOrderModalComponent,
+    EditInfoOrderComponent
   ],
   imports: [
     CommonModule,

@@ -119,7 +119,7 @@ export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.filteredLabors  = this.filteredLabors.filter(
+    this.filteredLabors = this.filteredLabors.filter(
       (labor) => labor == this.selectedLabor
     );
   }
@@ -145,14 +145,12 @@ export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
   }
   focusPreviousRow(index: number) {
     const nextIndex = index - 1;
-    console.log('bau ', nextIndex);
     if (nextIndex >= 0) {
       this.focusFirstRow(nextIndex);
     }
   }
   focusNextRow(index: number) {
     let nextIndex = index + 1;
-    console.log('bau nextIndex', nextIndex);
     if (nextIndex < this.filteredParts.length) {
       this.focusFirstRow(nextIndex);
     } else if (nextIndex === this.filteredParts.length) {
@@ -175,7 +173,6 @@ export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
 
   addSelectedLabor() {
     if (this.selectedLabor) {
-     
       this.repairOrderLaborItem.push(this.processOrderLaborItem());
       this.selectedLabor = null;
       this.searchInput2.nativeElement.value = '';
@@ -216,17 +213,15 @@ export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
     }
   }
 
-  processOrderLaborItem() : OrderLaborItem {
-    const oli = {labor : this.selectedLabor, quantity: this.quantity, discount: this.discount};
-   return oli
+  processOrderLaborItem(): OrderLaborItem {
+    const oli = {
+      labor: this.selectedLabor,
+      quantity: this.quantity,
+      discount: this.discount,
+    };
+    return oli;
   }
 
-  quantityIncrement(){
-    
-  }
-  quantityDecrement(){}
-
-
+  quantityIncrement() {}
+  quantityDecrement() {}
 }
-
-

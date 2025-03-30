@@ -1,44 +1,52 @@
-<div class="wrapper">
-   <div class="logo_area">
-      <img src="assets/images/logo.png" alt="logo">
+<div class="header-wrapper">
+   
+   <div class="toggle_area ">
+      <button class="toggle" (click)="switchSidenav()">
+         <i class='bx bx-menu'></i>
+      </button>
    </div>
-   <div class="toggle_area">
-    <button class="toggle" (click)="switchSidenav()" >
-      <i class='bx bx-menu'></i>
-   </button>
+   <div class="logo_area ">
+      <img  src="/assets/images/logo.png" alt="logo">
    </div>
 
-   <div class="right">
-   <div class="nav_area">
-    <ul>
-     <li><a href="#">Home</a></li>
-     <li><a href="#">About</a></li>
-     <li><a href="#">Contact</a></li>
-    </ul>
-   </div>
-   <div class="user_area">
-      <div class="image">
-       
+   <div class="right test">
+      <div class="nav_area test">
+         <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+         </ul>
       </div>
-      <div class="info" (mouse)="toggleDropdown()" >
-         <p>{{getName()}}</p>
-         <p>{{role | json}}</p>
+      <div class="user_area test">
+         <div class="image">
 
-         <div class="drpdown-menu "  [class.show]="dropdownOpen" >
-            <ul>
-               <li>Profile</li>
-               <li>Settings</li>
-             
+         </div>
+         <div class="user-info" (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)">
+            <p>{{getName()}}</p>
 
-            </ul>
-         </div> 
+            <div class="drpdown-menu " [class.show]="dropdownOpen" >
+               <ul>
+                  <li>
+                     <div class="userrole">
+                        <p>{{role | json}}</p>
+                     </div>
+                  </li>
+                  <li>Profile</li>
+                  <li>Settings</li>
+                  <li>
+                     <button>
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span (click)="logout()">Logout</span>
+                     </button>
+                  </li>
+
+
+               </ul>
+            </div>
+         </div>
+
       </div>
-      <div class="logout">
-         <button (click)="logout()">Logout</button>
-      </div>
-      
    </div>
-</div>
 
 
 

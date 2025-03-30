@@ -1,0 +1,45 @@
+<div class="page-wrapper">
+    <div class="top-header">
+        <h1 class="title">
+            Workshop List
+        </h1>
+        <button class="btn btn-primary" (click)="openNewWorkshopModal()">
+            <i class='bx bxs-plus-circle'></i> Add Workshop</button>
+    </div>
+    <hr>
+    <div class="table-container">
+        <table class="workshop-table table table-striped" >
+            <thead class="table-head">
+               <th class="id">Id</th>
+               <th class="col">Workshop Name</th>
+               <th class="col">Workshop Description</th>
+               <th class="options">Options</th>
+
+               
+            </thead>
+            <tbody class="table-body">
+                  <tr>
+                    <td class="id">1</td>
+                    <td>me</td>
+                    <td>dtt</td>
+                    <td class="options td-options">
+                        <button class="btn btn-primary">
+                            <i class='bx bxs-edit'></i>
+                            Edit
+                        </button>
+                        <button class="btn btn-danger">
+                            <i class='bx bx-message-square-x'></i>
+                            Delete
+                        </button>
+                    </td>
+                    
+                  </tr>
+                  <tr>
+                    <td>dt</td>
+                    <td>tdt</td>
+                    <td>dtt</td>
+                  </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

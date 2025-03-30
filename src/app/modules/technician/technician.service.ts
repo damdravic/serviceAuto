@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddTechnicianComponent } from './components/add-technician/add-technician.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { AddTechnicianComponent } from './components/add-technician/add-technici
 export class TechnicianService {
 
  
-  private readonly server: string = 'http://192.168.0.175:8081';
+  private readonly server: string = environment.apiUrl;
 
   constructor(private http : HttpClient,  private modal : NgbModal) { }
 

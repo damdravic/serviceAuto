@@ -1,31 +1,27 @@
+<div class="sidebar" [ngClass]="collapsed ? 'collapsed' : ''">
+    <div class="sidebar-content">
 
-    <div class="sidebar" [ngClass]="collapsed ? 'collapsed' : ''">
-        <div class="sidebar-content">
+        <div class="sidebar_top">
 
-            <div class="sidebar_top">
-
-                <div class="sidebar-logo">
-                    {{collapsed}}
-                </div>
-
-                <div class="sidebar-user">
-                    <div class="sidebar-user-image">
-                        <img src="" alt="">
-                    </div>
-                    <div class="sidebar-user-info">
-
-                    </div>
-                </div>
-
+            <div class="sidebar-logo">
             </div>
 
-            <div class="sidebar_menu">
+            <div class="sidebar-user">
+                <div class="sidebar-user-image">
+                    <img src="" alt="">
+                </div>
+                <div class="sidebar-user-info">
 
-               <ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sidebar_menu">
+
+            <ul>
                 <li>
-                    <button type="button" #but
-                      (click)="clicked($event.target)"
-                    routerLink="/dashboard">
+                    <button type="button" #but (click)="clicked($event.target)" routerLink="/dashboard">
                         <i class="ai-home-alt1"></i>
                         <p>Home</p>
 
@@ -33,42 +29,40 @@
 
                 </li>
                 <li>
-                    <button type="button" #but
-                      (click)="clicked($event.target)"
-                    routerLink="technician" >
-                        <i class="ai-home-alt1"></i>
+                    <button type="button" #but (click)="clicked($event.target)" routerLink="technician">
+                        <i class='bx bx-hard-hat'></i>
                         <p>Technician</p>
 
                     </button>
 
                 </li>
                 <li>
-                    <button type="button" #but
-                      (click)="clicked($event.target)"
-                    routerLink="customer" >
-                      <i class='bx bxs-user-detail'></i>
+                    <button type="button" #but (click)="clicked($event.target)" routerLink="customer">
+                        <i class='bx bxs-user-detail'></i>
                         <p>Customers</p>
 
                     </button>
 
                 </li>
                 <li>
-                    <button type="button" #but
-                      routerLink="/repairOrder"
-                     
-                      (click)="clicked($event.target)" >
-                      
-                      <i class='bx bx-task'></i>
+                    <button type="button" #but routerLink="order" (click)="clicked($event.target)">
+
+                        <i class='bx bx-task'></i>
                         <p>Repair Oredrs</p>
 
                     </button>
 
                 </li>
                 <li>
-                    <button type="button" #but (click)="clicked($event.target)" >
+                    <button type="button" routerLink="workshop"><i class='bx bx-category-alt'></i>
+                        <p>Workshop</p>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" #but (click)="clicked($event.target)">
                         <i class="ai-gear"></i>
                         <p>Settings</p>
-                        <i class="ai-chevron-down-small"></i>      
+                        <i class="ai-chevron-down-small"></i>
                     </button>
                     <div class="submenu" #subMenu>
                         <ul>
@@ -82,10 +76,10 @@
                     </div>
                 </li>
                 <li>
-                    <button type="button" #but (click)="clicked($event.target)" >
+                    <button type="button" #but (click)="clicked($event.target)">
                         <i class="ai-gear"></i>
                         <p>Settings</p>
-                        <i class="ai-chevron-down-small"></i>      
+                        <i class="ai-chevron-down-small"></i>
                     </button>
                     <div class="submenu" #subMenu>
                         <ul>
@@ -98,15 +92,13 @@
                         </ul>
                     </div>
                 </li>
-               </ul>
-           
+            </ul>
 
-       
 
-            </div>
+
 
         </div>
 
     </div>
 
-
+</div>

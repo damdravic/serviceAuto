@@ -15,12 +15,13 @@ import { RepairOrderComponent } from '../../modules/order/components/repair-orde
 import { RepairOrderState } from '../../interface/repair-order-state';
 import { Part } from '../../interface/part';
 import { Labor } from '../../interface/labor';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RepairOrderService {
-  private readonly server: string = 'http://192.168.0.175:8081';
+  private readonly server: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

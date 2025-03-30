@@ -21,7 +21,7 @@ export class AuthenticationGuard {
       return true;
     } else {
       console.log("Else" + this.authService.isAuthenticated())
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth/login']);
       return false;
     }
   }

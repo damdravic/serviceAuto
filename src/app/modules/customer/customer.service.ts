@@ -9,6 +9,7 @@ import { AppState } from 'src/app/interface/app-state';
 import { Store } from '@ngrx/store';
 import { selectAllCustomers, selectCustomerStatus } from './store/customer.selectors';
 import { deleteCustomer, updateCustomer } from './store/customer.actions';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -17,8 +18,8 @@ import { deleteCustomer, updateCustomer } from './store/customer.actions';
 export class CustomerService implements OnInit {
 
   
+private server =  environment.apiUrl;
 
-private server =  'http://192.168.0.175:8081';
 
 customers$ = this.store.select(selectAllCustomers);
 customerStatus$ = this.store.select(selectCustomerStatus);

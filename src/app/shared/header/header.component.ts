@@ -59,9 +59,9 @@ export class HeaderComponent {
   }
 
 
-   toggleDropdown(){
-        this.dropdownOpen = !this.dropdownOpen;
-   }
 
+  toggleDropdown(state: boolean) {
+    this.dropdownOpen = state;
+  }
 
 }

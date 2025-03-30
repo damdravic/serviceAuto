@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       :   this.router.navigate(['/login'])
      
   }
-
+/*
   login(loginForm: NgForm): void {
     this.loginState$ = this.userService
       .login$(loginForm.value.email, loginForm.value.password)
@@ -78,7 +78,8 @@ export class LoginComponent implements OnInit {
           });
         })
       );
-  }
+  }*/
+  /*
   setTokensAndNavigate(accessToken: string, refreshToken: string): any {
     return new Promise((resolve) => {
       localStorage.setItem(Key.TOKEN, accessToken);
@@ -100,7 +101,7 @@ export class LoginComponent implements OnInit {
         return { dataState: DataState.LOADED, loginSuccess: true };
       });
     }
-  
+  */
 
   verifyCode(verifyForm: NgForm): void {
     console.log(verifyForm.value.code + ' <-- code');

@@ -3,16 +3,20 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { Car } from './models/car';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
 
-  private server = 'http://192.168.0.175:8081';
+  private server = environment.apiUrl;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private ngbModal : NgbModal
+  ) { }
 
 
 
@@ -37,8 +41,10 @@ public getAllCarList$(): Observable<Car[]> {
     console.error('An error occurred:', error);
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
-
-
+ 
+closeModal(){
+  this.ngbModal.dismissAll();
+}
 
 
 }

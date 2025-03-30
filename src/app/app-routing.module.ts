@@ -7,25 +7,21 @@ import { AuthenticationGuard } from './core/guard/authentication.guard';
 import { content } from './shared/routes'
 import { MainpageComponent } from './layouts/mainpage/mainpage.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 
 const routes: Routes = [
 
 
  {
-  path: "",
+  path: '',
   component:MainpageComponent,
   canActivate: [AuthenticationGuard],
   children :content
-
-
- },{
-  path: 'login',
-  component: LoginComponent
-},{
-  path: 'register',
-  component: RegisterComponent
-}
-
+ },
+ {
+  path: 'auth',
+  loadChildren : () =>  import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule)
+  }
 ];
 
 @NgModule({

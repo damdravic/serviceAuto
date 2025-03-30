@@ -2,6 +2,7 @@
 
   <div class="wrapper">
     <div class="info_area">
+
       <div class="card_info orders">
         <div class="icon">
           <i class="fas fa-users"></i>
@@ -9,12 +10,11 @@
         <div class="info">
           <p>Orders</p>
         </div>
-      
-        
         <div class="infox">
           <h3>5</h3>
         </div>
       </div>
+
       <div class="card_info products">
         <div class="icon">
           <i class="fas fa-shopping-cart"></i>
@@ -27,6 +27,7 @@
           <h3>443</h3>
         </div>
       </div>
+
       <div class="card_info users">
         <div class="icon">
           <i class="fas fa-users"></i>
@@ -39,6 +40,7 @@
           <h3>5</h3>
         </div>
       </div>
+
       <div class="card_info cars">
         <div class="icon">
           <i class="fas fa-users"></i>
@@ -51,37 +53,36 @@
           <h3>5</h3>
         </div>
       </div>
+      
     </div>
 
     <div class="main_area">
       <div class="main_top_area">
-       
-
         <div class="ax_card">
           <section *ngIf="(orderState$ | async) as orderState">
-          <div class="top_info">
-            <div class="title">
-              <h5>Orders</h5>
+            <div class="top_info">
+              <div class="title">
+                <h5>Orders</h5>
+              </div>
+              <div class="settings">
+                <label for="itemPerPage">Items</label>
+                <select name="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="reloadPagination()">
+                  <option value="5">5</option>
+                  <option value="4">4</option>
+                  <option value="3">3</option>
+                </select>
+                <button class="card_btn" (click)="addNew()">Add New Order</button>
+                <button class="card_btn">Options</button>
+              </div>
             </div>
-            <div class="settings">
-              <label for="itemPerPage">Items</label>
-              <select name="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="reloadPagination()">
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-              </select>
-              <button class="card_btn" (click)="addNew()">Add New Order</button>
-              <button class="card_btn">Options</button>
-            </div>
+            <div class="content">
 
-          </div>
-          <div class="content">
-            
               <table class="recent_orders">
                 <thead>
                   <tr>
                     <th>Order ID</th>
                     <th>Order Date</th>
+                    <th>Description</th>
                     <th>Estimated Completion Date</th>
                     <th>Total Cost</th>
                     <th>Status</th>
@@ -93,54 +94,46 @@
                     <td>{{order.orderId}}</td>
                     <td>{{order.orderDate}}</td>
                     <td>{{order.description}}</td>
+                    <td>{{order.estimatedCompletionDate}}</td>
                     <td>{{order.totalCost}}</td>
                     <td>{{order.status}}</td>
                     <td class="min">
-                   
-                      <button class="btn  btn-primary" (click)="editOrder(order)">View</button>
-                      
+
+                      <button class="card_btn" (click)="editInfoOrder(order)"> Edit Info Order </button>
+                      <button class="card_btn" (click)="editOrder(order)"> Parts & Labor </button>
+
                     </td>
                   </tr>
                 </tbody>
               </table>
-             
 
-            
-          </div>
-          <div class="bottom">
-            <app-pagination 
-            *ngIf="orderState.dataState === DataState.LOADED" 
-            [totalItems]="orders.length"
-              [itemsPerPage]="itemsPerPage"
-               [currentPage]="currentPage"
-               (pageChanged)="changePage($event)"> </app-pagination>
-          </div>
+            </div>
+            <div class="bottom">
+              <app-pagination *ngIf="orderState.dataState === DataState.LOADED" [totalItems]="orders.length"
+                [itemsPerPage]="itemsPerPage" [currentPage]="currentPage" (pageChanged)="changePage($event)">
+              </app-pagination>
+            </div>
           </section>
-          
+
         </div>
         <div class="ax_chart">
-
           <app-pie-chart></app-pie-chart>
           <div class="Label-info">
             <h3>Orders</h3>
             <p>Orders</p>
           </div>
- 
-         </div>
-        
+        </div>
+        <div class="ax_card">
+          
+        </div>
+
 
       </div>
-      <div class="cars-list">
-        <h2>Cars</h2>
-        <ul>
-          <li *ngFor="let car of cars$ | async">
-            {{ car.brand }} - {{ car.licencePlate }}
-          </li>
-        </ul>
-      </div>
+     
 
-      
-      
+
+
+
     </div>
   </div>
 </div>

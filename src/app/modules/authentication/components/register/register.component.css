@@ -1,0 +1,82 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("/assets/images/sppedometer.jpg") ;
+}
+
+.content {
+  display: flex;
+  color: white;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: rgba(24, 22, 22, 0.8);
+  box-shadow: 5px 5px 6px 6px rgb(7, 58, 75);
+  border-radius: 10px;
+  
+}
+.main-content {
+  display: flex;
+
+}
+.title-area{
+    display: flex;
+    justify-content: right;
+}
+.title{
+    font-size: 2rem;
+    text-shadow: 10px 10px  10px  black;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  padding-right: 1.5rem;
+}
+.form-group input {
+  margin-left: 1rem;
+  padding: 0.25rem;
+  border: 1px solid gray;
+  color:white;
+  border-radius: 2px;
+  background-color: rgb(12, 12, 12);
+}
+
+
+.form-group input:focus{
+    outline: none;
+    border:1px solid rgb(90, 79, 79)
+}
+
+
+.submit-area{
+    display: flex;
+    justify-content: right;
+    padding: 20px 0 10px 0;
+
+}
+
+
+ button {
+ border:none;
+ border-radius:10px;
+ color:white;
+ padding: 15px 32px;
+ text-decoration: none;
+ display: inline-block;
+ background-color: #5700ba;
+ margin-top: 10px;
+
+ }
+ button:active {
+  background-color: #462670;
+  box-shadow: inset 2px rgb(104, 92, 138);
+  transform: translateY(4px);
+}

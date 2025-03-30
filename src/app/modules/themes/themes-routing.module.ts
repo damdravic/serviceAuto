@@ -6,13 +6,7 @@ import { DashboardComponent } from 'src/app/components/dashboard/dashboard.compo
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
-  {path:'dashboard' , component: DashboardComponent},
-  {path : 'technician', 
-    loadChildren: () => import ('../technician/technician.module').then(m => m.TechnicianModule )
-  },
-  {path : 'customer', 
-    loadChildren: () => import ('../customer/customer.module').then(m => m.CustomerModule )
-  },
+  { path: 'dashboard', component: DashboardComponent },
 
 ];
 

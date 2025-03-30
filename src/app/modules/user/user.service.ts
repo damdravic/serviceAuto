@@ -7,6 +7,7 @@ import { Key } from 'src/app/enum/key';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { Profile } from 'src/app/interface/profile';
 import { User } from 'src/app/interface/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,11 @@ import { User } from 'src/app/interface/user';
 export class UserService {
 
 
-private readonly server: string = 'http://192.168.0.175:8081';
+private readonly server: string =  environment.apiUrl;
 private jwtHelper = new JwtHelperService();
 
 constructor(private http: HttpClient,private router:Router) {}
-
+/*
 login$ = (email: string, password: string) =>
   <Observable<CustomHttpResponse<Profile>>>(
     this.http
@@ -28,7 +29,8 @@ login$ = (email: string, password: string) =>
       })
       .pipe(tap(console.log), catchError(this.handleError))
   );
-
+*/
+  
   verifyCode$ = (email: string, code: string) =>
   <Observable<CustomHttpResponse<Profile>>>(
     this.http

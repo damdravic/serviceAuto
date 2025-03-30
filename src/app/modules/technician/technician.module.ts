@@ -8,16 +8,8 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [
-    TechnicianComponent,
-    AddTechnicianComponent
-  ],
-  imports: [
-    CommonModule,
-    TechnicianRoutingModule,
-    FormsModule,
-  ],exports : [
-    TechnicianComponent, AddTechnicianComponent
-  ]
+  declarations: [TechnicianComponent, AddTechnicianComponent],
+  imports: [CommonModule, TechnicianRoutingModule, FormsModule],
+  exports: [TechnicianComponent, AddTechnicianComponent],
 })
-export class TechnicianModule { }
+export class TechnicianModule {}

@@ -1,1 +1,70 @@
-<p>add-new-car works!</p>
+<div class="wrapper">
+    <div class="top"></div>
+    <div class="content">
+        <div class="content-wrapper">
+            <form #newCarForm="ngForm" >
+                <div class="flex-row">
+                    <div class="ax-group">
+                        <label for="">Licence Plate</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="licencePlate" />
+                    </div>
+                    <div class="ax-group">
+                        <label for="">VIN</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="vin" />
+                    </div>
+                    <div class="ax-group">
+                        <label for="">Owner</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="customer" />
+                    </div>
+                </div>
+                <div class="flex-row">
+                    <div class="ax-group">
+                        <label for="">Mark</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="brand" />
+                    </div>
+                    <div class="ax-group">
+                        <label for="">Model</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="model" />
+                    </div>
+                    <div class="ax-group">
+                        <label for="">Year</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="year" />
+                    </div>
+                </div>
+                <div class="flex-row">
+                    <div class="ax-group">
+                        <label for="">Engine Type</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="engineType" />
+                    </div>
+                    <div class="ax-group">
+                        <label for="">Engine Capacity</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="engineCapacity" />
+                    </div>
+                    <div class="ax-group">
+                        <label for="">Fuel Type</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="fuelType" />
+                    </div>
+                </div>
+                <div class="flex-row">
+                    <div class="ax-group">
+                        <label for="">Color</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="color" />
+                    </div>
+                    <div class="ax-group">
+                        <label for="">Mileage</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="mileage" />
+                    </div>
+                    <div class="ax-group">
+                        <label for="">Transmission</label>
+                        <input type="text" class="search-input" ngModel autocomplete="off" name="transmission" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <footer class="modal-footer">
+        <button class="modal_btn" (click)="save(newCarForm)">AddCar</button>
+        <button class="modal_btn" (click)="cancel()">Cancel</button>
+    </footer>
+</div>

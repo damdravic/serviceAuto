@@ -1,0 +1,61 @@
+<div class="wrapper">
+    <div class="content">
+
+
+        <div class="main-content">
+            <div class="left">
+
+
+
+<div class="title-area">
+                <div class="title">
+                    Register
+                </div></div>
+                <div *ngIf="errorMessage"   class="error-message">{{errorMessage}}</div>
+                <hr>
+                <form #registerForm="ngForm" (ngSubmit)="register(registerForm) " action="">
+                    
+                    <div class="form-group">
+                        <label for="firstName">FirstName</label>
+                        <input type="text" ngModel name="firstName" required="" placeholder="Enter FirstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">LastName</label>
+                        <input type="text" ngModel name="lastName" required placeholder="Enter LastName">
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" ngModel name="email" required placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" ngModel required name="password" id="">
+                    </div>
+                    <hr>
+                    <div class="submit-area">
+                    <button type="submit">
+                        Submit
+                    </button>
+                    </div>
+
+                </form>
+
+
+            </div>
+            <div class="right">
+<img src=""
+    alt="Hyundai Tucson">
+
+                <p>If you have already an account
+                    <a routerLink="/login">Login</a>
+                </p>
+
+
+
+            </div>
+
+
+        </div>
+    </div>

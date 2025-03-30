@@ -1,0 +1,99 @@
+<div class="wrapper">
+    <div class="top">
+        <div class="modal_title">Adding new Repair Order</div>
+
+    </div>
+    <div class="content">
+        <div class="content_wrapper">
+           
+            <form #editedOrderForm="ngForm">
+
+                <div class="flex-row">
+
+
+                    <div class="ax-group">
+                        <label for="">Workshop</label>
+                        <select class="search-select" [(ngModel)]="workshopId" name="workshopId">
+                            <option selected>Select Workshop</option>
+                            <option *ngFor="let ws of allWorkshops$ |async" [value]="ws.id">{{ws.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="ax-group">
+                        <label for="">Car</label>
+                        <input type="text" class="search-input" name="vehicle" [(ngModel)]="searchCarTerm"
+                            autocomplete="off" (input)="searchCar()" />
+
+                        <div class="result-wrapper" *ngIf="(filtredCars$ | async)?.length > 0 && !car ">
+                            <div class="result-content">
+
+                                <div *ngFor="let car of filtredCars$ | async">
+
+                                    <ng-container *ngIf="isAddCarOption(car); else carItem">
+                                        <p>Car not found</p>
+                                        <button class="my_btn" type="button" (click)="openAddCarModal()">Add
+                                            Car</button>
+                                    </ng-container>
+
+                                    <ng-template #carItem>
+                                        <div class="search-result-item" (click)="setCar(car.licencePlate)">
+                                            {{ car.licencePlate }} - {{ car.model }}
+                                        </div>
+                                    </ng-template>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="ax-group">
+                    <label for="">Repair order Description</label>
+                    <textarea class="form-control" name="description" [(ngModel)]="description"  id="exampleFormControlTextarea1"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="flex-row">
+
+
+                    <div class="ax-group">
+                        <label for="">Technician yhhy</label>
+                        <select class="search-select" ngModel name="technicianId" aria-label="Default select example">
+                            <option *ngFor="let tech of  allTechnicians$ |async">
+                                {{tech.id}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="ax-group">
+                        <label for="">Estimated Date to Complete</label>
+                        <input type="date" ngModel name="estimatedCompletionDate" class="date form-control"
+                            style="width: 100%" />
+                    </div>
+
+
+                </div>
+                <input type="hidden" [ngModel]="selectedVehicleId" name="vehicleId" />
+
+
+            </form>
+        </div>
+    </div>
+    <footer class="modal-footer">
+        <button class="modal_btn" (click)="save(editedOrderForm)">Save</button>
+        <button class="modal_btn" (click)="close()">Cancel</button>
+
+    </footer>
+    <script type="text/javascript">
+        $(".date").datepicker({
+            format: "dd-mm-yyyy",
+        });
+    </script>
+</div>
