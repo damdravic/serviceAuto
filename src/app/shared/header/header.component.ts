@@ -7,12 +7,12 @@ import { UserService } from 'src/app/modules/user/user.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
+  standalone: false,
 })
 export class HeaderComponent {
   @Output() isCollapsed = new EventEmitter<boolean>();
   private jwtHelper = new JwtHelperService();
   public dropdownOpen = false;
-
 
   constructor(private userService: UserService) {}
   role: string = this.getRole();
@@ -21,9 +21,9 @@ export class HeaderComponent {
     this.isCollapsed.emit();
   }
 
-  getUsername() : string {
-    const token : string = localStorage.getItem(Key.TOKEN)
-    if(token){
+  getUsername(): string {
+    const token: string = localStorage.getItem(Key.TOKEN);
+    if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       return decodedToken.sub;
     } else {
@@ -31,13 +31,13 @@ export class HeaderComponent {
     }
   }
 
-  getName() : string{
-    const token : string = localStorage.getItem(Key.TOKEN)
-    if(token){
+  getName(): string {
+    const token: string = localStorage.getItem(Key.TOKEN);
+    if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      const username =  decodedToken.names;
+      const username = decodedToken.names;
       return username;
-    }else{
+    } else {
       return 'Guest';
     }
   }
@@ -58,10 +58,7 @@ export class HeaderComponent {
     this.userService.logout();
   }
 
-
-
   toggleDropdown(state: boolean) {
     this.dropdownOpen = state;
   }
-
 }

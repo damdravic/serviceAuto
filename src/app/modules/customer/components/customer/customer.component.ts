@@ -8,33 +8,32 @@ import { selectCustomer } from '../../store/customer.selectors';
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.css',
+  standalone: false,
 })
 export class CustomerComponent {
-
   searchTerm: any;
   customers$: Observable<Customer[]>;
-  selectedCustomer: Customer =null;
+  selectedCustomer: Customer = null;
   selectedCustomerOriginal: Customer = null;
-  customerStatus :string;
+  customerStatus: string;
 
-deleteCustomer(id){
-  this.customerService.deleteCustomer(id);
-}
+  deleteCustomer(id) {
+    this.customerService.deleteCustomer(id);
+  }
 
-editCustomer(customer : Customer) {
- this.customerService.editCustomer(customer);
-}
- 
-constructor(private customerService : CustomerService) {}
+  editCustomer(customer: Customer) {
+    this.customerService.editCustomer(customer);
+  }
 
+  constructor(private customerService: CustomerService) {}
 
   ngOnInit() {
     this.customerService.ngOnInit();
     this.customers$ = this.customerService.customers$;
-    this.customerService.customerStatus$.subscribe(status => {
+    this.customerService.customerStatus$.subscribe((status) => {
       this.customerStatus = status;
     });
-    this.customers$.subscribe(customers => {
+    this.customers$.subscribe((customers) => {
       console.log(customers);
     });
   }
@@ -46,14 +45,15 @@ constructor(private customerService : CustomerService) {}
     this.customerService.addNewCustomer();
   }
 
-  selectCustomer(customer : Customer){
-    this.selectedCustomer = {...customer};
-    this.selectedCustomerOriginal = {...customer};
+  selectCustomer(customer: Customer) {
+    this.selectedCustomer = { ...customer };
+    this.selectedCustomerOriginal = { ...customer };
   }
 
   hasCustomerChanged(): boolean {
-    return JSON.stringify(this.selectedCustomer) !== JSON.stringify(this.selectedCustomerOriginal);
+    return (
+      JSON.stringify(this.selectedCustomer) !==
+      JSON.stringify(this.selectedCustomerOriginal)
+    );
   }
-
-
 }

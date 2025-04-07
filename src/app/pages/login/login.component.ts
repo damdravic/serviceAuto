@@ -26,6 +26,7 @@ import { UserService } from 'src/app/modules/user/user.service';
   styleUrls: ['./login.component.css'],
   selector: 'app-login',
   templateUrl: './login.component.html',
+  standalone: false
 })
 export class LoginComponent implements OnInit {
   loginState$: Observable<LoginState> = of({ dataState: DataState.LOADED });
@@ -37,14 +38,13 @@ export class LoginComponent implements OnInit {
   signUpMode: boolean = false;
 
   constructor(private router: Router, private userService: UserService) {}
-  
+
   ngOnInit(): void {
     this.userService.isAuthenticated
       ? this.router.navigate(['/'])
-      :   this.router.navigate(['/login'])
-     
+      : this.router.navigate(['/login']);
   }
-/*
+  /*
   login(loginForm: NgForm): void {
     this.loginState$ = this.userService
       .login$(loginForm.value.email, loginForm.value.password)
@@ -148,22 +148,18 @@ export class LoginComponent implements OnInit {
     return this.signUpMode ? ' sign-up-mode' : '';
   }
 
-
-
-register(registerForm: NgForm): void {
-  this.userService.register(  registerForm.value).subscribe(
-    (response : CustomHttpResponse<User>) =>{
-      console.log('User registered', response);
-      this.router.navigate(['/login']).then(() => {
-        this.toggle();
-        registerForm.reset();
-    }) ;
-    }
-  ),(error : string) => {
-    console.error('User not registered', error);
+  register(registerForm: NgForm): void {
+    this.userService
+      .register(registerForm.value)
+      .subscribe((response: CustomHttpResponse<User>) => {
+        console.log('User registered', response);
+        this.router.navigate(['/login']).then(() => {
+          this.toggle();
+          registerForm.reset();
+        });
+      }),
+      (error: string) => {
+        console.error('User not registered', error);
+      };
   }
-  
-}
-
-
 }

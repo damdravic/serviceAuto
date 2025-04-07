@@ -17,6 +17,7 @@ import { OrderLaborItem } from 'src/app/interface/order-labor-item';
   selector: 'app-edit-reapir-order-modal',
   templateUrl: './edit-repair-order-modal.component.html',
   styleUrl: './edit-repair-order-modal.component.css',
+  standalone: false,
 })
 export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
   @Input() order: RepairOrder;

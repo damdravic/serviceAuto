@@ -22,6 +22,7 @@ import { loadTechs } from 'src/app/modules/technician/store/technician.actions';
   selector: 'app-add-new-order-modal',
   templateUrl: './add-new-order-modal.component.html',
   styleUrl: './add-new-order-modal.component.css',
+  standalone: false,
 })
 export class AddNewOrderModalComponent implements OnInit {
   searchCarTerm: string;
@@ -41,15 +42,17 @@ export class AddNewOrderModalComponent implements OnInit {
     private store: Store,
     private ngbModal: NgbModal,
     private workshopService: WorkshopService
-  ) { }
-  
+  ) {}
+
   ensureTechnicianLoaded() {
-    this.store.select(selectAllTechnicians).pipe(first())
-      .subscribe(technicians => {
+    this.store
+      .select(selectAllTechnicians)
+      .pipe(first())
+      .subscribe((technicians) => {
         if (technicians.length === 0) {
-                  this.store.dispatch(loadTechs())
-                }
-              })
+          this.store.dispatch(loadTechs());
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -96,15 +99,13 @@ export class AddNewOrderModalComponent implements OnInit {
   }
 
   setCar(licencePLate: string) {
-   
     this.allCars$.subscribe((allCars) => {
       const foundCar = allCars.find((car) => car.licencePlate === licencePLate);
-     
+
       if (foundCar) {
         this.car = foundCar;
         this.selectedVehicleId = this.car.id;
       }
-
     });
 
     this.searchCarTerm = licencePLate;

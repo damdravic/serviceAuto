@@ -20,8 +20,8 @@
     "@angular/router": "^19.2.5",
     "@auth0/angular-jwt": "^5.2.0",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0-rc.2",
-    "@ngrx/effects": "^18.1.0",
-    "@ngrx/store": "^18.1.0",
+    "@ngrx/effects": "^19.1.0",
+    "@ngrx/store": "^19.1.0",
     "@popperjs/core": "^2.11.8",
     "akar-icons-fonts": "^1.1.22",
     "angular-google-charts": "^16.0.1",
@@ -39,10 +39,10 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.6",
+    "@angular-devkit/build-angular": "^19.2.1",
     "@angular/cli": "^19.2.6",
     "@angular/compiler-cli": "^19.2.5",
-    "@ngrx/schematics": "^18.0.2",
+    "@ngrx/schematics": "^19.1.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",

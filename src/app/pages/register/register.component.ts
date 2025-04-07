@@ -11,16 +11,15 @@ import { Technician } from '../../modules/technician/models/technician';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
+  standalone: false,
 })
 export class RegisterComponent {
-
-  constructor(private router: Router, 
+  constructor(
+    private router: Router,
     private userService: UserService,
-  private techService : TechnicianService) {}
-  
-
-
+    private techService: TechnicianService
+  ) {}
 
   public onFocus(event) {
     event.target.classList.add('active');
@@ -32,25 +31,17 @@ export class RegisterComponent {
     }
   }
 
-
-
   register(registerForm: NgForm): void {
-    this.userService.register(  registerForm.value).subscribe(
-      (response : CustomHttpResponse<User>) =>{
+    this.userService
+      .register(registerForm.value)
+      .subscribe((response: CustomHttpResponse<User>) => {
         console.log('User registered', response);
         this.router.navigate(['/technician']).then(() => {
-        
-         this.techService.addNewTechModal();
-      }) ;
-      }
-    ),(error : string) => {
-      console.error('User not registered', error);
-    }
-    
+          this.techService.addNewTechModal();
+        });
+      }),
+      (error: string) => {
+        console.error('User not registered', error);
+      };
   }
-
-   
-
-
-
 }

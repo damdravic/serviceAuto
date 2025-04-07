@@ -15,11 +15,12 @@ import { Technician } from '../../models/technician';
   selector: 'app-add-technician',
   templateUrl: './add-technician.component.html',
   styleUrl: './add-technician.component.css',
+  standalone: false,
 })
 export class AddTechnicianComponent implements OnInit {
   searchInputv: string = '';
   private searchTerm = new Subject<string>();
-  public selectedUser : User = null;
+  public selectedUser: User = null;
 
   public users$ = this.store.select(selectAllUsers);
   public usersFound$: Observable<User[]>;

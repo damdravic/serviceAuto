@@ -4,10 +4,9 @@ import { Component } from '@angular/core';
   selector: 'app-spinner',
   template: `<div class="spiner-overlay">
     Loading ...
-  <div class="spinner"> Loading ... </div>
+    <div class="spinner">Loading ...</div>
   </div>`,
-  styleUrl: './spinner.component.css'
+  styleUrl: './spinner.component.css',
+  standalone: false
 })
-export class SpinnerComponent {
-
-}
+export class SpinnerComponent {}

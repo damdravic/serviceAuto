@@ -13,10 +13,10 @@ import { RepairOrder } from 'src/app/interface/repair-order';
   selector: 'app-edit-info-order',
   templateUrl: './edit-info-order.component.html',
   styleUrl: './edit-info-order.component.css',
+  standalone: false,
 })
 export class EditInfoOrderComponent implements OnInit {
   @Input() order: RepairOrder;
-
 
   description: string = '';
   workshopId: number;
@@ -56,7 +56,6 @@ export class EditInfoOrderComponent implements OnInit {
   ngOnInit(): void {
     this.description = this.order.description;
     this.workshopId = this.order.workshopId;
-
 
     this.ensureTechniciaonLoaded();
   }

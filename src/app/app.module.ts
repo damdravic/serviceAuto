@@ -45,6 +45,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,10 +73,10 @@ import { ToastrModule } from 'ngx-toastr';
     ChartsModule,
     CarModule,
     NgbModule,
+    
     EffectsModule.forRoot([TechnicianEffects, UserEffects, CustomerEffects]),
     TechnicianModule,
     ThemesModule,
-    BrowserAnimationModule,
     ToastrModule.forRoot(),
     StoreModule.forRoot({
       technician: techReducer,

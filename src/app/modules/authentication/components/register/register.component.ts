@@ -9,13 +9,12 @@ import { UserService } from 'src/app/modules/user/user.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
+  standalone: false,
 })
 export class RegisterComponent {
   errorMessage: string = '';
 
-  constructor(private userService: UserService,
-    private router : Router
-  ) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   register(registerForm: NgForm) {
     if (registerForm.invalid) {

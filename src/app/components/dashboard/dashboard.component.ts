@@ -18,9 +18,9 @@ import { EditInfoOrderComponent } from 'src/app/modules/order/components/edit-in
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
+  standalone: false,
 })
 export class DashboardComponent implements OnInit {
-
   orders: RepairOrder[] = [];
   itemsPerPage: number = 3;
   currentPage: number = 1;
@@ -28,24 +28,21 @@ export class DashboardComponent implements OnInit {
     dataState: DataState.LOADED,
   });
 
-
   readonly DataState = DataState;
   public technicians$ = this.store.select(selectAllTechnicians);
-  public cars$ : Observable<Car[]>;
+  public cars$: Observable<Car[]>;
 
   constructor(
     private ngbModal: NgbModal,
     private orderService: RepairOrderService,
     private cdr: ChangeDetectorRef,
-    private store : Store,
+    private store: Store,
     private carsService: CarService
-  
   ) {}
 
   ngOnInit(): void {
     this.getOrders();
     this.getAllCars$();
-   
   }
   collapsed = true;
 
@@ -77,7 +74,7 @@ export class DashboardComponent implements OnInit {
 
   editInfoOrder(order: RepairOrder) {
     const modalRef = this.ngbModal.open(EditInfoOrderComponent, {
-      size: 'lg'
+      size: 'lg',
     });
     modalRef.componentInstance.order = order;
   }
@@ -93,23 +90,14 @@ export class DashboardComponent implements OnInit {
     return this.orders.slice(start, end);
   }
 
-  getAllCars$() : void{
-         this.carsService.getAllCars$().subscribe({
-            next : (response) => {
-            this.cars$ = of(response.data.cars)
-            },
-            error : (error) => {
-              console.log(error)
-         }}
-       
-         )
-     
+  getAllCars$(): void {
+    this.carsService.getAllCars$().subscribe({
+      next: (response) => {
+        this.cars$ = of(response.data.cars);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
-
-
-
-
-
-
-
 }
