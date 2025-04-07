@@ -1,5 +1,28 @@
-<p>new-workshop-modal works!</p>
+<div class="top-info">
+    <div class="title">Add New Workshop</div>
+</div>
+
+<div class="content">
+    <form #addNewWorkshop="ngForm"  (ngSubmit)="addNewWs(addNewWorkshop)">
+
+        <div class="form-group">
+            <label for="workshopName">Workshop Name</label>
+            <input type="text" ngModel name="workshopName" id="">
+
+        </div>
+
+        <div class="formgroup">
+            <label for="workshopDescription">Workshop Description</label>
+            <input type="text"  ngModel name="workshopDescription" id="">
+        </div>
+        
+          
+
+    
+
 <div class="bottom">
-<button class="btn btn-primary">Save</button>
+<button class="btn btn-primary" type="submit">Save</button>
 <button class="btn btn-danger" (click)="closeModal()"> Close</button>
+</div>
+</form>
 </div>

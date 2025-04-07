@@ -6,14 +6,25 @@ import { Workshop } from 'src/app/core/interfaces/workshop';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { environment } from 'src/environments/environment';
 import { NewWorkshopModalComponent } from './components/new-workshop-modal/new-workshop-modal.component';
+import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { WorkshopActions } from './store/workshop.actions';
+import { selectAllWorkshops } from './store/workshop.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkshopService {
+  getWsFromStore$() {
+    return this.store.select(selectAllWorkshops); 
+  }
   private readonly baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient, private modal: NgbModal) {}
+  constructor(
+    private http: HttpClient,
+    private modal: NgbModal,
+    private store: Store
+  ) {}
 
   getAllWorkshops$(): Observable<
     CustomHttpResponse<{ workshops: Workshop[] }>
@@ -25,12 +36,17 @@ export class WorkshopService {
       .pipe(tap((response) => console.log('API Response', response)));
   }
 
+  addNewWorkshopService(newWorshopForm: NgForm) {
+    const newWorkshop :Workshop = this.createWorkshop(newWorshopForm);
+    this.store.dispatch(WorkshopActions.actNewWorkshop({newWorkshop}));
+  }
+
   addNewWorkshop$(
     workshop: Workshop
   ): Observable<CustomHttpResponse<Workshop>> {
     return this.http
       .post<CustomHttpResponse<Workshop>>(
-        `${this.baseUrl}/newWorkshop`,
+        `${this.baseUrl}/workshop/newWorkshop`,
         workshop
       )
       .pipe(catchError(this.handleError));
@@ -56,17 +72,19 @@ export class WorkshopService {
   }
 
   openNewWorkshopModal() {
-    this.modal.open(NewWorkshopModalComponent,{size : 'md'})
+    this.modal.open(NewWorkshopModalComponent, { size: 'md' });
   }
- 
+
   closeModal() {
     this.modal.dismissAll();
   }
 
+  private createWorkshop(newWorkshop: NgForm): Workshop {
+    const workshop: Workshop = {
+      name: newWorkshop.value.workshopName,
+      description: newWorkshop.value.workshopDescription,
+    };
 
-
+    return workshop;
+  }
 }
-
-
-
-

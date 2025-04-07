@@ -11,6 +11,8 @@ import { WorkshopService } from '../../workshop.service';
 })
 export class WorkshopComponent {
 
+  //workshops$ = this.workshopService.getWsFromStore();
+
   constructor(private store: Store,
     private workshopService : WorkshopService
   ) {

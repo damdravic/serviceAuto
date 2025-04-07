@@ -17,7 +17,7 @@ import { TopWidgetComponent } from './widgets/top-widget/top-widget.component';
 import { MainComponent } from './shared/main/main.component';
 import { CommonModule } from '@angular/common';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { XcompComponent } from './components/xcomp/xcomp.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
@@ -39,6 +39,7 @@ import { customerReducer } from './modules/customer/store/customer.reducer';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ChartsModule } from './modules/charts/charts.module';
 import { CarModule } from './modules/car/car.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -56,7 +57,7 @@ import { CarModule } from './modules/car/car.module';
     XcompComponent,
     PaginationComponent,
     MainpageComponent,
-    RegisterComponent,
+    RegisterComponent
  
   ],
   bootstrap: [AppComponent],
@@ -74,6 +75,8 @@ import { CarModule } from './modules/car/car.module';
     EffectsModule.forRoot([TechnicianEffects, UserEffects, CustomerEffects]),
     TechnicianModule,
     ThemesModule,
+    BrowserAnimationModule,
+    ToastrModule.forRoot(),
     StoreModule.forRoot({
       technician: techReducer,
       user: userReducer,
