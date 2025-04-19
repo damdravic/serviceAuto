@@ -9,9 +9,9 @@ import {
 import { Labor } from 'src/app/interface/labor';
 import { OrderItem } from 'src/app/interface/orderItem';
 import { Part } from 'src/app/interface/part';
-import { RepairOrder } from 'src/app/interface/repair-order';
-import { RepairOrderService } from 'src/app/core/services/repair-order.service';
 import { OrderLaborItem } from 'src/app/interface/order-labor-item';
+import { OrderService } from '../../order.service';
+import { Order } from '../../interfaces/order';
 
 @Component({
   selector: 'app-edit-reapir-order-modal',
@@ -20,7 +20,7 @@ import { OrderLaborItem } from 'src/app/interface/order-labor-item';
   standalone: false,
 })
 export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
-  @Input() order: RepairOrder;
+  @Input() order: Order;
   @ViewChild('searchInput') searchInput: ElementRef;
   @ViewChild('searchInput2') searchInput2: ElementRef;
   @ViewChild('checkPart') checkPart: ElementRef;
@@ -39,7 +39,7 @@ export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
   repairOrderLaborItem: OrderLaborItem[] = [];
   totalParts: number = 0;
 
-  constructor(private repairOrderService: RepairOrderService) {}
+  constructor(private orderService: OrderService) {}
 
   ngOnInit() {}
   ngAfterViewInit() {}
@@ -52,7 +52,7 @@ export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
     if (this.searchTerm === '') {
       this.filteredParts = [];
     } else {
-      this.filteredParts = this.repairOrderService.parts.filter(
+      this.filteredParts = this.orderService.parts.filter(
         (part) =>
           part.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
           part.code.includes(this.searchTerm)
@@ -206,7 +206,7 @@ export class EditRepairOrderModalComponent implements OnInit, AfterViewInit {
     if (this.searchTerm === '') {
       this.filteredLabors = [];
     } else {
-      this.filteredLabors = this.repairOrderService.fakeLabors.filter(
+      this.filteredLabors = this.orderService.fakeLabors.filter(
         (labor) =>
           labor.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
           labor.code.includes(this.searchTerm)

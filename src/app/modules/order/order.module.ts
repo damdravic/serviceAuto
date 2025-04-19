@@ -7,6 +7,8 @@ import { AddNewOrderModalComponent } from './components/add-new-order-modal/add-
 import { EditRepairOrderModalComponent } from './components/edit-repair-order-modal/edit-repair-order-modal.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { EditInfoOrderComponent } from './components/edit-info-order/edit-info-order.component';
+import { EffectsModule } from '@ngrx/effects';
+import { OrderEffects } from './store/order.effects';
 
 
 
@@ -21,7 +23,8 @@ import { EditInfoOrderComponent } from './components/edit-info-order/edit-info-o
     CommonModule,
     FormsModule,
     OrderRoutingModule,
-    CoreModule
+    CoreModule,
+    EffectsModule.forFeature([OrderEffects])
   ]
 })
 export class OrderModule { }

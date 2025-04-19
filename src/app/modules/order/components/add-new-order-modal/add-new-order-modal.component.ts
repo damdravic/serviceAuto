@@ -1,15 +1,21 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {
   NgbCalendar,
   NgbDateStruct,
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
-import { RepairOrder } from 'src/app/interface/repair-order';
-import { RepairOrderService } from 'src/app/core/services/repair-order.service';
+
 import { CarService } from 'src/app/modules/car/car.service';
 import { Car } from 'src/app/modules/car/models/car';
-import { BehaviorSubject, combineLatest, first, map, Observable, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  first,
+  map,
+  Observable,
+  of,
+} from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Technician } from 'src/app/modules/technician/models/technician';
 import { selectAllTechnicians } from 'src/app/modules/technician/store/technician.selectors';
@@ -18,6 +24,9 @@ import { AddNewCarComponent } from 'src/app/modules/car/components/add-new-car/a
 
 import { loadTechs } from 'src/app/modules/technician/store/technician.actions';
 import { WorkshopService } from 'src/app/modules/workshop/workshop.service';
+import { OrderService } from '../../order.service';
+import { Order } from '../../interfaces/order';
+import { initialOrder } from '../../interfaces/initial-order';
 
 @Component({
   selector: 'app-add-new-order-modal',
@@ -26,21 +35,25 @@ import { WorkshopService } from 'src/app/modules/workshop/workshop.service';
   standalone: false,
 })
 export class AddNewOrderModalComponent implements OnInit {
+  @Input() order: Order;
+  //editable  order
+  formOrder = initialOrder;
+
   searchCarTerm: string;
   car: Car = null;
   selectedVehicleId: number = null;
   allCars$: Observable<Car[]>;
   allTechnicians$: Observable<Technician[]> =
     this.store.select(selectAllTechnicians);
-  allWorkshops$ = this.workshopService.getAllWorkshops$().pipe(
-    map(response => response.data?.workshops)
-  );
+  allWorkshops$ = this.workshopService
+    .getAllWorkshops$()
+    .pipe(map((response) => response.data?.workshops));
   addCar: boolean = false;
   filtredCars$: Observable<(Car | { addCar: boolean })[]>;
   private searchTermSubject$ = new BehaviorSubject<string>('');
 
   constructor(
-    private orderService: RepairOrderService,
+    private orderService: OrderService,
     private carService: CarService,
     private store: Store,
     private ngbModal: NgbModal,
@@ -59,6 +72,10 @@ export class AddNewOrderModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.order) {
+      this.formOrder = { ...this.order };
+    }
+
     this.ensureTechnicianLoaded();
     //this is from service directly not from the store  --- need to corect it
     this.allCars$ = this.carService.getAllCarList$();
@@ -88,7 +105,8 @@ export class AddNewOrderModalComponent implements OnInit {
   }
 
   save(orderForm: NgForm) {
-    this.orderService.addOrder$(orderForm.value).subscribe((data) => {});
+    this.orderService.addNewOrderService(this.formOrder);
+    // this.orderService.addOrder$(orderForm.value).subscribe((data) => {});
   }
 
   searchCar() {
@@ -108,6 +126,7 @@ export class AddNewOrderModalComponent implements OnInit {
       if (foundCar) {
         this.car = foundCar;
         this.selectedVehicleId = this.car.id;
+        this.formOrder.vehicleId = this.car.id;
       }
     });
 

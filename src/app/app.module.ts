@@ -18,10 +18,9 @@ import { MainComponent } from './shared/main/main.component';
 import { CommonModule } from '@angular/common';
 
 import { NgbModule, NgbToast } from '@ng-bootstrap/ng-bootstrap';
-import { XcompComponent } from './components/xcomp/xcomp.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
-import { OrderModule } from './modules/order/order.module';
+
 import { SidenavModule } from './sharedModules/sidenav/sidenav.module';
 import { StoreModule } from '@ngrx/store';
 import { TechnicianModule } from './modules/technician/technician.module';
@@ -43,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { WorkshopEffects } from './modules/workshop/store/workshop.effects';
 import { workshopReducer } from './modules/workshop/store/workshop.reducer';
+import { OrderModule } from './modules/order/order.module';
 
 
 
@@ -58,7 +58,6 @@ import { workshopReducer } from './modules/workshop/store/workshop.reducer';
     TopWidgetComponent,
     MainComponent,
     DashboardComponent,
-    XcompComponent,
     PaginationComponent,
     MainpageComponent,
     RegisterComponent,

@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,26 +13,25 @@ import {
 
 import { Key } from 'src/app/enum/key';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
-import { DataState } from 'src/app/interface/data-state';
+
 import { LoginState } from 'src/app/interface/login-state';
 import { User } from 'src/app/interface/user';
 import { UserService } from 'src/app/modules/user/user.service';
-
-
-
+import { Order } from 'src/app/modules/order/interfaces/order';
+import { OrderDataState } from 'src/app/modules/order/interfaces/order-data-state';
 
 @Component({
   styleUrls: ['./login.component.css'],
   selector: 'app-login',
   templateUrl: './login.component.html',
-  standalone: false
+  standalone: false,
 })
 export class LoginComponent implements OnInit {
-  loginState$: Observable<LoginState> = of({ dataState: DataState.LOADED });
+  loginState$: Observable<LoginState> = of({ dataState: OrderDataState.LOADED });
 
   private phoneSubject = new BehaviorSubject<string | null>(null);
   private emailSubject = new BehaviorSubject<string | null>(null);
-  readonly DataState = DataState;
+  readonly DataState = OrderDataState;
   active: boolean = false;
   signUpMode: boolean = false;
 
@@ -113,17 +111,17 @@ export class LoginComponent implements OnInit {
           localStorage.setItem(Key.REFRESH_TOKEN, response.data.refreshToken);
           this.router.navigate(['/']);
           return {
-            dataState: DataState.LOADED,
+            dataState: OrderDataState.LOADED,
             loginSuccess: true,
             phone: this.phoneSubject.value.substring(
               this.phoneSubject.value.length - 4
             ),
           };
         }),
-        startWith({ dataState: DataState.LOADING, isUsingMfa: true }),
+        startWith({ dataState: OrderDataState.LOADING, isUsingMfa: true }),
         catchError((error: string) => {
           return of({
-            dataState: DataState.ERROR,
+            dataState: OrderDataState.ERROR,
             isUsingMfa: true,
             loginSucces: false,
             error,

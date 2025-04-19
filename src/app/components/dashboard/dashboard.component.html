@@ -59,7 +59,7 @@
     <div class="main_area">
       <div class="main_top_area">
         <div class="ax_card">
-          <section *ngIf="(orderState$ | async) as orderState">
+          <section >
             <div class="top_info">
               <div class="title">
                 <h5>Orders</h5>
@@ -109,7 +109,7 @@
 
             </div>
             <div class="bottom">
-              <app-pagination *ngIf="orderState.dataState === DataState.LOADED" [totalItems]="orders.length"
+              <app-pagination [totalItems]="orders.length"
                 [itemsPerPage]="itemsPerPage" [currentPage]="currentPage" (pageChanged)="changePage($event)">
               </app-pagination>
             </div>

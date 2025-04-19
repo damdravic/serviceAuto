@@ -10,7 +10,7 @@ import {
   filter,
   take,
 } from 'rxjs';
-import { Workshop } from 'src/app/core/interfaces/workshop';
+import { Workshop } from 'src/app/modules/workshop/interfaces/workshop';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { environment } from 'src/environments/environment';
 import { NewWorkshopModalComponent } from './components/new-workshop-modal/new-workshop-modal.component';
@@ -43,7 +43,7 @@ export class WorkshopService implements OnInit {
   }
 
   editWorkshopService(id: number, editedWorkshop: Workshop) {
-    console.log("in edit service")
+    console.log('in edit service');
     this.store
       .select(selectAllWorkshops)
       .pipe(
@@ -95,10 +95,15 @@ export class WorkshopService implements OnInit {
       .pipe(catchError(this.handleError));
   }
 
-  editWorkshop$(workshop: Workshop): Observable<CustomHttpResponse<{ workshop: Workshop }>>{
-    return this.http.post<CustomHttpResponse<{ workshop: Workshop }>>(
-      `${this.baseUrl}/workshop/editWorkshop`, workshop
-    ).pipe(catchError(this.handleError));
+  editWorkshop$(
+    workshop: Workshop
+  ): Observable<CustomHttpResponse<{ workshop: Workshop }>> {
+    return this.http
+      .post<CustomHttpResponse<{ workshop: Workshop }>>(
+        `${this.baseUrl}/workshop/editWorkshop`,
+        workshop
+      )
+      .pipe(catchError(this.handleError));
   }
 
   //-------------------------------------------------------------------------------------------Error hanlde

@@ -1,4 +1,5 @@
-export interface RepairOrder {
+export interface Order {
+    
   orderId :number;
   workshopId : number;
   vehicleId : number;
@@ -11,6 +12,6 @@ export interface RepairOrder {
   estimatedCompletionDate: Date;
   status : string;
   totalCost: number;
+
+
 }
-
-

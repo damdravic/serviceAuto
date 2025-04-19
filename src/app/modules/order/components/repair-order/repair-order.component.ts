@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { catchError, map, Observable, of, startWith } from 'rxjs';
-import { RepairOrderState } from 'src/app/interface/repair-order-state';
-import { DataState } from 'src/app/interface/data-state';
-import { RepairOrder } from 'src/app/interface/repair-order';
-import { RepairOrderService } from 'src/app/core/services/repair-order.service';
+import { OrderDataState } from '../../interfaces/order-data-state';
+import { OrderState } from '../../interfaces/order.state';
+import { Order } from '../../interfaces/order';
+import { OrderService } from '../../order.service';
+
+
 
 @Component({
   selector: 'app-repair-order',
@@ -12,26 +14,26 @@ import { RepairOrderService } from 'src/app/core/services/repair-order.service';
   standalone: false,
 })
 export class RepairOrderComponent {
-  orders: RepairOrder[] = [];
+  orders: Order[] = [];
 
-  constructor(private orderService: RepairOrderService) {}
+  constructor(private orderService: OrderService) {}
 
-  orderState$: Observable<RepairOrderState> = of({
-    dataState: DataState.LOADED,
+  orderState$: Observable<OrderState> = of({
+    dataState: OrderDataState.LOADED,
   });
 
   ngOnInit(): void {
     this.orderState$ = this.orderService.getAllOrders$().pipe(
       map((response) => {
-        console.log('Aici response data ==> ' + response.data.repairOrders);
-        this.orders = response.data.repairOrders;
+        console.log('Aici response data ==> ' + response.data.orders);
+        this.orders = response.data.orders;
         return {
-          dataState: DataState.LOADED,
+          dataState: OrderDataState.LOADED,
         };
       }),
-      startWith({ dataState: DataState.LOADING }),
+      startWith({ dataState: OrderDataState.LOADING }),
       catchError((error) => {
-        return of({ dataState: DataState.ERROR, error: error });
+        return of({ dataState: OrderDataState.ERROR, error: error });
       })
     );
   }

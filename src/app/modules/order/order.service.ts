@@ -1,35 +1,53 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
 import { Observable, tap, catchError, throwError } from 'rxjs';
 import { Key } from 'src/app/enum/key';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { Labor } from 'src/app/interface/labor';
 import { Part } from 'src/app/interface/part';
-import { RepairOrder } from 'src/app/interface/repair-order';
-import { RepairOrderState } from 'src/app/interface/repair-order-state';
+
+
 import { environment } from 'src/environments/environment';
+import { AddNewOrderAction } from './store/order.actions';
+import { Order } from './interfaces/order';
+import { OrderState } from './interfaces/order.state';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private modal: NgbModal,
+    private store: Store
+  ) {}
 
   private readonly server: string = environment.apiUrl;
 
+  addNewOrderService(newOrder: Order) {
+    this.store.dispatch(AddNewOrderAction.start({ newOrder }));
+  }
+
   getAllOrders$ = () =>
-    <Observable<CustomHttpResponse<RepairOrderState>>>(
+    <Observable<CustomHttpResponse<OrderState>>>(
       this.http
-        .get<CustomHttpResponse<RepairOrderState>>(
+        .get<CustomHttpResponse<OrderState>>(
           `${this.server}/repairOrder/all`
         )
         .pipe(tap(console.log), catchError(this.handleError))
     );
 
-  addOrder$ = (order: RepairOrder) =>
-    <Observable<CustomHttpResponse<RepairOrder>>>(
+  addOrder$ = (order: Order) =>
+    <Observable<CustomHttpResponse<Order>>>(
       this.http
-        .post<CustomHttpResponse<RepairOrder>>(
+        .post<CustomHttpResponse<Order>>(
           `${this.server}/repairOrder/create`,
           order
         )
@@ -48,6 +66,10 @@ export class OrderService {
       }
     }
     return throwError(() => errorMessage);
+  }
+
+  closeModal() {
+    this.modal.dismissAll();
   }
 
   // fake data

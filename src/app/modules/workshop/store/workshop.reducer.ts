@@ -6,7 +6,7 @@ import {
   DeleteWorkshopAction,
 } from './workshop.actions';
 import { initialWorkshopState } from './workshop.state';
-import { Workshop } from '../../../core/interfaces/workshop';
+import { Workshop } from '../interfaces/workshop';
 
 export const workshopFeatureKey = 'workshop';
 
@@ -33,7 +33,7 @@ export const workshopReducer = createReducer(
     error: error,
   })),
 
-//---------------------- Load Workshops -----------------
+  //---------------------- Load Workshops -----------------
 
   on(LoadWorkshopsActions.start, (state) => ({
     ...state,
@@ -62,7 +62,7 @@ export const workshopReducer = createReducer(
 
   on(EditWorkshopAction.success, (state, { workshop }) => ({
     ...state,
-    workshops: state.workshops.map(w =>
+    workshops: state.workshops.map((w) =>
       w.id === workshop.id ? workshop : w
     ),
     state: 'success' as 'success',
@@ -74,24 +74,22 @@ export const workshopReducer = createReducer(
     error: error,
   })),
 
- // TODO delete workshop
- //--------------------Delete workshop --------------------
+  // TODO delete workshop
+  //--------------------Delete workshop --------------------
 
-on(DeleteWorkshopAction.start, (state, { id }) => ({
-  ...state,
-  status: 'pending' as 'pending',
-})),
+  on(DeleteWorkshopAction.start, (state, { id }) => ({
+    ...state,
+    status: 'pending' as 'pending',
+  })),
 
   on(DeleteWorkshopAction.success, (state, { id }) => ({
     ...state,
     status: 'success' as 'success',
-    workshops : state.workshops.filter(workshop => workshop.id !== id)
+    workshops: state.workshops.filter((workshop) => workshop.id !== id),
   })),
   on(DeleteWorkshopAction.failure, (state, { error }) => ({
     ...state,
     status: 'failure' as 'failure',
-    error: error
+    error: error,
   }))
-
-
 );

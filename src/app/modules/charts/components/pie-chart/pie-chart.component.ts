@@ -1,11 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 
-import { RepairOrderService } from 'src/app/core/services/repair-order.service';
+
 import { ChartData, ChartOptions, ChartType, LabelItem } from 'chart.js';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
-import { RepairOrder } from 'src/app/interface/repair-order';
-import { RepairOrderState } from 'src/app/interface/repair-order-state';
+
+import { OrderService } from 'src/app/modules/order/order.service';
+import { Order } from 'src/app/modules/order/interfaces/order';
+import { OrderState } from 'src/app/modules/order/interfaces/order.state';
 
 
 
@@ -45,7 +47,7 @@ export class PieChartComponent implements OnInit {
     backgroundColor: string[]; // Set the colors for the chart segments
   }[];
 
-  constructor(private orderService: RepairOrderService) {}
+  constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
     this.getAllOrders();
@@ -53,9 +55,9 @@ export class PieChartComponent implements OnInit {
 
   private getAllOrders(): void {
     const ordersSub = this.orderService.getAllOrders$().subscribe(
-      (response: CustomHttpResponse<RepairOrderState>) => {
-        if (response.data?.repairOrders) {
-          this.processOrders(response.data.repairOrders);
+      (response: CustomHttpResponse<OrderState>) => {
+        if (response.data?.orders) {
+          this.processOrders(response.data.orders);
         }
       },
       (error: HttpErrorResponse) => {
@@ -64,7 +66,7 @@ export class PieChartComponent implements OnInit {
     );
   }
 
-  private processOrders(orders: RepairOrder[]): void {
+  private processOrders(orders: Order[]): void {
     this.pendingOrders = 0;
     this.inProgressOrders = 0;
     this.cancelledOrders = 0;

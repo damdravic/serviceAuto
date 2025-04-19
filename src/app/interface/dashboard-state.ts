@@ -1,9 +1,8 @@
-import { DataState } from "./data-state";
-import { User } from './user';
+import { OrderDataState } from '../modules/order/interfaces/order-data-state';
 
-export interface DashboardState{
-    dataState: DataState;
-    error?: string;
-    message?: string;
-    
+
+export interface DashboardState {
+  dataState: OrderDataState.LOADED;
+  error?: string;
+  message?: string;
 }

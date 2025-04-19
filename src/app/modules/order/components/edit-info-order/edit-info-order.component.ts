@@ -7,8 +7,8 @@ import { CarService } from 'src/app/modules/car/car.service';
 import { selectAllTechnicians } from 'src/app/modules/technician/store/technician.selectors';
 import { loadTechs } from 'src/app/modules/technician/store/technician.actions';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RepairOrder } from 'src/app/interface/repair-order';
 import { WorkshopService } from 'src/app/modules/workshop/workshop.service';
+import { Order } from '../../interfaces/order';
 
 @Component({
   selector: 'app-edit-info-order',
@@ -17,7 +17,7 @@ import { WorkshopService } from 'src/app/modules/workshop/workshop.service';
   standalone: false,
 })
 export class EditInfoOrderComponent implements OnInit {
-  @Input() order: RepairOrder;
+  @Input() order: Order;
 
   description: string = '';
   workshopId: number;
@@ -80,5 +80,5 @@ export class EditInfoOrderComponent implements OnInit {
     this.NgbModal.dismissAll();
   }
 
-  save(order: RepairOrder) {}
+  save(order: Order) {}
 }
