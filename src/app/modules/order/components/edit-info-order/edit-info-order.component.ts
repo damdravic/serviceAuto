@@ -2,12 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, first, map, Observable } from 'rxjs';
 import { Car } from 'src/app/modules/car/models/car';
-import { WorkshopService } from '../../../../core/services/workshop.service';
+
 import { CarService } from 'src/app/modules/car/car.service';
 import { selectAllTechnicians } from 'src/app/modules/technician/store/technician.selectors';
 import { loadTechs } from 'src/app/modules/technician/store/technician.actions';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RepairOrder } from 'src/app/interface/repair-order';
+import { WorkshopService } from 'src/app/modules/workshop/workshop.service';
 
 @Component({
   selector: 'app-edit-info-order',

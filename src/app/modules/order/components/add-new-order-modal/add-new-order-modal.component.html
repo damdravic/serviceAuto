@@ -65,10 +65,10 @@
 
 
           <div class="ax-group">
-            <label for="">Technician             yhhy</label>
+            <label for="">Technician </label>
             <select class="search-select" ngModel name="technicianId" aria-label="Default select example">
-             <option *ngFor="let tech of  allTechnicians$ |async">
-              {{tech.id}}
+             <option *ngFor="let tech of  allTechnicians$ |async" [value]="tech.id">
+               {{tech.techName}}
              </option>
             </select>
           </div>

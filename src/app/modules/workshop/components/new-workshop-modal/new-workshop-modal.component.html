@@ -3,26 +3,23 @@
 </div>
 
 <div class="content">
-    <form #addNewWorkshop="ngForm"  (ngSubmit)="addNewWs(addNewWorkshop)">
+    <form #addNewWorkshop="ngForm" (ngSubmit)="onSubmit(addNewWorkshop)">
 
         <div class="form-group">
             <label for="workshopName">Workshop Name</label>
-            <input type="text" ngModel name="workshopName" id="">
-
+            <input  [(ngModel)]="workshopForm.name" name="name"> 
         </div>
 
         <div class="formgroup">
             <label for="workshopDescription">Workshop Description</label>
-            <input type="text"  ngModel name="workshopDescription" id="">
+            <input type="text" [(ngModel)]="workshopForm.description" name="description" id="">
         </div>
-        
-          
 
-    
-
-<div class="bottom">
-<button class="btn btn-primary" type="submit">Save</button>
-<button class="btn btn-danger" (click)="closeModal()"> Close</button>
-</div>
-</form>
+        <div class="bottom">
+            <button class="btn btn-primary" type="submit">
+                {{ workshopx ? ' Salveaza madificarile' : 'Salveaza Workshop'}}
+            </button>
+            <button class="btn btn-danger" type="button" (click)="closeModal()"> Close</button>
+        </div>
+    </form>
 </div>

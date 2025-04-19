@@ -15,8 +15,9 @@ import { Technician } from 'src/app/modules/technician/models/technician';
 import { selectAllTechnicians } from 'src/app/modules/technician/store/technician.selectors';
 
 import { AddNewCarComponent } from 'src/app/modules/car/components/add-new-car/add-new-car.component';
-import { WorkshopService } from 'src/app/core/services/workshop.service';
+
 import { loadTechs } from 'src/app/modules/technician/store/technician.actions';
+import { WorkshopService } from 'src/app/modules/workshop/workshop.service';
 
 @Component({
   selector: 'app-add-new-order-modal',
@@ -31,7 +32,9 @@ export class AddNewOrderModalComponent implements OnInit {
   allCars$: Observable<Car[]>;
   allTechnicians$: Observable<Technician[]> =
     this.store.select(selectAllTechnicians);
-  allWorkshops$ = this.workshopService.getAllWorkshops$();
+  allWorkshops$ = this.workshopService.getAllWorkshops$().pipe(
+    map(response => response.data?.workshops)
+  );
   addCar: boolean = false;
   filtredCars$: Observable<(Car | { addCar: boolean })[]>;
   private searchTermSubject$ = new BehaviorSubject<string>('');

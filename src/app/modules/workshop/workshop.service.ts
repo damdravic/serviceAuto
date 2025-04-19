@@ -1,23 +1,31 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { map, Observable, tap, catchError, throwError } from 'rxjs';
+import {
+  map,
+  Observable,
+  tap,
+  catchError,
+  throwError,
+  filter,
+  take,
+} from 'rxjs';
 import { Workshop } from 'src/app/core/interfaces/workshop';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { environment } from 'src/environments/environment';
 import { NewWorkshopModalComponent } from './components/new-workshop-modal/new-workshop-modal.component';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { WorkshopActions } from './store/workshop.actions';
 import { selectAllWorkshops } from './store/workshop.selectors';
+import {
+  AddNewWorkshopAction,
+  EditWorkshopAction,
+} from './store/workshop.actions';
 
 @Injectable({
   providedIn: 'root',
 })
-export class WorkshopService {
-  getWsFromStore$() {
-    return this.store.select(selectAllWorkshops); 
-  }
+export class WorkshopService implements OnInit {
   private readonly baseUrl: string = environment.apiUrl;
 
   constructor(
@@ -25,6 +33,37 @@ export class WorkshopService {
     private modal: NgbModal,
     private store: Store
   ) {}
+
+  ngOnInit(): void {}
+
+  // service methods for dispatch actions
+
+  addNewWorkshopService(newWorkshop: Workshop) {
+    this.store.dispatch(AddNewWorkshopAction.start({ newWorkshop }));
+  }
+
+  editWorkshopService(id: number, editedWorkshop: Workshop) {
+    console.log("in edit service")
+    this.store
+      .select(selectAllWorkshops)
+      .pipe(
+        map((wsList) => wsList.find((ws) => ws.id === id)),
+        take(1)
+      )
+      .subscribe((originalWorkshop) => {
+        if (!originalWorkshop) return;
+
+        const updatedWorkshop: Workshop = {
+          ...originalWorkshop,
+          ...editedWorkshop,
+        };
+        this.store.dispatch(
+          EditWorkshopAction.start({ workshop: updatedWorkshop })
+        );
+      });
+  }
+
+  //----------------------------------------HttpClient actions
 
   getAllWorkshops$(): Observable<
     CustomHttpResponse<{ workshops: Workshop[] }>
@@ -36,21 +75,33 @@ export class WorkshopService {
       .pipe(tap((response) => console.log('API Response', response)));
   }
 
-  addNewWorkshopService(newWorshopForm: NgForm) {
-    const newWorkshop :Workshop = this.createWorkshop(newWorshopForm);
-    this.store.dispatch(WorkshopActions.actNewWorkshop({newWorkshop}));
-  }
-
   addNewWorkshop$(
     workshop: Workshop
-  ): Observable<CustomHttpResponse<Workshop>> {
+  ): Observable<CustomHttpResponse<{ workshop: Workshop }>> {
     return this.http
-      .post<CustomHttpResponse<Workshop>>(
+      .post<CustomHttpResponse<{ workshop: Workshop }>>(
         `${this.baseUrl}/workshop/newWorkshop`,
         workshop
       )
       .pipe(catchError(this.handleError));
   }
+
+  deleteWorkshop$(id: number): Observable<CustomHttpResponse<null>> {
+    console.log('SERVICE deleteWorkshop$, id primit:', id);
+    return this.http
+      .delete<CustomHttpResponse<null>>(
+        `${this.baseUrl}/workshop/deleteWorkshop/${id}`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  editWorkshop$(workshop: Workshop): Observable<CustomHttpResponse<{ workshop: Workshop }>>{
+    return this.http.post<CustomHttpResponse<{ workshop: Workshop }>>(
+      `${this.baseUrl}/workshop/editWorkshop`, workshop
+    ).pipe(catchError(this.handleError));
+  }
+
+  //-------------------------------------------------------------------------------------------Error hanlde
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string;
@@ -71,20 +122,17 @@ export class WorkshopService {
     return throwError(() => errorMessage);
   }
 
-  openNewWorkshopModal() {
-    this.modal.open(NewWorkshopModalComponent, { size: 'md' });
+  //---------------------------------------------------------------------------------------Modal options
+
+  openNewWorkshopModal(workshop?: Workshop) {
+    const modalRef = this.modal.open(NewWorkshopModalComponent, { size: 'md' });
+
+    if (workshop) {
+      modalRef.componentInstance.workshopx = workshop;
+    }
   }
 
   closeModal() {
     this.modal.dismissAll();
-  }
-
-  private createWorkshop(newWorkshop: NgForm): Workshop {
-    const workshop: Workshop = {
-      name: newWorkshop.value.workshopName,
-      description: newWorkshop.value.workshopDescription,
-    };
-
-    return workshop;
   }
 }

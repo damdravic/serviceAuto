@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { WorkshopActions } from '../../store/workshop.actions';
+import { AddNewWorkshopAction, DeleteWorkshopAction, LoadWorkshopsActions } from '../../store/workshop.actions';
 import { WorkshopService } from '../../workshop.service';
+import { selectAllWorkshops } from '../../store/workshop.selectors';
+import { Workshop } from 'src/app/core/interfaces/workshop';
+
 
 @Component({
   selector: 'app-workshop',
@@ -10,16 +13,31 @@ import { WorkshopService } from '../../workshop.service';
   styleUrl: './workshop.component.css',
   standalone: false,
 })
-export class WorkshopComponent {
-  //workshops$ = this.workshopService.getWsFromStore();
+export class WorkshopComponent implements OnInit {
+  public workshops$ = this.store.select(selectAllWorkshops);
 
-  constructor(private store: Store, private workshopService: WorkshopService) {}
-
-  openNewWorkshopModal() {
-    this.workshopService.openNewWorkshopModal();
+  constructor(private store: Store, private workshopService: WorkshopService) { }
+  ngOnInit(): void {
+    this.store.dispatch(LoadWorkshopsActions.start());
+   
+    this.workshops$.subscribe((workshops) => {
+      console.log('Workshops:', workshops);
+    });
+   
   }
 
-  addWorkshop(form: NgForm) {
-    this.store.dispatch(WorkshopActions.actWorkshops());
+  openNewWorkshopModal(workshop?: Workshop) {
+    this.workshopService.openNewWorkshopModal(workshop);
   }
+
+
+  
+
+  deleteWs(workshopId :number) {
+    console.log(workshopId)
+    this.store.dispatch(DeleteWorkshopAction.start({id :workshopId} ))
+    
+
+  }
+
 }

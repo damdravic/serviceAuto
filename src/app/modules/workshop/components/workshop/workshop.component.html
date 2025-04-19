@@ -18,29 +18,29 @@
                
             </thead>
             <tbody class="table-body">
-                  <tr >
-                    <td>dt</td>
-                    <td>tdt</td>
-                    <td>dtt</td>
+                  <tr *ngFor="let ws of workshops$ | async" >
+                    <td>{{ws.id}}</td>
+                    <td>{{ws.name}}</td>
+                    <td>{{ws.description}}</td>
                     
                     <td class="options td-options">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" (click)="openNewWorkshopModal(ws)">
                             <i class='bx bxs-edit'></i>
                             Edit
                         </button>
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger" (click)="deleteWs(ws.id)">
                             <i class='bx bx-message-square-x'></i>
                             Delete
                         </button>
                     </td>
                     
                   </tr>
-                  <tr>
-                    <td>dt</td>
-                    <td>tdt</td>
-                    <td>dtt</td>
-                  </tr>
+                
             </tbody>
         </table>
     </div>
+
+ 
+
+
 </div>

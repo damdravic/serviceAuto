@@ -40,6 +40,9 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 import { ChartsModule } from './modules/charts/charts.module';
 import { CarModule } from './modules/car/car.module';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { WorkshopEffects } from './modules/workshop/store/workshop.effects';
+import { workshopReducer } from './modules/workshop/store/workshop.reducer';
 
 
 
@@ -58,8 +61,7 @@ import { ToastrModule } from 'ngx-toastr';
     XcompComponent,
     PaginationComponent,
     MainpageComponent,
-    RegisterComponent
- 
+    RegisterComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -73,15 +75,16 @@ import { ToastrModule } from 'ngx-toastr';
     ChartsModule,
     CarModule,
     NgbModule,
-    
-    EffectsModule.forRoot([TechnicianEffects, UserEffects, CustomerEffects]),
+    EffectsModule.forRoot([TechnicianEffects, UserEffects, CustomerEffects,WorkshopEffects]),
     TechnicianModule,
     ThemesModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     StoreModule.forRoot({
       technician: techReducer,
       user: userReducer,
-      customerState: customerReducer
+      customerState: customerReducer,
+      workshop: workshopReducer
     }),
   ],
   providers: [

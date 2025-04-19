@@ -36,20 +36,23 @@ td{
 
 .options{
     
-    width: 15%;
+    min-width: 15%;
 }
 .td-options{
-    width:100%;
+   
+ 
     display:flex;
     justify-content: space-around;
+    border-right: none;
 }
 .table-container{
     width: 100%;
-   
+    overflow-x: auto;
 }
 .workshop-table{
     width: 100%;
-    table-layout: fixed;
+    table-layout: auto;
+   
 
 }
 
