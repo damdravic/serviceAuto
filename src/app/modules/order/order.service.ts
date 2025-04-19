@@ -1,29 +1,56 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CustomHttpResponse } from '../../interface/custom-http-response';
-import {
-  catchError,
-  Observable,
-  OperatorFunction,
-  ObservableInput,
-  tap,
-  throwError,
-} from 'rxjs';
-import { RepairOrder } from '../../interface/repair-order';
-import { Key } from '../../enum/key';
-import { RepairOrderComponent } from '../../modules/order/components/repair-order/repair-order.component';
-import { RepairOrderState } from '../../interface/repair-order-state';
-import { Part } from '../../interface/part';
-import { Labor } from '../../interface/labor';
+import { Observable, tap, catchError, throwError } from 'rxjs';
+import { Key } from 'src/app/enum/key';
+import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
+import { Labor } from 'src/app/interface/labor';
+import { Part } from 'src/app/interface/part';
+import { RepairOrder } from 'src/app/interface/repair-order';
+import { RepairOrderState } from 'src/app/interface/repair-order-state';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RepairOrderService {
+export class OrderService {
+  constructor(private http: HttpClient) {}
+
   private readonly server: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  getAllOrders$ = () =>
+    <Observable<CustomHttpResponse<RepairOrderState>>>(
+      this.http
+        .get<CustomHttpResponse<RepairOrderState>>(
+          `${this.server}/repairOrder/all`
+        )
+        .pipe(tap(console.log), catchError(this.handleError))
+    );
+
+  addOrder$ = (order: RepairOrder) =>
+    <Observable<CustomHttpResponse<RepairOrder>>>(
+      this.http
+        .post<CustomHttpResponse<RepairOrder>>(
+          `${this.server}/repairOrder/create`,
+          order
+        )
+        .pipe(tap(console.log), catchError(this.handleError))
+    );
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage: string;
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
+    } else {
+      if (error.error.reason) {
+        errorMessage = error.error.reason;
+      } else {
+        errorMessage = `en error occured - error status ${error.status} - error message ${error.message}`;
+      }
+    }
+    return throwError(() => errorMessage);
+  }
+
+  // fake data
 
   parts: Part[] = [
     new Part(1, 'aripa', '1234', 'aripa auto', 100),
@@ -107,37 +134,4 @@ export class RepairOrderService {
   httpHeaders: HttpHeaders = new HttpHeaders({
     Authorization: 'Bearer ' + localStorage.getItem(Key.TOKEN),
   });
-
-  getAllOrders$ = () =>
-    <Observable<CustomHttpResponse<RepairOrderState>>>(
-      this.http
-        .get<CustomHttpResponse<RepairOrderState>>(
-          `${this.server}/repairOrder/all`
-        )
-        .pipe(tap(console.log), catchError(this.handleError))
-    );
-
-  addOrder$ = (order: RepairOrder) =>
-    <Observable<CustomHttpResponse<RepairOrder>>>(
-      this.http
-        .post<CustomHttpResponse<RepairOrder>>(
-          `${this.server}/repairOrder/create`,
-          order
-        )
-        .pipe(tap(console.log), catchError(this.handleError))
-    );
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage: string;
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      if (error.error.reason) {
-        errorMessage = error.error.reason;
-      } else {
-        errorMessage = `en error occured - error status ${error.status} - error message ${error.message}`;
-      }
-    }
-    return throwError(() => errorMessage);
-  }
 }

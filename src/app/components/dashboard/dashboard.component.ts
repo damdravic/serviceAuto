@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AddNewOrderModalComponent } from '../../modules/order/components/add-new-order-modal/add-new-order-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { XcompComponent } from '../xcomp/xcomp.component';
-import { RepairOrderService } from 'src/app/core/services/repair-order.service';
+
+
 import { catchError, map, Observable, of, startWith } from 'rxjs';
 import { RepairOrderState } from 'src/app/interface/repair-order-state';
 import { DataState } from 'src/app/interface/data-state';
@@ -13,6 +13,7 @@ import { selectAllTechnicians } from '../../modules/technician/store/technician.
 import { CarService } from 'src/app/modules/car/car.service';
 import { Car } from 'src/app/modules/car/models/car';
 import { EditInfoOrderComponent } from 'src/app/modules/order/components/edit-info-order/edit-info-order.component';
+import { OrderService } from 'src/app/modules/order/order.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private ngbModal: NgbModal,
-    private orderService: RepairOrderService,
+    private orderService: OrderService,
     private cdr: ChangeDetectorRef,
     private store: Store,
     private carsService: CarService
