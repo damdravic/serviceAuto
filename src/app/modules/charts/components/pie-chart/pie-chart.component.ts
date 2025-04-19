@@ -55,7 +55,7 @@ export class PieChartComponent implements OnInit {
 
   private getAllOrders(): void {
     const ordersSub = this.orderService.getAllOrders$().subscribe(
-      (response: CustomHttpResponse<OrderState>) => {
+      (response: CustomHttpResponse<{orders : Order[]}>) => {
         if (response.data?.orders) {
           this.processOrders(response.data.orders);
         }

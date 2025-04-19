@@ -43,6 +43,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { WorkshopEffects } from './modules/workshop/store/workshop.effects';
 import { workshopReducer } from './modules/workshop/store/workshop.reducer';
 import { OrderModule } from './modules/order/order.module';
+import { OrderEffects } from './modules/order/store/order.effects';
+import { orderReducer } from './modules/order/store/order.reducer';
 
 
 
@@ -74,7 +76,7 @@ import { OrderModule } from './modules/order/order.module';
     ChartsModule,
     CarModule,
     NgbModule,
-    EffectsModule.forRoot([TechnicianEffects, UserEffects, CustomerEffects,WorkshopEffects]),
+    EffectsModule.forRoot([TechnicianEffects, UserEffects, CustomerEffects,WorkshopEffects,OrderEffects]),
     TechnicianModule,
     ThemesModule,
     BrowserAnimationsModule,
@@ -83,7 +85,8 @@ import { OrderModule } from './modules/order/order.module';
       technician: techReducer,
       user: userReducer,
       customerState: customerReducer,
-      workshop: workshopReducer
+      workshop: workshopReducer,
+      order : orderReducer
     }),
   ],
   providers: [

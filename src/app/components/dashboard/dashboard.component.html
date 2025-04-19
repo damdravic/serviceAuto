@@ -90,7 +90,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let order of paginatedOrders">
+                  <tr *ngFor="let order of paginatedOrders$ |async">
                     <td>{{order.orderId}}</td>
                     <td>{{order.orderDate}}</td>
                     <td>{{order.description}}</td>
@@ -109,7 +109,7 @@
 
             </div>
             <div class="bottom">
-              <app-pagination [totalItems]="orders.length"
+              <app-pagination [totalItems]="(allOrders$ | async)?.length || 0"
                 [itemsPerPage]="itemsPerPage" [currentPage]="currentPage" (pageChanged)="changePage($event)">
               </app-pagination>
             </div>

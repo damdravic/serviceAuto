@@ -3,7 +3,7 @@ import { AddNewOrderAction, LoadOrderActions } from './order.actions';
 import { initialOrderState } from '../interfaces/order.state';
 import { OrderDataState } from '../interfaces/order-data-state';
 
-export const reducer = createReducer(
+export const orderReducer = createReducer(
   initialOrderState,
 
   //---------------------------------Add New Order ----------------------------
@@ -35,7 +35,7 @@ export const reducer = createReducer(
   on(LoadOrderActions.success, (state, { orders }) => ({
     ...state,
     dataState: OrderDataState.LOADED,
-    orders: orders,
+    orders,
     error: null,
   })),
   on(LoadOrderActions.failure, (state, { error }) => ({

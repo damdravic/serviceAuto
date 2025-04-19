@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { Observable, tap, catchError, throwError } from 'rxjs';
+import { Observable, tap, catchError, throwError, map } from 'rxjs';
 import { Key } from 'src/app/enum/key';
 import { CustomHttpResponse } from 'src/app/interface/custom-http-response';
 import { Labor } from 'src/app/interface/labor';
@@ -23,6 +23,9 @@ import { OrderState } from './interfaces/order.state';
   providedIn: 'root',
 })
 export class OrderService {
+  loadOrders$(): Observable<Order> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private http: HttpClient,
     private modal: NgbModal,
@@ -34,15 +37,26 @@ export class OrderService {
   addNewOrderService(newOrder: Order) {
     this.store.dispatch(AddNewOrderAction.start({ newOrder }));
   }
-
+/*
   getAllOrders$ = () =>
-    <Observable<CustomHttpResponse<OrderState>>>(
+    <Observable<CustomHttpResponse<{ orders: Order[] }>>>(
       this.http
-        .get<CustomHttpResponse<OrderState>>(
+        .get<CustomHttpResponse<{ orders: Order[] }>>(
           `${this.server}/repairOrder/all`
         )
-        .pipe(tap(console.log), catchError(this.handleError))
-    );
+        .pipe(
+          map(res => res.data?.orders),
+          tap(console.log),
+          catchError(this.handleError))
+    ); */
+  
+  getAllOrders$(): Observable<CustomHttpResponse<{ orders: Order[] }>>
+  {
+    return this.http.get<CustomHttpResponse<{ orders: Order[] }>>
+      (`${this.server}/repairOrder/all`)
+      .pipe(
+        tap((response) => console.log('Api Order serv Response', response)))
+   }
 
   addOrder$ = (order: Order) =>
     <Observable<CustomHttpResponse<Order>>>(

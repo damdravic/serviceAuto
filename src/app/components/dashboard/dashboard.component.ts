@@ -13,6 +13,8 @@ import { Car } from 'src/app/modules/car/models/car';
 import { EditInfoOrderComponent } from 'src/app/modules/order/components/edit-info-order/edit-info-order.component';
 import { OrderService } from 'src/app/modules/order/order.service';
 import { Order } from 'src/app/modules/order/interfaces/order';
+import { selectAllOrders } from 'src/app/modules/order/store/order.selectors';
+import { LoadOrderActions } from 'src/app/modules/order/store/order.actions';
 
 
 @Component({
@@ -22,7 +24,11 @@ import { Order } from 'src/app/modules/order/interfaces/order';
   standalone: false,
 })
 export class DashboardComponent implements OnInit {
-  orders: Order[] = [];
+  //get orders from store OrderState: orders
+  allOrders$ = this.store.select(selectAllOrders);
+
+  paginatedOrders$ : Observable<Order[]>;
+
   itemsPerPage: number = 3;
   currentPage: number = 1;
 
@@ -30,19 +36,27 @@ export class DashboardComponent implements OnInit {
  
   public technicians$ = this.store.select(selectAllTechnicians);
   public cars$: Observable<Car[]>;
-reloadPagination: any;
-OrderDataState: any;
+  reloadPagination: any;
+   OrderDataState: any;
 
   constructor(
     private ngbModal: NgbModal,
     private orderService: OrderService,
-    private cdr: ChangeDetectorRef,
     private store: Store,
     private carsService: CarService
-  ) {}
+  ) { }
+
+   
 
   ngOnInit(): void {
-    //this.getOrders();
+    this.store.dispatch(LoadOrderActions.start())
+    this.allOrders$.subscribe(orders => {
+      console.log('orders : ', orders);
+    }
+      
+    )
+    this.updatePaginateOrders();
+    
     this.getAllCars$();
   }
   collapsed = true;
@@ -50,22 +64,7 @@ OrderDataState: any;
   addNew() {
     this.ngbModal.open(AddNewOrderModalComponent, { size: 'lg' });
   }
-/*
-  getOrders() {
-    this.orderState$ = this.orderService.getAllOrders$().pipe(
-      map((response) => {
-        this.orders = response.data.repairOrders;
-        return {
-          dataState: DataState.LOADED,
-        };
-      }),
-      startWith({ dataState: DataState.LOADING }),
-      catchError((error) => {
-        return of({ dataState: DataState.ERROR, error: error });
-      })
-    );
-  }
-*/
+
   editOrder(order: Order) {
     const modalRef = this.ngbModal.open(EditRepairOrderModalComponent, {
       size: 'lg',
@@ -84,12 +83,16 @@ OrderDataState: any;
     this.currentPage = pageNumber;
   }
 
-  get paginatedOrders() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-
-    return this.orders.slice(start, end);
+  updatePaginateOrders() {
+    this.paginatedOrders$ = this.allOrders$.pipe(
+      map(orders => {
+        const start = (this.currentPage - 1) * this.itemsPerPage;
+        const end = start + this.itemsPerPage;
+        return orders.slice(start, end);
+      })
+    )
   }
+
 
   getAllCars$(): void {
     this.carsService.getAllCars$().subscribe({
