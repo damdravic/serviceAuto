@@ -2,27 +2,35 @@
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdamdravic%2FserviceAuto&label=visitors&labelColor=%23697689&countColor=%23d9e3f0&labelStyle=upper)
 
 
-Aplicatie Full-Stack pentru gestionarea comenzilor de reparatii auto,construita in Angular - frontend , SpringBoot - backend si Mysql - database.
-proiect creat pt invatare si demonstratie practica pt portofoliu.
+A full-stack application for managing auto repair orders, built with Angular (frontend), Spring Boot (backend), and MySQL (database).  
+This project was created as a learning experience and a practical demonstration for my portfolio.
 
-# Functionalitati  implementate
+---
 
-- Autentificare cu JWT -spring security
-- Creare comenzi de reparatii (order)
-- Alegere atelier si tehnician
-- Adaugare piese si manopera
-- Interfete de administrare : ateliere si piese
+##  Implemented Features
 
-# Tehnologii folosite
+- JWT authentication with Spring Security  
+- Create repair orders  
+- Select workshop and technician  
+- Add parts and labor  
+- Admin interfaces for managing workshops and parts
 
-## Frontend
-- Angular
-- NgRx - stateManagement
-- RxJS
+---
 
-## Backend
-- Java 17 
-- SpringBoot
-- Spring Security
-- NamedParameterJdbcTemplate
-- Mysql
+##  Technologies Used
+
+###  Frontend
+- Angular  
+- NgRx – state management  
+- RxJS  
+
+###  Backend
+- Java 17  
+- Spring Boot  
+- Spring Security  
+- NamedParameterJdbcTemplate  
+- MySQL  
+
+This project was mainly built as a personal challenge and learning experience.  
+It may not grow further, but if you think my knowledge or approach could be useful in your own project, feel free to reach out.
+- Email: damian.dragosv@gmail.com 
