@@ -1,4 +1,5 @@
 # Whhyu -Car Service  Management App
+![Vizualizări repo](https://visitor-badge.glitch.me/badge?page_id=damdravic.serviceAUTO)
 
 Aplicatie Full-Stack pentru gestionarea comenzilor de reparatii auto,construita in Angular - frontend , SpringBoot - backend si Mysql - database.
 proiect creat pt invatare si demonstratie practica pt portofoliu.
