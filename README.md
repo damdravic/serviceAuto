@@ -1,6 +1,6 @@
 # Whhyu -Car Service  Management App
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdamdravic%2FserviceAuto&label=visitors&labelColor=%23697689&countColor=%23d9e3f0&labelStyle=upper)
-![Visitor count](https://shields-io-visitor-counter.herokuapp.com/badge?page=octocat.Spoon-Knife)
+
 
 Aplicatie Full-Stack pentru gestionarea comenzilor de reparatii auto,construita in Angular - frontend , SpringBoot - backend si Mysql - database.
 proiect creat pt invatare si demonstratie practica pt portofoliu.
