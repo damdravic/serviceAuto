@@ -26,7 +26,8 @@
 
 ---
 
-## 🔜 Planned
+##  Planned
+- [ ] Add GDPR cookie banner
 - [ ] Client profile page (list of all their orders)
 - [ ] Custom loading spinner and empty state components
 - [ ] Mobile responsiveness
