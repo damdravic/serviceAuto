@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="top">
-    <div class="modal_title">Adding new Repair Order</div>
+    <div class="modal_title">{{order ? 'Edit ' : 'AddNew '}} Order </div>
 
   </div>
   <div class="content">
@@ -12,7 +12,7 @@
 
           <div class="ax-group">
             <label for="">Workshop</label>
-            <select class="search-select"  [(ngModel)]="formOrder.workshopId"  aria-label="Default select example">
+            <select class="search-select"  [(ngModel)]="formOrder.workshopId" name="workshop" aria-label="Default select example">
               <option selected>Select Workshop</option>
               <option *ngFor="let ws of allWorkshops$ |async" [value]="ws.id">{{ws.name}}</option>
             </select>
@@ -57,8 +57,7 @@
 
         <div class="ax-group">
           <label for="">Repair order Description</label>
-          <textarea class="form-control"  [(ngModel)]="formOrder.description" id="exampleFormControlTextarea1"
-            rows="3"></textarea>
+          <textarea class="form-control"  [(ngModel)]="formOrder.description" name="description" rows="3"></textarea>
         </div>
 
         <div class="flex-row">

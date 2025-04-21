@@ -19,15 +19,14 @@ export class OrderEffects {
     this.actions$.pipe(
       ofType(AddNewOrderAction.start),
       switchMap((action) =>
-        from(this.orderService.addOrder$(action.newOrder)).pipe(
+        from(this.orderService.addNewOrder$(action.order)).pipe(
           tap((response) => {
             this.toastr.success('Order created successfully');
             this.orderService.closeModal();
-            console.log('ss');
           }),
           map((response) => {
-            const order = response.data;
-            return AddNewOrderAction.success({ order });
+            const order = response.data?.order;
+            return AddNewOrderAction.success({ order  });
           }),
           catchError((error) => of(AddNewOrderAction.failure({ error: error })))
         )

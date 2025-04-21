@@ -8,12 +8,12 @@ export const orderReducer = createReducer(
 
   //---------------------------------Add New Order ----------------------------
 
-  on(AddNewOrderAction.start, (state, { newOrder }) => ({
+  on(AddNewOrderAction.start, (state, {order}) => ({
     ...state,
     dataState: OrderDataState.LOADING,
   })),
 
-  on(AddNewOrderAction.success, (state, { order }) => ({
+  on(AddNewOrderAction.success, (state, {order }) => ({
     ...state,
     dataState: OrderDataState.LOADED,
     orders: [...state.orders, order],

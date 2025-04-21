@@ -13,8 +13,8 @@ export const LoadOrderActions = createActionGroup({
 export const AddNewOrderAction = createActionGroup({
   source: 'Order - Add',
   events: {
-    Start: props<{ newOrder: Order }>(),
-    Success: props<{ order: Order }>(),
+    Start: props<{order : Order }>(),
+    Success: props<{order :Order }>(),
     Failure: props<{ error: string }>(),
   },
 });

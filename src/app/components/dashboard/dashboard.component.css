@@ -60,7 +60,8 @@
   position: relative;
   border-radius: 0.5rem;
   border: 1px solid #eeeeee;
-  min-height: 20rem;
+ flex-direction: column;
+  min-height: 22rem;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
     0 4px 4px rgba(0, 0, 0, 0.12);
 }
@@ -72,20 +73,20 @@
 .ax_chart {
     position: relative;
 
-    height: 100%; /* Ensure the container takes up the full height */
-    width: 100%; /* Ensure the container takes up the full width */
-    padding: 20px; /* Add padding to the container */
-    border-radius: 10px; /* Add border radius to the container */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow to the container */
+    height: 100%;
+    width: 100%; 
+    padding: 20px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   
 }
 
 .bottom{
 width: 100%;
-  margin-top: 20px;
+  margin-top: auto;
   padding: 0 1rem;
-  position: absolute;
-  bottom: 0;
+  
+ 
   text-align: center;
   background-color: rgb(238, 238, 238);
 }
@@ -120,6 +121,10 @@ width: 100%;
 .content{
     width: 100%;
     padding: 0.2;
+   height: 100%;
+ 
+   min-height: 20rem;
+  
 }
 
 .recent_orders{
@@ -141,6 +146,7 @@ tr:hover {background-color: #ddd;}
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
+   
     background-color: rgb(191, 136, 243);
     color: white;
   }

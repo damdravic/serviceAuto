@@ -1,21 +1,27 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { AddNewOrderModalComponent } from '../../modules/order/components/add-new-order-modal/add-new-order-modal.component';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { catchError, map, Observable, of, startWith } from 'rxjs';
-
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  of,
+  startWith,
+  tap,
+} from 'rxjs';
 
 import { EditRepairOrderModalComponent } from '../../modules/order/components/edit-repair-order-modal/edit-repair-order-modal.component';
 import { Store } from '@ngrx/store';
 import { selectAllTechnicians } from '../../modules/technician/store/technician.selectors';
 import { CarService } from 'src/app/modules/car/car.service';
 import { Car } from 'src/app/modules/car/models/car';
-import { EditInfoOrderComponent } from 'src/app/modules/order/components/edit-info-order/edit-info-order.component';
 import { OrderService } from 'src/app/modules/order/order.service';
 import { Order } from 'src/app/modules/order/interfaces/order';
 import { selectAllOrders } from 'src/app/modules/order/store/order.selectors';
 import { LoadOrderActions } from 'src/app/modules/order/store/order.actions';
-
+import { AddEditOrderModalComponent } from 'src/app/modules/order/components/add-edit-order-modal/add-edit-order-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,72 +33,70 @@ export class DashboardComponent implements OnInit {
   //get orders from store OrderState: orders
   allOrders$ = this.store.select(selectAllOrders);
 
-  paginatedOrders$ : Observable<Order[]>;
-
+  //for pagination
   itemsPerPage: number = 3;
   currentPage: number = 1;
+  paginatedOrders$: Observable<Order[]>;
 
+  itemPerPageSubject = new BehaviorSubject<number>(this.itemsPerPage);
+  currentPageSubject = new BehaviorSubject<number>(this.currentPage);
 
- 
+  reloadPagination() {
+    setTimeout(() => {
+      this.currentPage = 1;
+      this.updatePaginateOrders();
+    }, 10);
+  }
+
   public technicians$ = this.store.select(selectAllTechnicians);
   public cars$: Observable<Car[]>;
-  reloadPagination: any;
-   OrderDataState: any;
+
+  OrderDataState: any;
 
   constructor(
     private ngbModal: NgbModal,
     private orderService: OrderService,
     private store: Store,
     private carsService: CarService
-  ) { }
-
-   
+  ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(LoadOrderActions.start())
-    this.allOrders$.subscribe(orders => {
-      console.log('orders : ', orders);
-    }
-      
-    )
+ 
+this.allOrders$.subscribe((orders) => {
+  console.log('Orders:', orders);
+});
+
+    this.store.dispatch(LoadOrderActions.start());
     this.updatePaginateOrders();
-    
+
     this.getAllCars$();
   }
+
   collapsed = true;
 
-  addNew() {
-    this.ngbModal.open(AddNewOrderModalComponent, { size: 'lg' });
-  }
-
-  editOrder(order: Order) {
-    const modalRef = this.ngbModal.open(EditRepairOrderModalComponent, {
+  //methode to open modal
+  addNew(order?: Order) {
+    const modRef = this.ngbModal.open(AddEditOrderModalComponent, {
       size: 'lg',
     });
-    modalRef.componentInstance.order = order;
-  }
-
-  editInfoOrder(order: Order) {
-    const modalRef = this.ngbModal.open(EditInfoOrderComponent, {
-      size: 'lg',
-    });
-    modalRef.componentInstance.order = order;
+    modRef.componentInstance.order = order;
   }
 
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
+    this.updatePaginateOrders();
   }
 
   updatePaginateOrders() {
+
     this.paginatedOrders$ = this.allOrders$.pipe(
-      map(orders => {
+      map((orders) => {
         const start = (this.currentPage - 1) * this.itemsPerPage;
         const end = start + this.itemsPerPage;
         return orders.slice(start, end);
       })
-    )
+    );
   }
-
 
   getAllCars$(): void {
     this.carsService.getAllCars$().subscribe({

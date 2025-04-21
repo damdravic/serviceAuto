@@ -67,9 +67,9 @@
               <div class="settings">
                 <label for="itemPerPage">Items</label>
                 <select name="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="reloadPagination()">
-                  <option value="5">5</option>
-                  <option value="4">4</option>
-                  <option value="3">3</option>
+                  <option [ngValue]="5">5</option>
+                  <option [ngValue]="4">4</option>
+                  <option [ngValue]="3">3</option>
                 </select>
                 <button class="card_btn" (click)="addNew()">Add New Order</button>
                 <button class="card_btn">Options</button>
@@ -92,14 +92,14 @@
                 <tbody>
                   <tr *ngFor="let order of paginatedOrders$ |async">
                     <td>{{order.orderId}}</td>
-                    <td>{{order.orderDate}}</td>
+                    <td>{{order.dateReceived}}</td>
                     <td>{{order.description}}</td>
                     <td>{{order.estimatedCompletionDate}}</td>
                     <td>{{order.totalCost}}</td>
                     <td>{{order.status}}</td>
                     <td class="min">
 
-                      <button class="card_btn" (click)="editInfoOrder(order)"> Edit Info Order </button>
+                      <button class="card_btn" (click)="addNew(order)"> Edit Info Order </button>
                       <button class="card_btn" (click)="editOrder(order)"> Parts & Labor </button>
 
                     </td>
@@ -109,10 +109,16 @@
 
             </div>
             <div class="bottom">
-              <app-pagination [totalItems]="(allOrders$ | async)?.length || 0"
-                [itemsPerPage]="itemsPerPage" [currentPage]="currentPage" (pageChanged)="changePage($event)">
+              <ng-container *ngIf="allOrders$ | async as allOrders">
+        
+              <app-pagination [totalItems]="allOrders.length"
+                [itemsPerPage]="itemsPerPage"
+                 [currentPage]="currentPage"
+                  (pageChanged)="changePage($event)">
               </app-pagination>
+              </ng-container>
             </div>
+          
           </section>
 
         </div>

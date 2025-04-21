@@ -23,9 +23,14 @@ import { OrderState } from './interfaces/order.state';
   providedIn: 'root',
 })
 export class OrderService {
+ 
+ 
+ //TODO  ?? not know why 
   loadOrders$(): Observable<Order> {
     throw new Error('Method not implemented.');
   }
+
+
   constructor(
     private http: HttpClient,
     private modal: NgbModal,
@@ -33,23 +38,13 @@ export class OrderService {
   ) {}
 
   private readonly server: string = environment.apiUrl;
-
-  addNewOrderService(newOrder: Order) {
-    this.store.dispatch(AddNewOrderAction.start({ newOrder }));
+// ------------------------------------------------------------- Dispatch orders --------------------------------------------------
+  addNewOrderService(order: Order) {
+    this.store.dispatch(AddNewOrderAction.start( {order } ));
   }
-/*
-  getAllOrders$ = () =>
-    <Observable<CustomHttpResponse<{ orders: Order[] }>>>(
-      this.http
-        .get<CustomHttpResponse<{ orders: Order[] }>>(
-          `${this.server}/repairOrder/all`
-        )
-        .pipe(
-          map(res => res.data?.orders),
-          tap(console.log),
-          catchError(this.handleError))
-    ); */
+ 
   
+  //-------------------------------------------------------------------------- Requests to backend -----------------------------------
   getAllOrders$(): Observable<CustomHttpResponse<{ orders: Order[] }>>
   {
     return this.http.get<CustomHttpResponse<{ orders: Order[] }>>
@@ -59,15 +54,26 @@ export class OrderService {
    }
 
   addOrder$ = (order: Order) =>
-    <Observable<CustomHttpResponse<Order>>>(
+    <Observable<CustomHttpResponse<{order : Order }>>>(
       this.http
-        .post<CustomHttpResponse<Order>>(
+        .post<CustomHttpResponse<{order : Order}>>(
           `${this.server}/repairOrder/create`,
           order
         )
-        .pipe(tap(console.log), catchError(this.handleError))
+        .pipe( catchError(this.handleError))
     );
 
+  
+  addNewOrder$(order: Order): Observable<CustomHttpResponse<{ order: Order }>>{
+    return this.http.post<CustomHttpResponse<{ order: Order }>>(
+      `${this.server}/repairOrder/create`,
+      order
+    ).pipe(catchError(this.handleError));
+  }
+  
+  
+  
+  
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string;
     if (error.error instanceof ErrorEvent) {
@@ -82,11 +88,17 @@ export class OrderService {
     return throwError(() => errorMessage);
   }
 
+// -------------------------------------------Manipulate Modal Window -----------------------------------------
+
+
   closeModal() {
     this.modal.dismissAll();
   }
 
-  // fake data
+
+
+
+  // ---------------------------------------------------------Fake data for Parts and Labor
 
   parts: Part[] = [
     new Part(1, 'aripa', '1234', 'aripa auto', 100),

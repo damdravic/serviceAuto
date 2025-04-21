@@ -43,7 +43,7 @@ export class WorkshopService implements OnInit {
   }
 
   editWorkshopService(id: number, editedWorkshop: Workshop) {
-    console.log('in edit service');
+  
     this.store
       .select(selectAllWorkshops)
       .pipe(

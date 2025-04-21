@@ -15,6 +15,8 @@ import {
   map,
   Observable,
   of,
+  take,
+  tap,
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Technician } from 'src/app/modules/technician/models/technician';
@@ -29,15 +31,16 @@ import { Order } from '../../interfaces/order';
 import { initialOrder } from '../../interfaces/initial-order';
 
 @Component({
-  selector: 'app-add-new-order-modal',
-  templateUrl: './add-new-order-modal.component.html',
-  styleUrl: './add-new-order-modal.component.css',
+  selector: 'app-add-edit-order-modal',
+  templateUrl: './add-edit-order-modal.component.html',
+  styleUrl: './add-edit-order-modal.component.css',
   standalone: false,
 })
-export class AddNewOrderModalComponent implements OnInit {
+export class AddEditOrderModalComponent implements OnInit {
   @Input() order: Order;
   //editable  order
   formOrder = initialOrder;
+
 
   searchCarTerm: string;
   car: Car = null;
@@ -72,13 +75,30 @@ export class AddNewOrderModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    //this is from service directly not from the store  --- need to corect it
+    this.allCars$ = this.carService.getAllCarList$();
+
+    //in edit mode add licencePlate to searchCarTerm
     if (this.order) {
       this.formOrder = { ...this.order };
+      console.log("description :" + this.formOrder.description);
+      this.allCars$
+        .pipe(
+          map((cars) => cars.find((car) => car.id === this.order.vehicleId)),
+          take(1)
+        )
+        .subscribe((car) => {
+          if (car) {
+            this.car = car;
+            this.searchCarTerm = car.licencePlate;
+            console.log(this.searchCarTerm);
+          }
+        });
     }
 
     this.ensureTechnicianLoaded();
-    //this is from service directly not from the store  --- need to corect it
-    this.allCars$ = this.carService.getAllCarList$();
+
     this.filtredCars$ = combineLatest([
       this.allCars$,
       this.searchTermSubject$,
