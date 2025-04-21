@@ -6,7 +6,7 @@
             <div class="left">
                 <img src="" alt="">
                 <p>If you dont have already an account
-                    <a routerLink="/register">Register</a>
+                    <a routerLink="/auth/register">Register</a>
                 </p>
             </div>
             <div class="right">
@@ -34,6 +34,17 @@
 
 
                 </form>
+                <hr>
+
+                <div class="demo-purpose">
+                    <p>For demo purpose you will login with User: Demo and Role: user</p>
+                    <button class="demo" (click)="demoLogin()">
+                        <i class='bx bxs-face-mask'></i>
+                        <p style="display : inline">Login for Demo</p>
+                    </button>
+
+                </div>
+
             </div>
         </div>
     </div>

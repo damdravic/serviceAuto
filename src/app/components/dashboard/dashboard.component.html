@@ -10,8 +10,8 @@
         <div class="info">
           <p>Orders</p>
         </div>
-        <div class="infox">
-          <h3>5</h3>
+        <div class="infox" *ngIf="allOrders$ | async as allOrders">
+          <h3>{{allOrders.length }}</h3>
         </div>
       </div>
 
@@ -36,8 +36,8 @@
           <p>Users</p>
           <p></p>
         </div>
-        <div class="infox">
-          <h3>5</h3>
+        <div class="infox" *ngIf="allOrders$ | async as allOrders">
+          <h3>{{allOrders.length  }}</h3>
         </div>
       </div>
 

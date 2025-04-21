@@ -17,4 +17,17 @@ export class LoginComponent {
       this.store.dispatch(login({ credentials: loginForm.value }));
     }
   }
+
+  demoLogin() {
+    const credentials = {
+       email: "demo",
+      password : "demo"
+    }
+    this.store.dispatch(login({ credentials }));
+    
+}
+
+
+
+
 }

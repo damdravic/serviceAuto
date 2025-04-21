@@ -80,3 +80,11 @@
   box-shadow: inset 2px rgb(104, 92, 138);
   transform: translateY(4px);
 }
+
+.demo{
+  width: 100%;
+}
+.demo i{
+  font-size: 30px;
+  margin-right: 20px;
+}
